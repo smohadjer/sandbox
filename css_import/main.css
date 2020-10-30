@@ -1,4 +1,4 @@
-@import "test.css";
+@import "test.css?v2";
 
 p {
     background: #ddd;
