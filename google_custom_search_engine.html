@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <title>Google CSE Using IFRAME</title>
+    <style type="text/css">
+		  #cse-search-results {
+				background: yellow;
+				width: 900px;;
+				margin: 20px;
+			}
+			#cse-search-results iframe {
+			  background: red;
+				margin: 20px;
+				padding: 20px;
+			}
+    </style> 
+  </head> 
+  <body>
+	  <p>This page uses a Google CSE setup to search www.saeidmohadjer.com. To mange Google CSE go to: <a href="http://www.google.com/cse/manage/all">http://www.google.com/cse/manage/all</a></p>
+	  <!-- search form starts here (include this section in all pages of the Website) -->
+    <form action="index.html" id="cse-search-box">
+      <div>
+        <input type="hidden" name="cx" value="000621296090678907746:uv4gyo_lzb8" />
+        <input type="hidden" name="cof" value="FORID:10" />
+        <input type="hidden" name="ie" value="UTF-8" />
+        <input type="text" name="q" size="31" />
+        <input type="submit" name="sa" value="Search" />
+      </div>
+    </form>
+    <script type="text/javascript" src="http://www.google.com/cse/brand?form=cse-search-box&lang=en"></script>
+		<!-- search form ends here -->	
+		
+    <!-- search results section (put in your results page)-->
+    <div id="cse-search-results"></div>
+		<script type="text/javascript" src="js/google_search_iframe.js"></script>
+    <script type="text/javascript" src="http://www.google.com/afsonline/show_afs_search.js"></script>
+    <!-- serach results section ends here -->
+	</body>
+</html>

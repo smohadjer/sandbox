@@ -1,0 +1,149 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en"
+      lang="en">
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <meta name="robots" content="index,follow" />
+    <title>Drop down navbar3</title>
+    <script type="text/javascript">
+    /*<![CDATA[*/    
+      function init() {
+        enableHoverinIE6();
+      }
+      
+      function enableHoverinIE6() {
+        if (document.all && document.getElementById) {
+          navRoot = document.getElementById("navbar");
+          for (i=0; i<navRoot.childNodes.length; i++) {
+            node = navRoot.childNodes[i];
+            node.onmouseover=function() {
+              this.className+="over";
+            }
+            node.onmouseout=function() {
+              this.className=this.className.replace("over", "");
+            }
+          }
+        }
+      }         
+      window.onload=init;
+    /*]]>*/           
+    </script>
+    <style type="text/css">
+    /*<![CDATA[*/   
+      * {
+        margin: 0px;
+        padding: 0px;       
+      }
+      #banner {
+        padding: 50px 0px;
+        text-align: center;
+        background: #eee;
+        border-bottom: solid 2px #fff;
+      }
+      #content {
+        padding: 20px;
+      }       
+      
+			/*********************** navbar ************************/    
+      #navbar {
+        font: 11px verdana, sans-serif;
+        margin: 0px;
+        list-style: none;   
+        background: #bbb;
+        padding-bottom: 25px;                
+      }
+      #navbar li {
+        float: left;
+        border-right: solid 1px #fff;
+      }
+      #navbar li:hover, 
+			#navbar li.over {
+        background: #999;      
+      }
+      #navbar a {
+        text-decoration: none;
+        display: block;
+        padding: 6px 25px;
+        width: 100px;
+        text-align: center;
+        color: #555;
+      }
+      #navbar ul {
+        border-top: solid 1px #fff;
+        position: absolute;
+        z-index: 10;
+        list-style: none; 
+        background: #ddd;       
+      }   
+      #navbar ul li {
+        float: none;
+        clear: both;
+        border-bottom: solid 1px #fff; 
+      }
+      #navbar ul a {
+        padding: 0px 0px 0px 15px;
+        display: block;
+        line-height: 25px;
+        width: 175px;
+        text-align: left;        
+      }
+      #navbar li ul li a:hover {
+        background: #aaa;
+      }      
+      #navbar li ul {
+			  display: none;
+			}
+      #navbar li:hover ul, 
+			#navbar li.over ul {
+			  display: block;
+			}
+    /*]]>*/      
+    </style>    
+  </head>
+  <body>
+    <div id="banner">
+      banner
+    </div>
+    <ul id="navbar">
+      <li><a href="#">La Quinta</a>
+        <ul>
+          <li><a href="#">La Quinta Story</a></li>
+          <li><a href="#">History</a></li>
+          <li><a href="#">Cochilla Valley</a></li>
+          <li><a href="#">Desert Lifestyle &amp; Activities</a></li>
+          <li><a href="#">Location Map</a></li>
+        </ul>
+      </li>
+      <li><a href="#">SilverRock</a>
+        <ul>
+          <li><a href="#">Vision</a></li>
+          <li><a href="#">History</a></li>
+          <li><a href="#">Master Site Plan</a></li>
+          <li><a href="#">Lifestyle &amp; Amenities</a></li>
+          <li><a href="#">Team</a></li>                      
+        </ul>
+      </li>      
+      <li><a href="#">Golf</a>
+        <ul>
+          <li><a href="#">Warranty</a></li>
+          <li><a href="#">Sales Agreement</a></li>
+          <li><a href="#">Membership</a></li>
+          <li><a href="#">Learning and Training Center</a></li>                        
+        </ul>
+      </li>      
+      <li><a href="#">Media Center</a>
+        <ul>
+          <li><a href="#">In The Media</a></li>
+          <li><a href="#">Multimedia</a></li>
+        </ul>
+      </li>
+    </ul>
+    <div id="content">
+      <p>Nulla in risus sit amet nisl blandit tristique. Proin feugiat ipsum at diam venenatis dictum. Nam egestas, tortor ac consectetuer suscipit, pede justo vulputate libero, eu pulvinar risus tellus ac mauris. Nullam molestie ornare mi. Quisque accumsan eleifend sapien. Sed ac felis id enim ultricies sollicitudin. Nunc sit amet lectus. Aenean a leo. Proin tellus metus, dapibus in, ultricies ac, ullamcorper quis, neque. Donec at urna eget ipsum ultricies tempus. Nunc ac nisl aliquam velit volutpat sollicitudin. Praesent bibendum leo vel mauris mattis tincidunt. Vestibulum ac mi. Donec tristique odio sed dui tincidunt sodales. Nulla id erat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Aliquam aliquet tincidunt orci. Donec volutpat, arcu quis dapibus venenatis, enim ante convallis elit, quis volutpat sapien erat at nisi. Integer aliquet interdum quam.</p>
+      <p>Praesent ornare posuere ipsum. Pellentesque blandit tortor sed tellus. Aliquam ultrices, erat a dapibus tristique, orci nisl scelerisque ante, ac aliquet ante turpis sit amet pede. Aliquam vestibulum accumsan purus. Pellentesque ligula risus, tincidunt ut, tristique at, luctus vitae, sapien. Phasellus eget tortor ac tellus semper aliquet. Quisque blandit nisi vitae metus. Nam tempus congue nisl. Aliquam faucibus mi sit amet dolor. Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean adipiscing, diam eu condimentum dictum, metus erat suscipit libero, eleifend pharetra tellus pede eu turpis.</p>
+      <p>Cras adipiscing mauris vitae urna. Nullam rutrum ultricies nisi. Morbi dapibus ante eget quam. In sed libero. Phasellus purus arcu, facilisis ut, vestibulum et, mollis in, diam. Aenean sit amet sem. Praesent vitae lorem. Cras tincidunt. Maecenas dui. In urna. Sed tempor dictum felis. Cras vitae eros posuere elit tincidunt tristique. Etiam aliquam, nisi ac mollis consectetuer, eros justo commodo lacus, tempus ornare purus diam lacinia tortor. Pellentesque at ante. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Integer tristique, metus a pretium fringilla, purus risus sodales erat, ac interdum pede massa et magna. Proin imperdiet libero id elit. Aenean tempor ornare sapien.</p> 
+    </div>    
+  </body>
+</html>

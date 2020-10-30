@@ -1,0 +1,173 @@
+/*! default.css v0.0.0 | MIT License | https://github.com/SaeidMohadjer/defaultCSS */
+
+* {
+	margin: 0;
+}
+
+/* This make the scrollbar always visible and only active when needed. */
+/* http://stackoverflow.com/questions/1202425/making-the-main-scrollbar-always-visible */
+html {
+	overflow: -moz-scrollbars-vertical; 
+	overflow-y: scroll;
+}
+
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section { 
+	display: block; 
+}
+
+body {
+	margin: 0;
+}
+
+a img {
+	border: none;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+/* to avoid yellow outline/border that appears on focus in Chrome */
+@media screen and (-webkit-min-device-pixel-ratio:0) { 
+	textarea:focus, input:focus{
+		outline: 0;
+	}
+}
+
+/* web font example */
+@font-face{
+	font-family:"Helvetica Roman";
+	src:url("../fonts/ea95b44a-eab7-4bd1-861c-e73535e7f652.eot?#iefix");
+	src:url("../fonts/ea95b44a-eab7-4bd1-861c-e73535e7f652.eot?#iefix") format("eot"),
+	url("../fonts/4021a3b9-f782-438b-aeb4-c008109a8b64.woff") format("woff"),
+	url("../fonts/669f79ed-002c-4ff6-965c-9da453968504.ttf") format("truetype"),
+	url("../fonts/d17bc040-9e8b-4397-8356-8153f4a64edf.svg#d17bc040-9e8b-4397-8356-8153f4a64edf") format("svg");
+	
+	font-weight: normal;
+	font-style: normal;
+}
+
+/* anti-aliasing fix for Chrome based on http://stackoverflow.com/questions/13674808/chrome-svg-font-rendering-breaks-layout/14345363  */
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    @font-face {
+        font-family:"Helvetica Roman";
+		src: url("../fonts/d17bc040-9e8b-4397-8356-8153f4a64edf.svg#d17bc040-9e8b-4397-8356-8153f4a64edf") format("svg");
+    }
+}
+
+.clearfix:after  {
+    content: ".";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+}
+
+/* any device smaller than ipad */
+@media only screen and (max-width: 767px) {
+	/* to avoid horizontal scrolling on switch from landscape to portrait mode */	
+	#my_div_with_width_auto {
+		overflow-x: hidden;  
+	}
+
+}
+
+/* support for retina displays */
+@media
+only screen and (-webkit-min-device-pixel-ratio: 2),
+only screen and (   min--moz-device-pixel-ratio: 2),
+only screen and (     -o-min-device-pixel-ratio: 2/1),
+only screen and (        min-device-pixel-ratio: 2),
+only screen and (                min-resolution: 192dpi),
+only screen and (                min-resolution: 2dppx) {   
+	.load_more a {
+		background-image: url(../img/load_more_blau@2x.png);
+		background-size: 15px 18px; /* half of image width and height */
+	}
+}
+		
+
+		
+		
+		
+		
+		
+		
+		
+		
+		
+/* remove below rules to a form.css file */		
+		
+		
+/***************************** forms ******************************/
+label, input {
+  vertical-align: middle;
+}
+
+form div#error_summary {
+  color: red; 
+	border: red 1px solid; 
+	padding: 2em; 
+	margin-bottom: 2em;
+}
+
+form td {
+  padding-bottom: 15px;
+  vertical-align: top;
+}
+
+form input.error, form textarea.error {
+ border: solid 1px #cc222a;
+ background: url('../images/icons/not_ok.gif') no-repeat #ff9f9f right 2px; 
+}
+
+form input.pass, form textarea.pass {
+  background: url('../images/icons/ok.gif') no-repeat #fff right 2px;
+}
+
+form .required {
+  
+}
+
+p.error {
+  background: url(../images/icons/error_01.gif) no-repeat left 1px;
+  padding-left: 22px;
+  text-align: left;  
+  margin-top: 3px;
+  color: #cc222a;
+  line-height: 20px;
+  font-weight: bold;   
+}
+
+#content #confirm {
+  background: url(../images/icons/confirm_01.gif) no-repeat left 0px;
+  padding-left: 23px;
+  text-align: left;
+  color: #00a500;
+  font-weight: bold;
+  line-height: 20px;
+}
+
+form .hint {
+  color: #00a500;
+  margin-bottom: 3px;
+}
+
+/* use the next two rules for check boxes */
+form .error label {
+	background: url('../images/icons/not_ok.gif') no-repeat #ff9f9f right center !important;
+	padding-right: 20px;
+}
+
+form .pass label {
+	/*
+	background: url('../images/icons/ok.gif') no-repeat #fff right center !important;
+	padding-right: 20px;	
+	*/
+}
+
+form select.error {
+  background: #ff9f9f;
+	border: solid 1px #cc222a;
+}
+

@@ -1,0 +1,66 @@
+.callout {
+	width: 700px;
+	background: #fff;
+	height: 550px;
+	overflow: hidden;
+	position: relative;
+}
+
+div.reflection {
+	-webkit-transform: scaleY(-1);
+	-moz-transform: scaleY(-1);
+	-o-transform: scaleY(-1);
+	-ms-transform: scaleY(-1);
+	transform: scaleY(-1);
+	opacity: 0.2;
+
+}	
+
+.container {
+	width: 200px;
+	height: 250px;
+	position: relative;
+	margin: 40px auto 0;
+}
+
+#carousel {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	-webkit-transform-style: preserve-3d;
+	-moz-transform-style: preserve-3d;
+	-o-transform-style: preserve-3d;
+	transform-style: preserve-3d;
+}
+
+#carousel figure {
+	display: block;
+	position: absolute;
+	width: 200px;			  
+	height: 286px;
+	left: 10px;
+	top: 0px;			  
+	margin: 0;
+	-webkit-backface-visibility: hidden;
+	-moz-backface-visibility: hidden;
+	-o-backface-visibility: hidden;
+	backface-visibility: hidden;			  
+}
+
+ #carousel figure div {
+	background: #fff;			 
+	margin-bottom:2px;
+ }			
+ 
+ #carousel figure div img {
+	display: block;
+ }
+ 
+ #fade {
+	background: url(../images/fade.png) repeat-x left bottom;
+	position: absolute;
+	z-index: 100;
+	bottom: 0;
+	width: 100%;
+	height: 280px;
+ }

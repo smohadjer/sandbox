@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Selectize demo</title>
+		<meta name="description" content="" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+		<script src="dist/js/standalone/selectize.js"></script>
+		<link href="dist/css/selectize.bootstrap3.css" rel="stylesheet" />
+		<script>
+			$(function() {
+				$('.demo select').selectize({
+					searchField: ['text', 'continent'],
+					render: {
+						option: function (data, escape) {
+							//var continent = data.continent ? ' <span>(' + data.continent + ')</span>' : '';
+							return '<div data-continent="' + data.continent + '">' + data.text + '</div>';
+						}
+					},
+					onChange: function(value) {
+						$('#continent').text(this.getOption(value).data('continent'));
+					},
+					onBlur: function() {
+						this.clearCache();
+					}
+				});
+			});
+		</script>
+		<style>
+			@media (min-width: 768px) {
+				.demo {
+					width: 50%;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Selectize demo</h1>
+		<p>Example of selectize with custom data attributes which are respected during filtering. Entering "Asia" for example will list only countries with data-continent="Asia".</p>
+		<div class="demo">
+			<p>Continent: <span id="continent">Not specified</span></p>
+	        <select>
+				<option value="">Search for a country by entering its name or its continent</option>
+	        	<option data-data='{"continent": "Asia"}' value="AF">Afghanistan</option>
+	        	<option data-data='{"continent": "Africa"}'  value="DZ">Algeria</option>
+	        	<option data-data='{"continent": "Oceania"}' value="AU">Australia</option>
+	        	<option data-data='{"continent": "North America"}' value="BS">Bahamas</option>
+	        	<option data-data='{"continent": "Asia"}' value="BH">Bahrain</option>
+	        	<option data-data='{"continent": "Asia"}' value="BD">Bangladesh</option>
+	        	<option data-data='{"continent": "Europe"}' value="BE">Belgium</option>
+	        	<option data-data='{"continent": "South America"}' value="BR">Brazil</option>
+	        	<option data-data='{"continent": "Europe"}' value="BG">Bulgaria</option>
+	        	<option data-data='{"continent": "Africa"}' value="CM">Cameroon</option>
+	        	<option data-data='{"continent": "North America"}' value="CA">Canada</option>
+	        	<option data-data='{"continent": "Africa"}' value="TD">Chad</option>
+	        	<option data-data='{"continent": "South America"}' value="CO">Colombia</option>
+	        	<option data-data='{"continent": "Africa"}' value="CG">Congo</option>
+	        	<option data-data='{"continent": "North America"}' value="CR">Costa Rica</option>
+	        	<option data-data='{"continent": "Europe"}' value="HR">Croatia</option>
+	        	<option data-data='{"continent": "Europe"}' value="DK">Denmark</option>
+	        	<option data-data='{"continent": "South America"}' value="EC">Ecuador</option>
+	        	<option data-data='{"continent": "Africa"}' value="EG">Egypt</option>
+	        	<option data-data='{"continent": "Africa"}' value="ET">Ethiopia</option>
+	        	<option data-data='{"continent": "Europe"}' value="FI">Finland</option>
+	        	<option data-data='{"continent": "Europe"}' value="FR">France</option>
+	        	<option data-data='{"continent": "Africa"}' value="GA">Gabon</option>
+	        	<option data-data='{"continent": "Africa"}' value="GM">Gambia</option>
+	        	<option data-data='{"continent": "Europe"}' value="DE">Germany</option>
+	        	<option data-data='{"continent": "North America"}' value="HN">Honduras</option>
+	        	<option data-data='{"continent": "Asia"}' value="HK">Hong Kong</option>
+	        	<option data-data='{"continent": "Asia"}' value="IN">India</option>
+	        	<option data-data='{"continent": "Asia"}' value="ID">Indonesia</option>
+	        	<option data-data='{"continent": "Asia"}' value="IR">Iran, Islamic Republic of</option>
+	        	<option data-data='{"continent": "Asia"}' value="IQ">Iraq</option>
+	        	<option data-data='{"continent": "Oceania"}' value="MH">Marshall Islands</option>
+	        	<option data-data='{"continent": "North America"}' value="MX">Mexico</option>
+	        	<option data-data='{"continent": "Oceania"}' value="NZ">New Zealand</option>
+	        	<option data-data='{"continent": "South America"}' value="PE">Peru</option>
+	        	<option data-data='{"continent": "South America"}' value="UY">Uruguay</option>
+	        	<option data-data='{"continent": "South America"}' value="VE">Venezuela, Bolivarian Republic of</option>
+	        </select>
+		</div>
+
+		<p>Related Links:<br />
+		<a href="https://github.com/selectize/selectize.js/issues/239">https://github.com/selectize/selectize.js/issues/239</a><br />
+		<a href="https://github.com/selectize/selectize.js">https://github.com/selectize/selectize.js</a></p>
+	</body>
+</html>

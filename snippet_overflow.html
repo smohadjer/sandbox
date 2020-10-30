@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+		"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+		<title>Using overflow: auto to clear floats</title>
+		<meta name="robots" content="noindex" />		
+		<link href="style.css" rel="stylesheet" type="text/css" />
+		<style type="text/css">
+			div.container1 {
+				background: #ddd;
+				width: 400px;
+				border: solid 1px #000;
+				clear: both;			
+			}
+			div.container1 p {
+				float: left;
+				width: 190px;
+			}
+			
+			div.container2 {
+				clear: both;
+				width: 400px;
+				border: solid 1px #000;
+				margin: 20px;
+				padding: 20px;
+			}
+			div.container2 h3 {
+				float: left;
+				width: 200px;
+				background: #ddd;
+			}
+		</style>		
+	</head>
+	<body>
+		<div style="float: left; border-right: dotted 1px; padding: 30px;">
+			<h2>Test1: Using "overflow: auto" to clear floats</h2>
+			<div class="container1">
+				<h3>Container DIV has no overflow:auto, henece its height is not calculated correctly</h3>
+				<p>Fusce nec dignissim ante. Aenean luctus sapien ac nunc scelerisque sit amet lobortis lorem tristique. Etiam quis lectus urna. Proin sollicitudin tortor luctus mauris pellentesque luctus. Duis ut urna ac diam convallis cursus. Maecenas id fringilla eros. </p>
+				<p>Ut sagittis libero ut dui cursus id tempus leo porttitor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ut adipiscing sapien. Pellentesque vitae sem massa. Duis ut urna ac diam convallis cursus. Maecenas id fringilla eros. Maecenas gravida, lectus eget varius posuere, lacus nunc sagittis neque, non porttitor justo nunc ac ligula. </p>
+			</div>
+		
+			<div class="container1" style="overflow: auto;">
+				<h3>Container DIV has overflow:auto, hence correct height</h3>
+				<p>Fusce nec dignissim ante. Aenean luctus sapien ac nunc scelerisque sit amet lobortis lorem tristique. Etiam quis lectus urna. Proin sollicitudin tortor luctus mauris pellentesque luctus. Duis ut urna ac diam convallis cursus. Maecenas id fringilla eros. </p>
+				<p>Ut sagittis libero ut dui cursus id tempus leo porttitor. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent ut adipiscing sapien. Pellentesque vitae sem massa. Duis ut urna ac diam convallis cursus. Maecenas id fringilla eros. Maecenas gravida, lectus eget varius posuere, lacus nunc sagittis neque, non porttitor justo nunc ac ligula. </p>
+			</div>
+		</div>
+		
+		<div style="float: left; padding: 30px;">	
+			<h2>Test2: Using "overflow: hidden" to avoid wrapping</h2>
+			<div class="container2">
+				<h3>float: left; <br /> width: 200px;<br /> background: #ddd;</h3>
+				<p><strong>This has no overflow hidden. </strong>Aenean luctus sapien ac nunc scelerisque sit amet lobortis lorem tristique. Etiam quis lectus urna. Proin sollicitudin tortor luctus mauris pellentesque luctus. Duis ut urna ac diam convallis cursus. Maecenas id fringilla eros. Fusce nec dignissim ante. Aenean luctus sapien ac nunc scelerisque sit amet lobortis lorem tristique. Etiam quis lectus urna. Proin sollicitudin tortor luctus mauris pellentesque luctus. Duis ut urna ac diam convallis cursus. Maecenas id fringilla eros. </p>			
+			</div>	
+			
+			<div class="container2">
+				<h3>float: left; <br /> width: 200px;<br /> background: #ddd;</h3>
+				<p style="overflow:hidden;"><strong>This has overflow: hidden. </strong>Aenean luctus sapien ac nunc scelerisque sit amet lobortis lorem tristique. Etiam quis lectus urna. Proin sollicitudin tortor luctus mauris pellentesque luctus. Duis ut urna ac diam convallis cursus. Maecenas id fringilla eros. Fusce nec dignissim ante. Aenean luctus sapien ac nunc scelerisque sit amet lobortis lorem tristique. Etiam quis lectus urna. Proin sollicitudin tortor luctus mauris pellentesque luctus. Duis ut urna ac diam convallis cursus. Maecenas id fringilla eros. </p>			
+			</div>	
+		</div>
+	</body>
+</html>
+
+

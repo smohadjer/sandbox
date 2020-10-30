@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0">
+		<title>media Query support in javascript (via enquire.js and matchMedia.js)</title>
+		<style>
+			p {
+				color: #333;
+			}
+
+			.changed {
+				color: red;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>media Query support in javascript (via enquire.js and matchMedia.js)</h1>
+		<p>This text should turn red when window width matches the media query (min-width: 768px)</p>
+		<script src="js/vendor/jquery.min.js"></script>
+		<script src="modules/vendor/matchMedia.js-master/matchMedia.js"></script>
+		<script src="modules/vendor/matchMedia.js-master/matchMedia.addListener.js"></script>
+		<script src="resources/bower_components/enquire/dist/enquire.js"></script>
+		<script>
+			$(document).ready(function() {
+				enquire.register( 'screen and (min-width: 768px)', {
+
+				  match: function(){
+					$('p').addClass('changed');
+				  },
+
+				  unmatch: function(){
+					$('p').removeClass('changed');
+				  }
+
+				}, true); //adding true forces match method to run in IE8 and lower, unmatch will never run in IE8 and lower.
+			});
+		</script>
+	</body>
+</html>

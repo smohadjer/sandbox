@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>HTML5 boilerplate</title>
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="default.css">
+		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+		<script src="js/vendor/html5shiv.js"></script>
+		<style>
+			figure {
+				position: relative;
+				display: block;
+			}
+
+			figure:before {
+				width: 100px;
+				height: 50px;
+				position: absolute;
+				top: 10px;
+				left: 10px;
+				content: 'hello world';
+				font-size: 24px;
+				z-index: 10;
+			}
+		</style>
+    </head>
+    <body>
+		<p>In IE8 world "hello world" won't be displayed over first image.</p>
+		<figure>
+			<img style="display: block;" src="http://lorempixel.com/400/200/sports/1/" />
+		</figure>
+		<figure>
+			<img src="http://lorempixel.com/400/200/sports/1/" />
+		</figure>
+	</body>
+</html>

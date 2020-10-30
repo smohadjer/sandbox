@@ -1,0 +1,117 @@
+body {
+	font: 12px normal arial, verdana, sans-serif;
+	margin: 20px;
+}
+h1 {
+	margin-bottom: 20px;
+	font-family: Georgia,​ Times New Roman, Times, ​serif;
+	font-size: 22px;
+	font-weight: normal;
+	line-height: 28px;
+}
+
+/*
+h2 {
+	margin-top: 20px;
+	border-bottom: dotted 1px #999;
+	margin-bottom: 10px;
+	font-family: Georgia,​ Times New Roman, Times, ​serif;	
+	font-weight: normal;
+	font-size: 16px;
+}
+*/
+
+p {
+	margin: 10px 0;
+}
+
+#content {
+}
+#content > h3:first-child {
+	margin: 0 0 10px;
+	font: bold normal 16px/18px helvetica, arial, verdana, sans-serif;	
+}
+#content ol {
+	margin-left: 17px;
+}
+#content ol li{
+	margin-bottom: 5px;
+}
+.external:after {
+	content: "(external)";
+}
+
+
+/********************** documentation ***************************/
+.doc {
+	clear: both;
+	margin: 20px 20px 20px 0;
+	border-top: dotted 1px #777;
+	padding: 10px 15px;
+}
+
+.doc ul  {
+	margin-left: 15px;
+}
+
+.doc > h4:first-child {
+	margin-top: 0;
+}
+
+.doc table {
+	text-align: left;
+	border-collapse: collapse;
+	margin-top: 5px;
+}
+
+.doc table td,
+.doc table th {
+	padding: 3px 30px 3px 10px;
+	border-bottom: dotted 1px #666;	
+	text-align: left;	
+}
+
+.doc table tr:last-child td {
+	border: none;
+}
+
+p.tip {
+	background: #eee;
+	padding: 10px;
+}
+
+/******************** footer *********************/
+#footer {
+	clear: both;
+	color: #999;
+	margin: 20px 1% 20px 0;
+	font: 12px arial, sans-serif;
+	text-align: right;
+}
+#footer a {
+	color: #999
+}
+
+/******************** api *********************/
+.api {
+	background: #eee;
+}
+.api td, .api th {
+	border-bottom: solid 1px #ccc;
+	text-align: left;
+	vertical-align: top;
+	padding: 3px 20px 3px 0;
+}
+
+.api th {
+	font-weight: normal;
+	font-style: italic;
+}
+
+.api td:last-child {
+	width: 50%;
+}
+
+@media only screen and (max-width: 767px) {	
+
+}

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Parallax</title>
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+		<script>
+			$(document).ready(function() {
+				var $sections = $('.parallax > section');
+
+				$(window).on('scroll', function() {
+					parallax($sections.not(':last-child'));
+				});
+
+				function isScrolledIntoView($elem) {
+				    //var $elem = $(elem);
+				    var $window = $(window);
+
+				    var docViewTop = $window.scrollTop();
+				    var docViewBottom = docViewTop + $window.height();
+
+				    var elemTop = $elem.offset().top;
+				    var elemBottom = elemTop + $elem.height();
+
+				    //return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
+					return ((elemBottom <= docViewBottom) && (elemTop <= docViewTop));
+
+				}
+
+				function parallax($sections) {
+					var scrollTop = $(window).scrollTop();
+
+					$sections.each(function() {
+						var $section = $(this);
+						var offset = $section.offset().top;
+						//var tranlateY = offset < scrollTop ? (scrollTop - offset) * 0.5 : 0;
+var tranlateY = 0;
+
+						if (isScrolledIntoView($section)) {
+							tranlateY = (scrollTop - offset) * 0.5;
+						} else {
+							tranlateY = 0;
+						}
+
+						$section.css({
+							'transform': 'translateY(' + tranlateY + 'px)'
+						});
+					});
+				}
+			});
+
+		</script>
+		<style>
+			.parallax section {
+				position: relative;
+			}
+
+			/* rules below are not required for parallax effect */
+			footer, header {
+				padding: 50px;
+				background: #ccc;
+				margin: 10px 0;
+			}
+			.parallax section img {
+				width: 100%;
+			}
+		</style>
+    </head>
+    <body>
+		<header>header</header>
+        <div class="parallax">
+			<section>
+				<img src="http://lorempixel.com/768/350/sports/1/" />
+			</section>
+			<section id="two">
+				<img src="http://lorempixel.com/768/350/sports/2/" />
+			</section>
+			<section>
+				<img src="http://lorempixel.com/768/350/sports/3/" />
+			</section>
+			<section>
+				<img src="http://lorempixel.com/768/350/sports/6/" />
+				<p style="margin: 0; font-size: 100px; padding: 200px 0; background: yellow;">Lorem ipsum</p>
+			</section>
+			<section>
+				<img src="http://lorempixel.com/768/350/sports/5/" />
+			</section>
+		</div>
+		<footer>footer</footer>
+    </body>
+</html>

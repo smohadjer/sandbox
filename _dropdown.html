@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en"
+      lang="en">
+  <head>
+    <meta http-equiv="Content-type"
+          content="text/html; charset=utf-8" />
+    <title>
+      Horizontal Navigation
+    </title>
+    <style type="text/css">
+    /*<![CDATA[*/
+      body {
+        margin: 50px;
+        font: 11px verdana, sans-serif;
+      }
+      #content {clear: both; margin: 0px; padding: 0px; padding-top: 35px;}
+      ul#navbar, ul.subnav {
+        list-style: none;
+        margin: 0px;
+        padding: 0px;
+        font-weight: bold;        
+        border-top: solid 2px #fff;
+      }
+      ul#navbar {
+        position: absolute;
+        top: 50px;
+        z-index: 5;        
+        background: transparent;
+        /* Add these two rules if you want navbar have a background that extends 
+        across the page. The image must have the same height as navbar so that
+        when dropdowns appear it doesn't show beneath them.               
+        background: url(../images/navbar_bg.gif) repeat-x; 
+        width: 800px */
+      }
+      #navbar li {
+        float: left;              
+        background: #ddd;
+        margin: 1px;
+      }      
+      #navbar li .subnav li {
+        float: none;        
+        margin: 0px;
+        padding: 0px;
+        border-bottom: solid 2px #fff;
+        background: #ddd;
+      }       
+      #navbar li a {
+        text-decoration: none;
+        display: block;
+        width: 140px;
+        padding: 7px;
+        color: #000;
+      }
+      #navbar li a:hover {background: #aaa;}
+      #navbar li ul.subnav {display: none;}
+      #navbar li:hover ul.subnav, #navbar li.over ul.subnav {display: block;}
+    /*]]>*/
+    </style>
+    <script type="text/javascript">
+    /*<![CDATA[*/
+      function init() {
+        enableHoverinIE6();
+        enableKeyboardNavigation();
+      }
+      
+      function enableHoverinIE6() {
+        if (document.all && document.getElementById) {
+          navRoot = document.getElementById("navbar");
+          for (i=0; i<navRoot.childNodes.length; i++) {
+            node = navRoot.childNodes[i];
+            if (node.nodeName=="LI") {
+              node.onmouseover=function()
+              {
+                this.className+="over";
+              }
+              node.onmouseout=function() 
+              {
+                this.className=this.className.replace("over", "");
+              }
+            }
+          }
+        }
+      }      
+
+      function enableKeyboardNavigation() {
+        var navElm=document.getElementById("navbar");
+        navbarLis=navElm.getElementsByTagName('li');
+
+        navbarLis[0].onfocus= function() {navElm.getElementsByTagName('li')[0].getElementsByTagName('ul')[0].style.display="block";}
+        navbarLis[0].onblur= function()  {navElm.getElementsByTagName('li')[0].getElementsByTagName('ul')[0].style.display="none";}
+                        
+        navbarLis[3].onfocus= function() {navElm.getElementsByTagName('li')[3].getElementsByTagName('ul')[0].style.display="block";}
+        navbarLis[3].onblur= function() {navElm.getElementsByTagName('li')[3].getElementsByTagName('ul')[0].style.display="none";}
+
+        navbarLis[9].onfocus= function() {navElm.getElementsByTagName('li')[9].getElementsByTagName('ul')[0].style.display="block";}
+        navbarLis[9].onblur= function() {navElm.getElementsByTagName('li')[9].getElementsByTagName('ul')[0].style.display="none";}
+        
+        navbarLis[13].onfocus= function() {navElm.getElementsByTagName('li')[13].getElementsByTagName('ul')[0].style.display="block";}
+        navbarLis[13].onblur= function() {navElm.getElementsByTagName('li')[13].getElementsByTagName('ul')[0].style.display="none";}
+      }
+      
+      window.onload=init;
+    /*]]>*/
+    </script>
+  </head>
+
+  <body>
+    <ul id="navbar">
+      <li><a href="#" tabindex="1">Item 1</a>
+        <ul class="subnav">
+          <li><a href="#" tabindex="2">subItem 1</a></li>
+          <li><a href="#" tabindex="3">subItem 2</a></li>
+        </ul>     
+      </li>
+      <li><a href="#" tabindex="4">Item 2</a>
+        <ul class="subnav">
+          <li><a href="#">subItem 1</a></li>
+          <li><a href="#">subItem 2</a></li>
+          <li><a href="#">subItem 3</a></li>
+          <li><a href="#">subItem 4</a></li>
+          <li><a href="#">subItem 5</a></li>  
+        </ul>     
+      </li>      
+      <li><a href="#">Item 3</a>
+        <ul class="subnav">
+          <li><a href="#">subItem 1</a></li>
+          <li><a href="#">subItem 2</a></li>
+          <li><a href="#">subItem 3</a></li>
+        </ul> 
+      </li>
+      <li><a href="#">Item 4</a>
+        <ul class="subnav">      
+          <li><a href="#">subItem 1</a></li>
+          <li><a href="#">subItem 2</a></li>
+          <li><a href="#">subItem 3</a></li>
+          <li><a href="#">subItem 4</a></li>   
+        </ul> 
+      </li>
+
+    </ul>  
+    <p id="content">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean sagittis, turpis in pellentesque porttitor, urna orci tempor diam, molestie vulputate nisl est pharetra orci. Cras quis elit non dui interdum pellentesque. Pellentesque aliquam massa imperdiet nisl. Ut accumsan fringilla odio. Ut sit amet dui. Proin erat. Donec placerat turpis porttitor felis. Nullam convallis. Duis convallis arcu non mi bibendum posuere. Etiam eu est. Mauris varius dui vitae tortor. Sed mauris mi, condimentum eget, elementum sit amet, pretium quis, metus. Maecenas faucibus. Aenean ipsum. Mauris eros velit, gravida ac, commodo eget, tempor sit amet, nibh. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Maecenas vitae tellus. Praesent dolor. Fusce pellentesque, sapien quis adipiscing tristique, libero turpis sollicitudin turpis, a imperdiet magna sapien et quam. Nunc ligula. Donec posuere euismod nibh. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas nisl leo, fermentum at, egestas quis, tincidunt ut, est. Sed in lectus quis justo tristique commodo. Donec sed est at ante egestas tincidunt. Nulla tellus nulla, semper vitae, pretium vel, egestas sit amet, ligula. Integer dapibus. Nulla facilisi. Integer venenatis sodales ipsum. Cras eget mi. Phasellus dictum consectetuer orci. Aliquam quis lorem. Vivamus mollis ante in nisl. Vestibulum libero neque, dignissim mattis, scelerisque non, tempor sit amet, lacus. Phasellus vel quam quis purus laoreet euismod. Sed fermentum. Aenean odio elit, facilisis ut, iaculis quis, nonummy quis, nisi. Phasellus hendrerit faucibus diam. Praesent ipsum erat, condimentum id, convallis a, congue vel, erat.</p>          
+  </body>
+</html>

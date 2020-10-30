@@ -1,0 +1,14 @@
+.wrapper {
+	max-width: 500px;
+}
+
+nav a {
+	padding: 5px 10px;
+	background: #eee;
+	text-decoration: none;
+}
+
+nav a.selected {
+	background: #333;
+	color: #fff;
+}

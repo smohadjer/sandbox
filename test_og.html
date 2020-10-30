@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head prefix="og: http://ogp.me/ns#">
+        <meta charset="utf-8" />
+        <title>Open Graph test</title>
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		<meta property="og:title" content="Test Title">
+		<meta property="og:type" content="article">
+		<meta property="og:url" content="http://sandbox.saeidmohadjer.com/test_og.html">
+		<meta property="og:description" content="Testing slef hosted object sharing on facebook">
+		<meta property="og:image" content="http://sandbox.saeidmohadjer.com/images/Arif.png">
+		<meta property="fb:app_id" content="722766634504866">
+
+		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+		<script>
+			$(document).ready(function() {
+
+			});
+		</script>
+    </head>
+    <body>
+		<script>
+		  window.fbAsyncInit = function() {
+			FB.init({
+			  appId      : '722766634504866',
+			  xfbml      : true,
+			  version    : 'v2.2'
+			});
+		  };
+
+		  (function(d, s, id){
+			 var js, fjs = d.getElementsByTagName(s)[0];
+			 if (d.getElementById(id)) {return;}
+			 js = d.createElement(s); js.id = id;
+			 js.src = "//connect.facebook.net/en_US/sdk.js";
+			 fjs.parentNode.insertBefore(js, fjs);
+		   }(document, 'script', 'facebook-jssdk'));
+		</script>
+
+        <p>Hello World</p>
+		<script>
+			function fbShare() {
+				FB.ui({
+					method: 'share',
+					href: 'http://sandbox.saeidmohadjer.com/test_og.html',
+				}, function(response){
+					console.log(response);
+				});
+			}
+		</script>
+		<a href="javascript:fbShare()">Share on Facebook</a>
+    </body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xml:lang="en"
+      lang="en">
+  <head>
+    <meta http-equiv="Content-type"
+          content="text/html; charset=utf-8" />
+    <title>
+      Vertical Navigation
+    </title>
+    <style type="text/css">
+    /*<![CDATA[*/
+      body {
+        margin: 50px;
+        font: 11px verdana, sans-serif;
+      }
+      #sidebar {clear: left; width: 150px; float: left;}
+      #content {margin-left: 175px;}
+      ul#navbar {
+        list-style: none;
+        font-weight: bold;
+        margin: 0px;
+        padding: 0px;       
+        width: 160px;
+        float: left;
+        padding-bottom: 20px;
+      }
+      ul.subnav {
+        list-style: none;
+        margin: 0px;
+        padding: 0px;  
+        background: #fff;
+        width: 160px;        
+        display: none;       
+        margin-left: 160px;
+        position: absolute;
+        top: 0px;
+      }
+      #navbar li {
+        position: relative;
+        z-index: 5;
+        background: #ddd;
+        border-bottom: solid 2px #fff;
+        border-right: solid 2px #fff;     
+      }
+      #navbar li .subnav li {
+        margin: 0px;
+        border-left: solid 0px #fff;
+        padding: 0px;        
+      }      
+      #navbar li a  {
+        text-decoration: none;
+        display: block;
+        width: 150px;
+        padding: 7px 1px 7px 7px;
+        color: #000;
+      }
+      #navbar li .subnav li a {
+      }
+      #navbar li a:hover {background: #aaa;}
+      #navbar li:hover ul.subnav, #navbar li.over ul.subnav {display: block;}
+   
+    /*]]>*/
+    </style>
+    <script type="text/javascript">
+    /*<![CDATA[*/
+      startList = function() {
+        if (document.all && document.getElementById) {
+          navRoot = document.getElementById("navbar");
+          for (i=0; i<navRoot.childNodes.length; i++) {
+            node = navRoot.childNodes[i];
+            if (node.nodeName=="LI") {
+              node.onmouseover=function(){
+                this.className+="over";
+              }
+              node.onmouseout=function() {
+                this.className=this.className.replace("over", "");
+              }
+            }
+          }
+        }
+      }
+      window.onload=startList;
+    /*]]>*/
+    </script>
+  </head>
+
+  <body>
+    <ul id="navbar">
+      <li><a href="#">Item one</a>
+        <ul class="subnav">
+          <li><a href="#">subItem one</a></li>
+          <li><a href="#">subItem two</a></li>
+        </ul>     
+      </li>
+      <li><a href="#">Item two</a>
+        <ul class="subnav">
+          <li><a href="#">subItem one</a></li>
+          <li><a href="#">subItem two</a></li>
+          <li><a href="#">subItem three</a></li>
+          <li><a href="#">subItem four</a></li>
+          <li><a href="#">subItem five</a></li>  
+        </ul>     
+      </li>      
+      <li><a href="#">Item three</a>
+        <ul class="subnav">
+          <li><a href="#">subItem one</a></li>
+          <li><a href="#">subItem two</a></li>
+          <li><a href="#">subItem three</a></li>
+        </ul> 
+      </li>
+      <li><a href="#">Item four</a>
+        <ul class="subnav">      
+          <li><a href="#">subItem one</a></li>
+          <li><a href="#">subItem two</a></li>
+          <li><a href="#">subItem three</a></li>
+          <li><a href="#">subItem four</a></li>   
+        </ul> 
+      </li>
+    </ul>
+    <p id="sidebar">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean sagittis, turpis in pellentesque porttitor, urna orci tempor diam, molestie vulputate nisl est pharetra orci. Cras quis elit non dui interdum pellentesque. Pellentesque aliquam massa imperdiet nisl. Ut accumsan fringilla odio. Ut sit amet dui. Proin erat. Donec placerat turpis porttitor felis. Nullam convallis. Duis convallis arcu non mi bibendum posuere. Aenean sagittis, turpis in pellentesque porttitor, urna orci tempor diam, molestie vulputate nisl est pharetra orci. Cras quis elit non dui interdum pellentesque. Pellentesque aliquam massa imperdiet nisl. Ut accumsan fringilla odio. Ut sit amet dui. Proin erat. Donec placerat turpis porttitor felis. Nullam convallis. Duis convallis arcu non mi bibendum posuere.</p>
+    <p id="content">Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean sagittis, turpis in pellentesque porttitor, urna orci tempor diam, molestie vulputate nisl est pharetra orci. Cras quis elit non dui interdum pellentesque. Pellentesque aliquam massa imperdiet nisl. Ut accumsan fringilla odio. Ut sit amet dui. Proin erat. Donec placerat turpis porttitor felis. Nullam convallis. Duis convallis arcu non mi bibendum posuere. Etiam eu est.
+      Mauris varius dui vitae tortor. Sed mauris mi, condimentum eget, elementum sit amet, pretium quis, metus. Maecenas faucibus. Aenean ipsum. Mauris eros velit, gravida ac, commodo eget, tempor sit amet, nibh. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Maecenas vitae tellus. Praesent dolor. Fusce pellentesque, sapien quis adipiscing tristique, libero turpis sollicitudin turpis, a imperdiet magna sapien et quam. Nunc ligula. Donec posuere euismod nibh. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Maecenas nisl leo, fermentum at, egestas quis, tincidunt ut, est. Sed in lectus quis justo tristique commodo. Donec sed est at ante egestas tincidunt. Nulla tellus nulla, semper vitae, pretium vel, egestas sit amet, ligula. Integer dapibus.
+      Nulla facilisi. Integer venenatis sodales ipsum. Cras eget mi. Phasellus dictum consectetuer orci. Aliquam quis lorem. Vivamus mollis ante in nisl. Vestibulum libero neque, dignissim mattis, scelerisque non, tempor sit amet, lacus. Phasellus vel quam quis purus laoreet euismod. Sed fermentum. Aenean odio elit, facilisis ut, iaculis quis, nonummy quis, nisi. Phasellus hendrerit faucibus diam. Praesent ipsum erat, condimentum id, convallis a, congue vel, erat. </p>
+  </body>
+</html>
+

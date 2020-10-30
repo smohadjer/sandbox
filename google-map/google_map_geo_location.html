@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+		<title>Geo Location</title>
+		<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+		<style>
+			#map {
+				width: 400px;
+				height: 300px;
+				margin-right: 10px;
+				float: left;
+				clear: left;
+			}
+			#content button {
+				margin: 0 10px 20px 0;
+			}
+			#content span {
+				display: none;
+			}
+
+			#content  table {
+				background: #eee;
+				border-collapse: collapse;
+			}
+			#content  td {
+				padding: 0 10px;
+				border-bottom: solid 1px #555;
+			}
+		</style>
+		<script>
+			$(function() {
+				$('#btnInit').click(function() {
+					if (navigator.geolocation) {
+						navigator.geolocation.getCurrentPosition(showMap,handle_errors);
+						$('button').after('<img id="loader" src="images/loader.gif" alt="loader" />');
+					} else {
+						fallback();
+					}
+				});
+			});
+
+			function handle_errors(error) {
+				switch(error.code) {
+					case error.PERMISSION_DENIED:
+						alert("user did not share geolocation data");
+						$('#loader').remove();
+						fallback();
+						break;
+					case error.POSITION_UNAVAILABLE:
+						alert("could not detect current position");
+						$('#loader').remove();
+						fallback();
+						break;
+					case error.TIMEOUT:
+						alert("retrieving position timed out");
+						$('#loader').remove();
+						break;
+					default:
+						alert("unknown error");
+						$('#loader').remove();
+						break;
+				}
+
+
+			}
+
+			function fallback() {
+				var url = 'http://freegeoip.net/json/?callback=?';
+				$.getJSON(url, function(data) {
+					if(data){
+						var position = {};
+						position.coords = {};
+						position.coords.latitude = data.latitude;
+						position.coords.longitude = data.longitude;
+						showMap(position);
+
+						$('span').text('Position detected using IP Address (' + data.city + ', ' + data.country_name + ')');
+
+						var items = [];
+						$.each(data, function(key, val) {
+							items.push('<tr><td>' + key + '</td><td>' + val + '</td></tr>');
+						});
+						$('<table/>', {
+							html: items.join('')
+						}).appendTo('#content');
+					}
+
+
+				});
+			}
+
+			function showMap(position)  {
+				console.log(position);
+				$('#loader').remove();
+				$('span').show();
+				var latlng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+				var map = new google.maps.Map(document.getElementById('map'), {
+					zoom: 15,
+					center: latlng,
+					mapTypeId: google.maps.MapTypeId.ROADMAP
+				});
+				var marker = new google.maps.Marker({
+					position: latlng,
+					map: map
+				});
+
+				//only run this for HTML5 capable browsers
+				if (position.address != undefined ) {
+					var items = [];
+					$.each(position.address, function(key, val) {
+						items.push('<tr><td>' + key + '</td><td>' + val + '</td></tr>');
+					});
+					$.each(position.coords, function(key, val) {
+						items.push('<tr><td>' + key + '</td><td>' + val + '</td></tr>');
+					});
+					$('<table/>', {
+						html: items.join('')
+					}).appendTo('#content');
+				} else {
+					reverseGeocode(latlng);
+				}
+			}
+
+			function reverseGeocode(latlng) {
+				var geocoder = new google.maps.Geocoder();
+				geocoder.geocode( { 'latLng': latlng}, function(results, status) {
+					if (status == google.maps.GeocoderStatus.OK) {
+						var rows;
+						for (var i=0; i<results[0].address_components.length; i++) {
+							var result = results[0].address_components[i];
+							rows += '<tr><td>' + result.types[0] + '</td><td>' + result.long_name + '</td></tr>';
+						}
+						$('#content').append('<h4>HTML5 Geolocation failed to return position.address!</h4><table>' + rows + '</table');
+					} else {
+						alert("Geocode was not successful for the following reason: " + status);
+					}
+				});
+			}
+		</script>
+	</head>
+	<body>
+		<div id="content">
+			<h3>Geolocation via HTML5 with IP-Address Fallback and Reverse Geocoding</h3>
+			<p>Windows Safari and IE8 or lower are not capable of using HTML5 and use IP-Address to detect location of user.</p>
+			<div><button id="btnInit" >Show My Location</button></div>
+			<p><span>Position detected via HTML5 Geolocation API</span></p>
+			<div id="map"></div>
+		</div>
+
+	</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+		"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+		<title>Center-align Website with full page background</title>
+		<meta name="robots" content="noindex" />		
+		<style type="text/css">
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			html {
+				overflow-y: scroll;
+			}
+			body {
+				background: url(images/shadow.png) repeat-y center top;	
+			}
+			#footer {
+				background: #eee;
+				margin: 0 auto;
+				width: 995px;
+				
+			}
+			#footer p {
+				padding: 20px;
+			}
+			#content {
+				width: 955px;
+				padding: 20px;
+				margin: 0 auto;
+			}			
+			
+		</style>		
+		<script src="http://code.jquery.com/jquery-1.6.1.min.js" type="text/javascript"></script>
+		<script type="text/javascript">
+			$(function() {
+				$(window).resize(function() {
+					positionFooter();
+				});
+								
+				if ($.browser.webkit) {
+					fixWebkitBug();
+				}				
+				
+				positionFooter();				
+			});
+			
+			function positionFooter() {
+				if  ( $('body').height() + $('#footer').height() < $(window).height() ) {	
+					var top = $(window).scrollTop() + $(window).height() - $('#footer').height() + 'px';
+			
+					$('#footer').css({
+						position: 'absolute',
+						left: '50%',
+						'margin-left': '-497px',				
+						top: top
+					});			
+				} else {
+					$('#footer').css({
+						position: 'static',
+						'margin-left': 'auto'
+					});					
+				}
+			}
+			
+			function fixWebkitBug() {
+				//alert('browser is using Webkit engine!');
+				$('body').css({
+					'margin-left': '1px'
+				});
+			}		
+
+			/*function extendPage() {
+				$('body').css('height','auto');
+				
+				var bodyH = $('body').height();
+				var windowH = $(window).height();
+
+				if ( bodyH < windowH ) {
+					$('body').height(windowH);
+				}
+			}*/			
+		</script>
+	</head>
+	<body>
+		<div id="content">
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla dignissim, felis quis lacinia dignissim, risus tortor pulvinar lorem, eget sodales tellus velit at ante. Pellentesque euismod euismod pharetra. Ut sed nulla mi. Aenean in gravida velit. Integer vehicula, leo at tincidunt fermentum, sapien lectus porta lectus, eu volutpat mi leo non est. Proin in erat dolor. Integer imperdiet bibendum lorem nec cursus. Pellentesque ut arcu sed risus facilisis molestie ut at lacus. Mauris bibendum turpis id tellus pharetra fringilla eu id turpis. In nisl neque, aliquam ut tempus vitae, lacinia congue nisl. Praesent arcu ligula, laoreet vitae auctor a, gravida sit amet diam. Etiam dolor ligula, condimentum sit amet ultricies non, tempus ut erat. Donec nec nisi lacus. Suspendisse at porttitor nunc. </p>
+		</div>	
+		<div id="footer">
+			<p>footer sticks to bottom of viewport</p>
+		</div>
+	</body>
+</html>
+
+

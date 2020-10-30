@@ -1,0 +1,230 @@
+#mosaic {
+	position: relative;
+	width: 100%;
+}
+
+#mosaic a,
+#mosaic #banner a  {
+	color: #fff;
+}
+
+#mosaic a span {
+	color: #ffc414;
+}
+
+#mosaic .wrapper {
+	position: relative;
+	overflow: hidden;
+}
+
+#mosaic .wrapper .tile {
+	float: left;
+	width: 25%;
+	overflow: hidden;
+	visibility: hidden;
+}
+
+#mosaic .tile img {
+	width: 100%;
+/*	height: 100%; */
+	max-width: 100%;
+}
+
+/***** banner ******/
+#mosaic .tile#banner {
+	color: #fff;
+	width: 100%;
+	background: #333;
+	padding: 10px 0;
+	overflow: hidden;
+}
+
+#mosaic .tile#banner h1  {
+	font-weight: 600;
+	font-style: italic;
+	margin: 0 10px 10px;
+	font-size: 25px;
+}
+
+#mosaic .tile#banner h2  {
+	font-size: 15px;
+	line-height: 20px;
+	font-weight: 500;
+	margin: 10px;
+}
+
+#mosaic .tile#banner p  {
+	font-size: 16px;
+	margin: 10px;
+}
+
+/***** detail ******/
+#mosaic .tile .detail {
+	position: absolute;
+	background: rgba(0,0,0,0.7);
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	color: #fff;
+	display: none; /* to avoid flashing of layer on page load */
+	z-index: 1;
+}
+
+.lt-ie9 #mosaic .tile .detail {
+	background: url(../img/ie8_bg_mosaic_detail.png);
+}
+
+#mosaic .tile .detail .icon-close {
+	float: right;
+	cursor: pointer;
+	padding: 10px;
+	color: #fff;
+}
+
+#mosaic .tile .detail .icon-close:before {
+	margin-right: 0;
+}
+
+#mosaic .tile .detail p  {
+	margin: 10px;
+}
+
+#mosaic .tile .detail span.icon-arrow-light  {
+	position: absolute;
+	bottom: 10px;
+	font-size: 15px;
+	line-height: 15px;
+	margin: 10px;
+}
+
+#mosaic .tile .detail span.icon-arrow-light:before {
+	font-size: 12px;
+	line-height: 15px;	
+	margin-right: 8px;
+}	
+
+#mosaic .tile .detail > p  {
+	font-size: 18px;
+	line-height: 23px;
+	font-style: italic;
+	font-family: "minion-pro",serif;
+}
+
+#mosaic .tile .detail p.subline  {
+	color: #ccc;
+	font-family: "imago-pro-roche-n4", "imago-pro-roche", "arial-rfb", sans-serif;
+	font-size: 14px;
+	line-height: 18px;
+	font-style: normal;
+}
+
+/***** see_all *****/
+#mosaic .tile#see_all {
+	position: relative;
+	z-index: 0;
+}
+
+#mosaic .tile#see_all .detail {
+	display: table;
+	z-index: 0;
+}
+
+#mosaic .tile#see_all .detail span {
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+	padding: 0 15px;
+}
+
+#mosaic .tile#see_all a span {
+	font-size: 14px;
+	line-height: 16px;
+}
+
+@media screen and (min-width: 600px) {
+	#mosaic .wrapper .tile {
+		width: 33.33333333333333%;
+		position: relative;
+	}
+	
+	#mosaic .tile#banner {
+		width: 66.6666666666666%;
+		padding: 0;			
+	}	
+
+	#mosaic .tile#banner h1  {
+		font-size: 25px;
+		margin: 20px 20px 10px;
+	}
+	
+	#mosaic .tile#banner h2 {
+		margin: 10px 20px 10px;
+	}	
+	
+	#mosaic .tile#banner p  {
+		margin: 0 20px;
+	}	
+
+	#mosaic .tile#banner a span {
+		color: #ffc414;
+		font-family: "imago-pro-roche-n5", "imago-pro-roche", "arial-rfb", sans-serif;
+		font-weight: 500;
+	}
+
+	#mosaic .tile#banner a:before {
+		font-size: 14px;
+		margin-right: 8px;
+	}	
+	
+	#mosaic .tile#see_all,
+	#mosaic .tile.last {
+		display: none;
+	}	
+	
+	#mosaic .tile .detail {
+	}	
+	
+	#mosaic .tile .detail .icon-close {
+		display: none;
+	}		
+}
+
+
+@media screen and (min-width: 768px) {
+	#mosaic .wrapper .tile {
+		width: 20%;
+	}
+
+	#mosaic .tile#banner {
+		width: 60%;
+	}
+	
+	#mosaic .tile#banner h1  {
+		font-size: 28px;
+	}
+	
+	#mosaic .tile#banner h2 {
+		font-size: 16px;
+	}	
+	
+	#mosaic .tile#banner p  {
+		font-size: 14px;
+	}		
+}
+
+
+@media screen and (min-width: 1024px) {
+	#mosaic .tile#banner h1  {
+		font-size: 35px;
+	}
+	
+	#mosaic #banner.tile h2 {
+		font-size: 18px;
+	}	
+	
+	#mosaic .tile#banner p  {
+		font-size: 16px;
+	}	
+}
+

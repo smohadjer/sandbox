@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>HTML5 boilerplate</title>
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link href="resources/bower_components/star-rating/jquery.rating.css" rel="stylesheet" />
+		<script src="resources/bower_components/jquery/dist/jquery.js"></script>
+		<script src="resources/bower_components/star-rating/jquery.rating.js"></script>
+		<script>
+			$(document).ready(function() {
+				var rating = $('input.stars').rating({
+					required: true,
+					callback: function(value, link) {
+						console.log(value);
+					}
+				});
+
+				$('form').on('submit', function(e) {
+					e.preventDefault();
+					alert($(this).serialize());
+					rating.rating('readOnly');
+				});
+			});
+		</script>
+    </head>
+    <body>
+		<h1>Star-rating Demo</h1>
+		<p> Cliking any star would console.log() its value. After submit stars are set to read only mode.<br />
+		Hint: Do not use class name "star" for radio buttons.
+		</p>
+		<div>
+			<form method="get" action="#">
+				<div>
+					<input name="rating" type="radio" class="stars" value="1" />
+					<input name="rating" type="radio" class="stars" value="2" />
+					<input name="rating" type="radio" class="stars" value="3" />
+					<input name="rating" type="radio" class="stars" value="4" />
+					<input name="rating" type="radio" class="stars" value="5" />
+				</div>
+				<br /><br /><br />
+				<button type="submit">Submit Rating</button>
+			</form>
+		</div>
+    </body>
+</html>

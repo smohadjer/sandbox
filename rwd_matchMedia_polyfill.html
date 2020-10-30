@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0">
+		<title>matchMedia polyfill with IE8 support</title>
+		<script src="resources/bower_components/jquery-legacy/dist/jquery.min.js"></script>
+		<!--[if lte IE 9]>
+			<script src="resources/bower_components/media-match/media.match.js"></script>
+		<![endif]-->
+		<script type="text/javascript">
+			$(document).ready(function() {
+				var mql = window.matchMedia('screen and (min-width: 768px)');
+				mql.addListener(matchMediaHandler);
+				matchMediaHandler(mql);
+
+				//matchMedia event handler
+				function matchMediaHandler(mql) {
+					if (mql.matches) {
+						$('p').css('color','red');
+					} else {
+						$('p').css('color','blue');
+					}
+				}
+
+				//usage example inside event handlers
+				$('button').on('click', function() {
+					if (window.matchMedia('screen and (min-width: 768px)').matches) {
+						alert('Not a mobile device');
+					} else {
+						alert('Mobile');
+					}
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<h1>matchMedia polyfill with IE8 support</h1>
+		<p class="default">This text should turn red when media query "screen and (min-width: 768px)" is matched and blue when not matched.</p>
+
+		<button>Alert device type</button>
+	</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>HTML5 boilerplate</title>
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+		<script>
+			$(document).ready(function() {
+				if (navigator.geolocation) {
+				  navigator.geolocation.getCurrentPosition(success, error);
+				} else {
+				  error('not supported');
+				}
+
+				function success(position) {
+				  var lat = position.coords.latitude;
+				  var lng = position.coords.longitude;
+
+				  console.log(lat, lng);
+
+				  var url = 'http://api.geonames.org/countryCode?type=json&username=smohadjer&lat=' + lat + '&lng=' + lng;
+
+				  $.getJSON(url, function(data) {
+					  console.log(data);
+					  $('p').html(data.countryCode);
+				  });
+				}
+
+				function error(msg) {
+					console.log('error', msg);
+				}
+			});
+		</script>
+    </head>
+    <body>
+        <p>Hello World</p>
+    </body>
+</html>

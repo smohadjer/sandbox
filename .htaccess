@@ -1,0 +1,12 @@
+Options +Indexes
+IndexOptions FancyIndexing FoldersFirst IgnoreCase NameWidth=*
+#DirectoryIndex index.html index.php
+
+php_value upload_max_filesize 8M
+php_value post_max_size 4M
+
+#password protection
+#AuthUserFile /var/www/vhosts/saeidmohadjer.com/uwe.saeidmohadjer.com/.htpasswd
+#AuthType Basic
+#AuthName "Stage Server for Sandbox"
+#Require valid-user

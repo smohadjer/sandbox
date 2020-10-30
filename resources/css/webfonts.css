@@ -1,0 +1,21 @@
+@font-face {
+	font-family: 'MyCustomFont';
+	src: url('../fonts/MyCustomFontBold.eot');
+	src: url('../fonts/MyCustomFontBold.eot?#iefix') format('eot'),
+		url('../fonts/MyCustomFontBold.woff') format('woff'),
+		url('../fonts/MyCustomFontBold.ttf') format('truetype');
+
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'MyCustomFontBold';
+	src: url('../fonts/MyCustomFontBold.eot');
+	src: url('../fonts/MyCustomFontBold.eot?#iefix') format('eot'),
+		url('../fonts/MyCustomFontBold.woff') format('woff'),
+		url('../fonts/MyCustomFontBold.ttf') format('truetype');
+
+	font-weight: bold;
+	font-style: normal;
+}

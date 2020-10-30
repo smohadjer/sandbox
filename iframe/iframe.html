@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>iFrame JavaScript Communication</title>
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+		<script>
+			$(document).ready(function() {
+				//domReady code here...
+			});
+
+			function iframe_ready() {
+				alert('iframe can call functions in parent page!');
+				$('#iframe')[0].contentWindow.iframe_function();
+			}
+		</script>
+		<style>
+			iframe {
+				border: solid 1px #ccc;
+				width: 300px;
+				height: 300px
+
+			}
+		</style>
+	</head>
+	<body>
+		<h1>iFrame JavaScript Communication</h1>
+		<p>iFrame:</p>
+		<iframe id="iframe" frameborder="0" src="iframe_content.html"></iframe>
+	</body>
+</html>

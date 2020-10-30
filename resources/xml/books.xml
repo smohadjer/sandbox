@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<books language="English">
+  <book>
+    <title>XSLT : Programmer's Reference</title>
+    <author>Michael Kay</author>
+    <publisher>Wrox</publisher>
+  </book>
+  <book>
+    <title>Cascading Style Sheets : Designing for the Web</title>
+    <author>Hakon Wium Lie</author>
+    <publisher>Addison-Wesley</publisher>
+  </book>
+</books>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Slidehow using adaptiveHeight</title>
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+		<script src="resources/bower_components/bxslider/jquery.bxslider.min.js"></script>
+		<link rel="stylesheet" href="resources/bower_components/bxslider/jquery.bxslider.css" />
+		<script>
+			$(document).ready(function() {
+				var slider = $('.bxslider').bxSlider({
+				  //adaptiveHeight: true
+				});
+
+				$('button').on('click', function() {
+					$('.test').attr('src', 'http://lorempixel.com/400/600/');
+					slider.redrawSlider();
+				});
+			});
+		</script>
+    </head>
+    <body>
+		<ul class="bxslider">
+		  <li><img src="http://lorempixel.com/400/200/" /></li>
+		  <li><img src="http://lorempixel.com/400/400/" /></li>
+		  <li><img class="test" src="http://lorempixel.com/400/300/" /></li>
+		</ul>
+		<p>Hello World</p>
+		<button>resize image</button>
+    </body>
+</html>

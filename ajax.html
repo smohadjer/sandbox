@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+		<title>Ajax and JsonP</title>
+		<script>
+			$(document).ready(function() {
+				$('#ajax button').click(function() {
+					$('#status').text("");
+
+					var url = $(this).attr('data');
+					ajax_test(url);
+				});
+			});
+
+			function ajax_test(url) {
+				$.ajax({
+					url: url,
+					success: function(data, textStatus, jqXHR) {
+						console.log('success');
+						console.log(jqXHR);
+						$('#error').text("No error!");
+					},
+					error: function(jqXHR, textStatus, errorThrown) {
+						console.log('error');
+						if (jqXHR.statusText == 'timeout') {
+							$('#error').text('Error: timeout!');
+						}
+
+						$('#error').html(
+							'jqXHR.status: ' + jqXHR.status + '<br/>' +
+							'jqXHR.statusText: ' + jqXHR.statusText + '<br/>' +
+							'textStatus: ' + textStatus + '<br/>' +
+							'errorThrown: ' + errorThrown);
+						console.log(jqXHR);
+					},
+					timeout: 10000,
+					statusCode: {
+						200: function() {
+							console.log('200');
+							$('#status').text("200");
+						},
+						301: function() {	// move permanently
+							console.log('301');
+							$('#status').text("301");
+						},
+						302: function() {	// redirection
+							console.log('302');
+							$('#status').text("302");
+						},
+						304: function() {	// not modified - never called
+							console.log('304');
+							$('#status').text("304");
+						},
+						403: function() {
+							console.log('403');
+							$('#status').text("403");
+						},
+						404: function() {
+							console.log('404');
+							$('#status').text("404");
+						},
+						500: function() {
+							console.log('500');
+							$('#status').text("500");
+						}
+					}
+				});
+			}
+		</script>
+	</head>
+	<body>
+		<div id="content">
+			<h3>Ajax</h3>
+			<div id="ajax">
+				<button data="_mocks/json.php">No error (successful)</button><br />
+				<button data="_mocks/301.php">HTTP 301</button><br />
+				<button data="_mocks/302.php">HTTP 302</button><br />
+				<button data="_mocks/304.html">HTTP 304</button><br />
+				<button data="_mocks/.htaccess">Error 403</button><br />
+				<button data="_mocks/not_found.php">Error 404</button><br />
+				<button data="_mocks/timeout.php">Server timeout error (wait 10s)</button><br />
+				<button data="_mocks/500.php">Error 500</button><br />
+			</div>
+			<p id="error">Error responses come here...</p>
+			<p>Status Code: <span id="status"></span></p>
+		</div>
+	</body>
+</html>

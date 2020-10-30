@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+		<title>Sortable Table</title>
+		<script src="resources/bower_components/tablesorter/js/jquery.tablesorter.js"></script>
+		<link rel="stylesheet" href="resources/bower_components/tablesorter/css/theme.default.css" />
+		<script>
+			$(document).ready(function() {
+				$("table").tablesorter({
+					//no sorting on 2nd and 3rd columns
+					headers: { 1: { sorter: false}, 2: {sorter: false}},
+
+					// sort on third column, order asc
+					sortList: [[0,0]],
+
+					// to specify which element in <th> would trigger sorting
+					selectorSort: 'span'
+				});
+
+				$('#content button').click(function() {
+					var dummy_rows = $('.tablesorter tbody tr').clone();
+					$('.tablesorter tbody').append(dummy_rows);
+
+					//we trigger an update event so that table rows are re-sorted
+					$('.tablesorter').trigger('update');
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<div id="content">
+			<h1>Sortable Table</h1>
+			<table class="tablesorter" cellspacing="1">
+				<thead>
+					<tr>
+						<th><span>Name</span></th>
+						<th>Country</th>
+						<th>Age</th>
+						<th><span>Total</span></th>
+						<th><span>Discount</span></th>
+						<th><span>Date</span></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>peter</td>
+						<td>UK</td>
+						<td>28</td>
+						<td>$9.99</td>
+						<td>20%</td>
+						<td>jul 6, 2006 8:14 am</td>
+					</tr>
+					<tr>
+						<td>john</td>
+						<td>Germany</td>
+						<td>33</td>
+						<td>$19.99</td>
+						<td>25%</td>
+						<td>dec 10, 2002 5:14 am</td>
+					</tr>
+					<tr>
+						<td>clark</td>
+						<td>Italy</td>
+						<td>18</td>
+						<td>$15.89</td>
+						<td>44%</td>
+						<td>jan 12, 2003 11:14 am</td>
+					</tr>
+					<tr>
+						<td>bruce</td>
+						<td>France</td>
+						<td>45</td>
+						<td>$153.19</td>
+						<td>44%</td>
+						<td>jan 18, 2001 9:12 am</td>
+					</tr>
+					<tr>
+						<td>bruce</td>
+						<td>Switzerland</td>
+						<td>22</td>
+						<td>$13.19</td>
+						<td>11%</td>
+						<td>jan 18, 2007 9:12 am</td>
+					</tr>
+				</tbody>
+			</table>
+			<br />
+			<button>Add rows</button>
+		</div>
+		<h2>Links</h2>
+		<ul>
+			<li><a href="http://tablesorter.com/docs/">http://tablesorter.com/docs/</a></li>
+			<li><a href="https://github.com/Mottie/tablesorter/">https://github.com/Mottie/tablesorter/</a></li>
+		</ul>
+	</body>
+</html>

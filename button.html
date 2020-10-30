@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+		<title>Semantic Button with Gradiant and Icon</title>
+		<script>
+			$(document).ready(function() {
+
+			});
+		</script>
+		<style>
+			/***** button ******/
+			a.button {
+				padding: 7px 30px 8px 10px;
+				color: #fff;
+				text-decoration: none;
+				display: inline-block;
+				position: relative;
+				font-size: 14px;
+				line-height: 16px;
+				background-color: #77cdfa;
+				background-image: -webkit-linear-gradient(top, #77cdfa 0%,#2985b4 100%); /* needed for Safari */
+				background-image: linear-gradient(to bottom, #77cdfa 0%, #2985b4 100%);
+				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#77cdfa', endColorstr='#2985b4',GradientType=0 ); /* for ie9 */
+			}
+
+			a.button:hover {
+				background-image: -webkit-linear-gradient(top, #77cdfa 0%,#155e84 100%); /* needed for Safari */
+				background-image: linear-gradient(to bottom, #77cdfa 0%, #155e84 100%);
+				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#77cdfa', endColorstr='#155e84',GradientType=0 ); /* for ie9 */
+			}
+
+			a.button:after {
+				background: url("css/img/icon_arrow_button.png") no-repeat right center;
+				content: "";
+				height: 100%;
+				left: 0px;
+				position: absolute;
+				top: 0;
+				width: 100%;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="content">
+			<h3>Semantic Button with Gradiant and Icon</h3>
+			<a href="javascript:void(0);" class="button">Hello World</a>
+		</div>
+	</body>
+</html>

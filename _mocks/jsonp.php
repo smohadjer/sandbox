@@ -1,0 +1,1 @@
+<?php echo $_GET['callback'] . '({"name": "Saeid"})'; ?>

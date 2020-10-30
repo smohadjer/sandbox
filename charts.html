@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+		<script src="js/vendor/raphael.js"></script>
+		<script src="js/charts.js"></script>
+		<script>
+			var data = {
+				xyz: {
+					name: "Xzy",
+					media: [
+						{name: "Facebook", value:200128, color: "3171bc", icon: "facebook.png"},
+						{name: "Twitter", value:220123, color: "16c6ef", icon: "twitter.png"},
+						{name: "Pinterest", value:220560, color: "e02b3d", icon: "pinterest.png"},
+						{name: "Slideshare", value:230200, color: "10c4c4", icon: "slideshare.png"},
+						{name: "Youtube", value:162503, color: "f9c023", icon: "youtube.png"},
+						{name: "WordPress", value:90021, color: "7380e5", icon: "wp.png"}
+					]
+				}
+			}
+
+			$(document).ready(function() {
+				Raphael('chart_pie', 300, 350).chart({
+					x: 150,
+					y: 150,
+					radius: 100,
+					data: data.xyz,
+					id: 'chart_pie',
+					icons_path: 'images/',
+					icon_width: 30,
+					icon_height: 30,
+					type: 'pie',
+					delta: 30,
+					init_callback: function(paper) {
+						$('#chart_pie p span').text(addCommas(paper.total()));
+						//fixing bug that icons are covered by slice's stroke if slice is small
+						$('#chart_pie image').each(function() {
+							$(this).remove();
+							$('#chart_pie svg').append($(this));
+						});
+					}
+				});
+
+				Raphael('chart_hz_bars', 300, 450).chart({
+					x: 20,
+					y: 20,
+					bar_height: 40,
+					corner_radius: 0,
+					start_angle: 0,
+					data: data.xyz,
+					id: 'chart_hz_bars',
+					icons_path: 'images/',
+					icon_width: 20,
+					icon_height: 20,
+					type: 'bar',
+					subtype: 'horizontal',
+					delta: 10,
+					size_factor: 1200,
+					init_callback: function() {
+						$('#chart_hz_bars ul').hide();
+					}
+				});
+
+				Raphael('chart_bars', 300, 350).chart({
+					x: 130,
+					y: 130,
+					bar_height: 40,
+					corner_radius: 20,
+					start_angle: -30,
+					data: data.xyz,
+					id: 'chart_bars',
+					icons_path: 'images/',
+					icon_width: 20,
+					icon_height: 20,
+					type: 'bar',
+					subtype: 'circular',
+					delta: 20,
+					size_factor: 900
+				});
+
+			});
+		</script>
+       <style>
+			body {
+			}
+			.chart {
+				width: 300px;
+				float: left;
+				background: #eee;
+				margin-right: 10px;
+				position: relative;
+
+			}
+
+			.chart table {
+				margin: 0 20px 20px;
+				border-top: dotted 1px #999;
+				border-collapse: collapse;
+			}
+			.chart td {
+				padding-right: 50px;
+				border-bottom: dotted 1px #999;
+			}
+
+			#chart_hz_bars {
+				width: 300px;
+			}
+
+			.chart p {
+				font-size: 16px;
+				text-align: center;
+				margin: 0 auto 10px;
+			}
+
+			.chart ul {
+				display: none;
+				font-size: 24px;
+				left: 0;
+				margin-top: 10px;
+				padding-left: 40px;
+				position: absolute;
+				top: 0;
+			}
+        </style>
+	</head>
+	<body>
+		<div class="main">
+			<div class="chart" id="chart_bars">
+				<p class="total"><span></span</p>
+				<table class="legend"></table>
+			</div>
+			<div class="chart" id="chart_pie">
+				<p class="total"><span></span</p>
+				<table class="legend"></table>
+			</div>
+			<div class="chart" id="chart_hz_bars">
+				<p class="total"><span></span</p>
+				<ul>
+					<li class="repins">2,399</li>
+					<li class="comments">60,000</li>
+					<li class="shares">120,000</li>
+				</ul>
+
+			</div>
+		</div>
+	</body>
+</html>

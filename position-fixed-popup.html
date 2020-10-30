@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Position fixed popup</title>
+		<style>
+			/* demo styles not required for popup */
+			p {
+				font-size: 5em;
+			}
+
+		  .component {
+			background: salmon;
+			position: relative;
+			text-align: center;
+			padding: 5em;
+			width: 50%;
+			margin: 1em auto;
+			/* intentinally adding a filter rule to popup parent to verify that popup positioning is bullet-proof against browsers' inability to position fix elements relative to viewport when parent has a filter or transition */
+			filter: drop-shadow(10px 4px 8px #999);
+		  }
+
+		  footer {
+		  	background: yellow;
+			position: fixed;
+			width: 100vw;
+			padding: 1em;
+			z-index: 10;
+			bottom: 0;
+			left: 0;
+		  }
+
+		  /* styles required for popup */
+		  html.popupIsOpen .component {
+			 filter: none;
+		  }
+
+		  html.hideScrollbar,
+		  html.hideScrollbar body /* needed for iphone */ {
+		  	height: 100vh;
+			overflow-y: hidden;
+		  }
+
+		  .popup {
+			display: none;
+			background: green;
+			position: fixed;
+			z-index: 100;
+			width: 100vw;
+			height: 100vh;
+			top: 0;
+			left: 0;
+			padding: 5em;
+			text-align: left;
+			box-sizing: border-box;
+			overflow-y: scroll; /* momenutm scrolling */
+			-webkit-overflow-scrolling: touch; /* momenutm scrolling */
+			opacity: 0;
+			transition: all 0.5s;
+			/* transform: scale(0.5); */
+		  }
+
+		  /* since hidden elements styles can't be animated */
+		  .popup--visible {
+			display: block;
+		  }
+
+		  .popup--animate {
+			opacity: 1;
+			/* transform: scale(1); */
+		  }
+
+		  /* popup should not be clickable during animation to avoid
+		  propagation of evens to parent trigger undesired actions */
+		  .popup--animating {
+			  pointer-events: none;
+		  }
+
+		  .popup__close {
+				position: fixed;
+				top: 1em;
+				right: 1em;
+				font-size: 2.5em;
+				cursor: pointer;
+				border: none;
+				background: white;
+				padding: 0.3em 0.6em;
+				border-radius: 5em;
+		  }
+		</style>
+	</head>
+	<body>
+		<main>
+			<p>Scroll down to find link triggering popup...</p>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+			<div class="component">
+				<p><a data-popup-id="myPopup" href="#">Display popup window</a></p>
+				<div class="popup" id="myPopup">
+					<button class="popup__close">Close</button>
+					<div class="popup__content">
+						<h1>A position fixed overlay with scrollable content</h1>
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+					</div>
+				</div>
+			</div>
+			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+		</main>
+		<footer>
+			position fixed footer comes here...
+			<a data-popup-id="myPopup" data-popup-options='{"hideScrollbar": true, "position": "fixed"}' href="#">Show popup without page scrolling</a>
+		</footer>
+		<script>
+			(function popup() {
+				'use strict';
+
+				let popupLinks = document.querySelectorAll('[data-popup-id]');
+				let closeElements = document.querySelectorAll('.popup__close');
+				let scrollPosition;
+				let showPopup = function(event, popupOptions) {
+					event.preventDefault();
+
+					let popup = document.querySelector('#' + event.target.getAttribute('data-popup-id'));
+					let transitionendListener = function() {
+						if (popupOptions && popupOptions.hideScrollbar) {
+							document.querySelector('html').classList.add('hideScrollbar');
+							popup.removeEventListener('transitionend', transitionendListener);
+						}
+					}
+
+					if (popup) {
+						scrollPosition = window.scrollY;
+						popup.classList.add('popup--visible');
+						document.querySelector('html').classList.add('popupIsOpen');
+
+						popup.addEventListener('transitionend', transitionendListener);
+
+						// we need some delay after making popup visible for animation to work
+						setTimeout(function() {
+							popup.classList.add('popup--animate');
+						}, 100);
+					}
+				};
+				let closePopup = function(event) {
+					/* in case a link is used for close button */
+					event.preventDefault();
+
+					let popup = event.target.closest('.popup');
+					let transitionendListener = function() {
+						popup.classList.remove('popup--visible', 'popup--animating');
+						document.querySelector('html').classList.remove('popupIsOpen');
+						popup.removeEventListener('transitionend', transitionendListener);
+					}
+
+					popup.addEventListener('transitionend', transitionendListener);
+					popup.classList.add('popup--animating');
+					popup.classList.remove('popup--animate');
+
+					document.querySelector('html').classList.remove('hideScrollbar');
+					window.scrollTo(0, scrollPosition);
+				};
+
+				if (popupLinks) {
+					popupLinks.forEach(elm => {
+						let popupOptions = elm.getAttribute('data-popup-options');
+						popupOptions = JSON.parse(popupOptions);
+
+						elm.addEventListener('click', (event) => {
+							showPopup(event, popupOptions);
+						});
+					});
+				}
+
+				if (closeElements) {
+					closeElements.forEach(elm => {
+						elm.addEventListener('click', closePopup);
+					});
+				}
+			})();
+		</script>
+	</body>
+</html>

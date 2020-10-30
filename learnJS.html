@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>learnJS</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<script>
+			var myApp = {};
+
+			myApp.Module1 = function() {
+				console.log('this: ', this);
+
+				//private
+				var name = 'private';
+				var play = function() {
+					console.log('playing now...');
+				};
+
+				//public
+				this.name = 'Saeid';
+				this.sleep = function() {
+					console.log(this.name, ' is sleeping now!');
+				};
+			};
+
+			//init using new
+			var test = new myApp.Module1();
+
+			//init by calling fn
+			myApp.Module1();
+		</script>
+    </head>
+    <body>
+        <p>Hello World</p>
+    </body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>HTML5 boilerplate</title>
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+		<script>
+			$(document).ready(function() {
+				$('button').on('click', function() {
+					//random color generator from http://www.paulirish.com/2009/random-hex-color-code-snippets/
+					var color = '#'+(function lol(m,s,c){return s[m.floor(m.random() * s.length)] + (c && lol(m,s,c-1));})(Math,'0123456789ABCDEF',4);
+					$('polygon').css('fill', color);
+					
+					//http://stackoverflow.com/questions/11753485/set-img-src-to-dynamic-svg-element
+					var svg = (new XMLSerializer).serializeToString($('svg').get(0));
+					$('input#image').val(svg);
+				});
+			});
+		</script>
+    </head>
+    <body>
+		<h1>Edit SVG in browser and save it to server</h1>
+		<p>Use "Add color" button to change SVG color and then click "Save" button to send it to server.</p>
+		<div>
+			<svg height="210" width="250">
+			  <polygon points="100,10 40,180 190,60 10,60 160,180" style="fill:white;stroke:purple;stroke-width:5;fill-rule:evenodd;" />
+			  Sorry, your browser does not support inline SVG.
+			</svg>
+		</div>
+		
+		<button>Add color</button>
+		
+		<form style="display: inline;" action="save_svg.php" method="post">
+			<input type="hidden" name="image" id="image" value="" />
+			<input type="submit" value="Save" />
+		</form>
+    </body>
+</html>

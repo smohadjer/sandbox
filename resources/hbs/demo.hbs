@@ -1,0 +1,39 @@
+<div class="entry">
+    <!-- example of a handlebars exmpression -->
+    <h1>{{title}}</h1>
+    
+    <div class="body">
+        <!-- example of using expression with triple stash to avoid html escaping -->
+        {{{h2}}}
+
+        <!-- example of built-in helpers -->
+        <!-- tilde character removes white space after handlebar expression -->
+        <ul>
+            {{#each people}}
+                <li><strong>First name:</strong> {{firstName~}}
+                    {{#if lastName~}}
+                        , <strong>Last name:</strong> {{lastName}}
+                    {{else}}
+                        (no last name?)
+                    {{/if}}
+                </li>
+            {{/each}}
+        </ul>
+
+        <!-- example of invoking a custom helper with context -->
+        {{#mylist people}}
+            {{firstName}}
+        {{/mylist}}
+
+        <!-- example of custom help where current context is sent in this keyword -->
+        <ul>
+        {{#each people}}
+            <li>{{agree_button "Hello" class="button"}}</li>
+        {{/each}}
+        </ul>
+
+        <!-- you can use "this" keyword to refer to context. Useful if you have
+        helper with same name as context item -->
+        <p>{{this.mylist}}</p>
+    </div>
+</div>

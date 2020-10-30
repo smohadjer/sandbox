@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>jQuery Calendar based on moment.js and clndr.js</title>
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+		<script src="resources/bower_components/jquery/dist/jquery.js"></script>
+		<script src="resources/bower_components/underscore/underscore.js"></script>
+		<script src="resources/bower_components/moment/moment.js"></script>
+		<script src="resources/bower_components/clndr/clndr.min.js"></script>
+		<style type="text/css">
+			span.available:before {
+				background: none repeat scroll 0 0 #7fb2e5;
+			}
+			span:before {
+				background: none repeat scroll 0 0 #ccc;
+				content: " ";
+				display: inline-block;
+				height: 15px;
+				margin-right: 5px;
+				width: 15px;
+			}
+			span {
+				margin-right: 30px;
+			}
+			.cal2 {
+				max-width: 47%;
+			}
+			.cal2 .clndr .clndr-grid {
+				text-align: center;
+				display: inline-block;
+				width: 100%;
+			}
+			.cal2 .clndr .clndr-grid .days > div,
+			.cal2 .clndr .clndr-grid .header > div {
+				float: left;
+				width: 13%;
+				margin-left: 1.5%;
+				margin-bottom: 1.5%;
+				height: auto;
+				font-size: 40px;
+				padding: 1.5% 0;
+				color: #333;
+			}
+			.cal2 .clndr .clndr-grid .header > div:first-child {
+				margin-left: 0;
+			}
+			.cal2 .clndr .clndr-grid .days > div:nth-child(7n+1) {
+				margin-left: 0;
+			}
+			.cal2 .clndr .clndr-grid .header > div {
+				text-align: left;
+				margin-bottom: 0;
+				background: #fff;
+				font-size: 20px;
+				padding: 0;
+			}
+			.cal2 .clndr .clndr-grid .day {
+				background: #7fb2e5;
+				cursor: pointer;
+			}
+			.cal2 .clndr .clndr-grid .day.event {
+				background: #ccc;
+				cursor: default;
+			}
+			.cal2 .clndr .clndr-grid .day.today {
+				background: #E3C57F;
+			}
+			.cal2 .clndr .clndr-grid .empty,
+			.cal2 .clndr .clndr-grid .days > .adjacent-month {
+				background: #e5e5e5;
+				color: #ccc;
+				cursor: default;
+			}
+		</style>
+		<script>
+			$(document).ready(function() {
+				$('.cal2').clndr({
+					template: $('#template-calendar').html(),
+					weekOffset: 1,
+					startWithMonth: moment(), //or "2014-10-01"
+					daysOfTheWeek: ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'],
+					events: [
+						{ date: "2014-10-15" },
+						{ date: "2014-10-16" },
+						{ date: "2014-10-17" },
+						{ date: "2014-10-21" },
+						{ date: "2014-10-22" }
+					],
+					clickEvents: {
+						click: function(target){
+							if (!$(target.element).hasClass('event')) {
+								console.log(target);
+							}
+						}
+					}
+				});
+			});
+		</script>
+    </head>
+    <body>
+		<h1>Calendar built using jQuery, clndr.js, moment.js, and underscore.js</h1>
+		<p>
+			<span class="available">Freie Termine</span>
+			<span>Bereits Belegte Termine</span>
+		</p>
+		<div class="cal2">
+			<script type="text/template" id="template-calendar">
+				<!--<div class="clndr-previous-button">&lsaquo;</div>-->
+				<h1 class="month"><%= month %></h1>
+				<!--<div class="clndr-next-button">&rsaquo;</div>-->
+				<div class="clndr-grid">
+					<div class="days-of-the-week">
+						<div class="header">
+							<% _.each(daysOfTheWeek, function(day) { %>
+							<div class="header-day"><%= day %></div>
+							<% }); %>
+						</div>
+						<div class="days">
+							<% _.each(days, function(day) { %>
+							<div class="<%= day.classes %>"><%= day.day %></div>
+							<% }); %>
+						</div>
+					</div>
+				</div>
+			</script>
+		</div>
+    </body>
+</html>

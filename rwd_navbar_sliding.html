@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+		<title>Sliding Menu</title>
+		<script>
+			$(document).ready(function() {
+				sliding_nav();
+			});
+
+			function sliding_nav() {
+				var transition = 500; //millisecond
+				var defaultWidth = $('#nav_container').outerWidth();
+
+				function resetMargin(width) {
+					var divLeftMargin = 0;
+					$('.additional-block').each(function() {
+						thisLeftMargin	= divLeftMargin + 'px';
+						$(this).css('margin-left', thisLeftMargin);
+						divLeftMargin	= divLeftMargin + width;
+					});
+				}
+				resetMargin(defaultWidth);
+
+				//for variable width
+				$(window).resize(function() {
+					var count = parseInt($('.slider').css('margin-left')) / defaultWidth;
+					defaultWidth = $('#nav_container').width();
+					resetMargin(defaultWidth);
+					$('.slider').css({'margin-left': count * defaultWidth})
+				});
+
+				//for variable height
+				var new_height = $('.additional-block').first().height();
+				$('.binder').height(new_height);
+
+				$('.menu a').each(function() {
+					var target_id = $(this).attr('href');
+					if ($(target_id).length > 0) {
+						$(this).addClass('has-child');
+					}
+				});
+
+				$('.menu a').click(function(event) {
+					event.preventDefault();
+					var selectedDiv			= $($(this).attr('href'));
+					var selectedMargin		= selectedDiv.css('margin-left');
+					var selectedParent		= $(this).closest('.additional-block');
+					var sliderMargin		= $('.slider').css('margin-left');
+					var slidingMargin		= (parseInt(sliderMargin) - defaultWidth) + 'px';
+
+					//for variable height
+					var new_height = selectedDiv.height();
+					$('.binder').stop().animate({height: new_height});
+
+					if(selectedMargin.length > 0) {
+						//add back button
+						if (selectedDiv.find('.back').length == 0) {
+							selectedDiv.children('.header')
+								.prepend('<span class="back"></span>')
+								.bind('click', function () {
+									selectedParent = $(this).closest('.additional-block');
+									sliderMargin = - (parseInt(selectedParent.css('margin-left')) - defaultWidth) + 'px';
+									$('.slider').stop().animate({marginLeft: sliderMargin}, transition);
+									//for variable height
+									var new_height = $(selectedParent).prev('.additional-block').height();
+									$('.binder').stop().animate({height: new_height});
+								});
+						}
+
+						//position next panel to right side of current panel and then animate it in
+						if((parseInt(selectedMargin) - defaultWidth) >= defaultWidth) {
+							selectedParent.after(selectedDiv);
+							resetMargin(defaultWidth);
+							$('.slider').stop().animate({marginLeft: slidingMargin}, transition);
+						} else {
+							$('.slider').stop().animate({marginLeft: slidingMargin}, transition);
+						}
+					}
+				});
+
+			}
+		</script>
+		<style>
+			#nav_container {
+				line-height: 1.5em;
+				font-family: Helvetica;
+				width: 50%;
+			}
+
+			.binder {
+				background: #e8e8e8;
+				float: left;
+				height: 370px;
+				position: relative;
+				overflow: hidden;
+				width: 100%;
+			}
+
+			.header {
+				background: #6E84A2;
+				font-size: 14px;
+				color: #fff;
+				height: 30px;
+				padding: 0 10px;
+				text-align: center;
+				position: relative;
+			}
+
+			.additional-block {
+				/*float: left;*/
+				position: absolute;
+				width: 100%;
+			}
+
+			.menu {
+				margin: 0;
+				padding: 0;
+			}
+
+			.menu li {
+				list-style-type: none;
+				font-size: 14px;
+			}
+
+			.menu li:hover {
+				background: #194FDB;
+				cursor: pointer;
+			}
+
+			.menu li:hover a.has-child {
+				background: url('images/arrow-hover.png') center right no-repeat;
+			}
+
+			.menu li a {
+				display: block;
+				outline: none;
+				padding: 5px 5px 5px 10px;
+				border-bottom: 1px solid #ccc;
+				text-decoration: none;
+				color: #000;
+			}
+
+			.menu li:hover a {
+				color: #fff;
+			}
+
+			.has-child {
+				background: url('images/arrow.png') center right no-repeat;
+			}
+
+			.has-child:hover {
+				background: url('images/arrow-hover.png') center right no-repeat;
+			}
+
+			.back {
+				margin-top: .5em;
+				background: url('images/prev.png') bottom left no-repeat;
+				position: absolute;
+				display: block;
+				height: 15px;
+				width: 10px;
+				cursor: pointer;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="content">
+			<h3>Sliding Menu</h3>
+			<p>iPhone like menu with variable width and height.</p>
+			<p>Based on tutorials here: <a href="http://www.webstuffshare.com/2010/02/how-to-create-iphone-style-navigation-part-i/">part 1</a>
+			and <a href="http://www.webstuffshare.com/2010/02/iphone-style-navigationajax-rotate-part-ii/">part 2</a></p>
+			<div id="nav_container">
+				<div class="binder">
+					<div class="slider">
+						<div id="start" class="additional-block">
+							<div class="header">
+								Indonesian Super League
+							</div>
+							<ul class="menu">
+								<li><a href="#arema">Arema Malang</a></li>
+								<li><a href="#persebaya">Persebaya Surabaya</a></li>
+								<li><a href="#persib">Persib Bandung</a></li>
+								<li><a href="#persija">Persija Jakarta</a></li>
+								<li><a href="#persipura">Persipura Jayapura</a></li>
+								<li><a href="#sriwijaya">Sriwijaya FC</a></li>
+							</ul>
+						</div>
+						<div id="arema" class="additional-block">
+							<div class="header">
+								Arema Malang
+							</div>
+							<ul class="menu">
+								<li><a href="#markus">Markus Horison</a></li>
+								<li><a href="#roman">Roman Chmelo</a></li>
+								<li><a href="#alamshah">Noh Alam Shah</a></li>
+								<li><a href="#pierre">Pierre Njanka</a></li>
+								<li><a href="#fakhrudin">Moch Fakhrudin</a></li>
+							</ul>
+						</div>
+						<div id="persebaya" class="additional-block">
+							<div class="header">
+								Persebaya Surabaya
+							</div>
+							<ul class="menu">
+								<li><a href="#korinus">Korinus Fingkreuw</a></li>
+								<li><a href="#andioddang">Andi Oddang</a></li>
+								<li><a href="#joshmaguire">Josh Maguire</a></li>
+								<li><a href="#takatoshi">Takatoshi Uchida</a></li>
+								<li><a href="#johntakpor">John Tarkpor</a></li>
+							</ul>
+						</div>
+						<div id="persib" class="additional-block">
+							<div class="header">
+								Persib Bandung
+							</div>
+							<ul class="menu">
+								<li><a href="#gonzales">Christian Gonzales</a></li>
+								<li><a href="#suchao">Suchao Nutnum</a></li>
+								<li><a href="#budi">Budi Sudarsono</a></li>
+								<li><a href="#nova">Nova Arianto</a></li>
+								<li><a href="#maman">Maman Abdurahman</a></li>
+								<li><a href="#atep">Atep</a></li>
+							</ul>
+						</div>
+						<div id="persija" class="additional-block">
+							<div class="header">
+								Persija Jakarta
+							</div>
+							<ul class="menu">
+								<li><a href="#bp">Bambang Pamungkas</a></li>
+								<li><a href="#aliyudin">Aliyudin</a></li>
+								<li><a href="#musyafry">T.A. Muyafry</a></li>
+								<li><a href="#baihakki">Baihakki Khaizan</a></li>
+								<li><a href="#abanda">Abanda Herman</a></li>
+								<li><a href="#mustafic">Mustafic Fahrudin</a></li>
+								<li><a href="#firman">Firman Utina</a></li>
+							</ul>
+						</div>
+						<div id="persipura" class="additional-block">
+							<div class="header">
+								Persipura Jayapura
+							</div>
+							<ul class="menu">
+								<li><a href="#boaz">Boaz Salossa</a></li>
+								<li><a href="#goncalves">Alberto Goncalves</a></li>
+								<li><a href="#kabes">Ian Louis Kabes</a></li>
+								<li><a href="#hendra">Hendra Ridwan</a></li>
+								<li><a href="#erol">Erol Iba</a></li>
+								<li><a href="#igbonefo">Victor Igbonefo</a></li>
+							</ul>
+						</div>
+						<div id="sriwijaya" class="additional-block">
+							<div class="header">
+								Sriwijaya FC
+							</div>
+							<ul class="menu">
+								<li><a href="#ponaryo">Ponaryo Astaman</a></li>
+								<li><a href="#arif">Arif Suyono</a></li>
+								<li><a href="#isnan">Isnan Ali</a></li>
+								<li><a href="#zahrahan">Zah Rahan</a></li>
+								<li><a href="#gumbs">Keith Kayamba Gumbs</a></li>
+								<li><a href="#obiora">Richard Obiora</a></li>
+							</ul>
+						</div>
+						<div id="markus" class="additional-block">
+							<div class="header">
+								Markus Horison
+							</div>
+							<ul class="menu">
+								<li><a href="#markus-photo">Photo</a></li>
+								<li><a href="#markus-biodata">Biodata</a></li>
+							</ul>
+						</div>
+						<div id="markus-photo" class="additional-block">
+							<div class="header">
+								Markus Horison's Photo
+							</div>
+							<p align="center">
+								<img src="images/Markus.png" />
+							</p>
+						</div>
+						<div id="markus-biodata" class="additional-block">
+							<div class="header">
+								Markus Horison's Biodata
+							</div>
+							<p class="biodata">
+								<strong>Name :</strong><br/>
+								Markus Horison / Markus Haris Maulana<br/>
+								<strong>Position :</strong><br/>
+								Goalkeeper<br/>
+								<strong>Date of Birth :</strong><br/>
+								March 14, 1981<br/>
+							</p>
+						</div>
+						<div id="roman" class="additional-block">
+							<div class="header">
+								Roman Chmelo
+							</div>
+							<p align="center">
+								<img src="images/Roman.png" />
+							</p>
+						</div>
+						<div id="bp" class="additional-block">
+							<div class="header">
+								Bambang Pamungkas
+							</div>
+							<p align="center">
+								<img src="images/BP.png" />
+							</p>
+						</div>
+						<div id="baihakki" class="additional-block">
+							<div class="header">
+								Baihakki Khaizan
+							</div>
+							<p align="center">
+								<img src="images/Baihakki.png" />
+							</p>
+						</div>
+						<div id="boaz" class="additional-block">
+							<div class="header">
+								Boaz Salossa
+							</div>
+							<p align="center">
+								<img src="images/Boaz.png" />
+							</p>
+						</div>
+						<div id="goncalves" class="additional-block">
+							<div class="header">
+								Alberto Goncalves
+							</div>
+							<p align="center">
+								<img src="images/Goncalves.png" />
+							</p>
+						</div>
+						<div id="suchao" class="additional-block">
+							<div class="header">
+								Suchao Nutnum
+							</div>
+							<p align="center">
+								<img src="images/Suchao.png" />
+							</p>
+						</div>
+						<div id="atep" class="additional-block">
+							<div class="header">
+								Atep
+							</div>
+							<p align="center">
+								<img src="images/Atep.png" />
+							</p>
+						</div>
+						<div id="korinus" class="additional-block">
+							<div class="header">
+								Korinus Fingkreuw
+							</div>
+							<p align="center">
+								<img src="images/Korinus.png" />
+							</p>
+						</div>
+						<div id="takatoshi" class="additional-block">
+							<div class="header">
+								Takatoshi Uchida
+							</div>
+							<p align="center">
+								<img src="images/Takatoshi.png" />
+							</p>
+						</div>
+						<div id="ponaryo" class="additional-block">
+							<div class="header">
+								Ponaryo Astaman
+							</div>
+							<p align="center">
+								<img src="images/Ponaryo.png" />
+							</p>
+						</div>
+						<div id="arif" class="additional-block">
+							<div class="header">
+								Arif Suyono
+							</div>
+							<p align="center">
+								<img src="images/Arif.png" />
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</body>
+</html>

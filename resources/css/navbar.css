@@ -1,0 +1,108 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+#header a {
+	text-decoration: none;
+	color: #000;
+}
+
+#topnav {
+	background: #efefef;
+	padding: 0 20px 0 2px;
+	font-size: 13px;
+	height: 31px;
+	width: 973px;
+}
+
+#topnav ul li {
+	list-style: none;
+	float: left;
+	font-size: 13px;
+	padding: 8px 12px 0 7px;
+}
+
+#topnav #country {
+	font-weight: bold;
+	cursor: pointer;
+	padding-right: 12px;
+	margin-right: 12px;
+	padding-left: 12px;
+	background: url(../img/icon_pfeil_schwarz_nachunten.gif) no-repeat right 14px;	
+}
+
+#topnav li#language {
+	position: relative;
+}
+
+#topnav span a {
+	text-decoration: none;
+	color: #000;
+	line-height: 29px;
+}
+
+.scroll-pane {
+	height: 270px;
+	overflow: auto;
+	margin: 10px 0 5px;
+	width: 152px;
+}
+#language_list {
+	display: none;
+}
+#language_list {
+	position: absolute;
+	z-index: 100;
+	top: 0px;
+	left: -3px;
+}
+#language_list  ul {
+	margin-top: 10px;
+}
+#country_list {
+	position: absolute;
+	top: 0;
+	z-index: 100;	
+	left: 4px;
+}
+#country_list  span{
+	font-weight: bold;
+	padding-right: 12px;
+	background: url(../img/icon_pfeil_schwarz_nachunten.gif) no-repeat right 6px;	
+}
+
+.dropdown {
+	padding: 8px 10px 5px 9px;
+	float: left;	
+	font-size: 13px;
+	background: #fff; 
+	border: solid 1px #bbb;
+	border-top: none;
+	-moz-box-shadow: 0px 0px 5px #aaa;	
+	-webkit-box-shadow: 0px 0px 5px #aaa;	
+	box-shadow: 0px 0px 5px #aaa;		
+}
+.dropdown ul  li {
+	list-style: none;
+	margin: 0 0 8px;
+	padding: 0 !important;	
+	font: normal 11px verdana, arial, sans-serif !important;
+	float: none !important;
+	line-height: 13px;
+}
+.dropdown ul  li a {
+	color: #06c !important;
+}
+.dropdown ul  li a:hover {
+	text-decoration: underline !important;
+}
+.dropdown ul  li {
+	color: #aaa;
+}
+.dropdown ul  li.selected a:hover {
+	text-decoration: none;
+}
+
+
+

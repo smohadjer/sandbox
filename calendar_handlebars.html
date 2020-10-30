@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>jQuery Calendar (moment.js + clndr.js)</title>
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+		<script src="resources/bower_components/jquery/dist/jquery.js"></script>
+		<script src="resources/bower_components/handlebars/handlebars.js"></script>
+		<script src="resources/bower_components/moment/min/moment-with-locales.min.js"></script>
+		<script src="resources/bower_components/clndr/clndr.min.js"></script>
+		<style type="text/css">
+			span.available:before {
+				background: none repeat scroll 0 0 #7fb2e5;
+			}
+			span:before {
+				background: none repeat scroll 0 0 #ccc;
+				content: " ";
+				display: inline-block;
+				height: 15px;
+				margin-right: 5px;
+				width: 15px;
+			}
+			span {
+				margin-right: 30px;
+			}
+			#cal1 {
+				max-width: 47%;
+			}
+			#cal1 .clndr .clndr-grid {
+				text-align: center;
+				display: inline-block;
+				width: 100%;
+			}
+			#cal1 .clndr .clndr-grid .days > div,
+			#cal1 .clndr .clndr-grid .header > div {
+				float: left;
+				width: 15%;
+				margin-left: 2%;
+				margin-bottom: 2%;
+				height: auto;
+				font-size: 40px;
+				padding: 2% 0;
+				color: #333;
+			}
+			#cal1 .clndr .clndr-grid .header > div:first-child {
+				margin-left: 0;
+			}
+			#cal1 .clndr .clndr-grid .days > div:nth-child(6n+1) {
+				margin-left: 0;
+			}
+			#cal1 .clndr .clndr-grid .header > div {
+				text-align: left;
+				margin-bottom: 0;
+				background: #fff;
+				font-size: 20px;
+				padding: 0;
+			}
+			#cal1 .clndr .clndr-grid .day {
+				background: #7fb2e5;
+				cursor: pointer;
+			}
+			#cal1 .clndr .clndr-grid .day.event {
+				background: #ccc;
+				cursor: default;
+			}
+			#cal1 .clndr .clndr-grid .day.today {
+				/* background: #E3C57F; */
+			}
+			#cal1 .clndr .clndr-grid .empty,
+			#cal1 .clndr .clndr-grid .days > .adjacent-month {
+				background: #e5e5e5;
+				color: #ccc;
+				cursor: default;
+			}
+		</style>
+		<script>
+			$(document).ready(function() {
+				var locale = getParameterByName('locale') || 'en';
+
+				moment.locale(locale);
+
+				Handlebars.registerHelper('weekday', function(days) {
+					var str = '';
+					$.each(days, function() {
+						//isoweekday 1 being Monday and 7 being Sunday
+						if (this.date.isoWeekday() !== 7) {
+							str += '<div class="' + this.classes + '">' + this.day + '</div>';
+						}
+					});
+					return str;
+				});
+
+				Handlebars.registerHelper('daylabel', function() {
+					var str = '';
+
+					for (var i=1; i<7; i++) {
+						str += '<div class="header-day">' + moment().isoWeekday(i).format('dd') + '</div>';
+					}
+
+					return str;
+				});
+
+				var template = Handlebars.compile( $('#template-calendar').html() );
+
+				$('#cal1').clndr({
+					render: function(data) {
+						return template(data);
+					},
+					//weekOffset: 0,
+					startWithMonth: moment().month(),
+					//daysOfTheWeek: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+					events: [
+						{ date: "2015-01-15" },
+						{ date: "2015-01-24" },
+						{ date: "2015-02-17" },
+						{ date: "2015-02-18" },
+						{ date: "2015-03-22" }
+					],
+					clickEvents: {
+						click: function(target){
+							if (!$(target.element).hasClass('event')) {
+								console.log(target);
+							}
+						}
+					}
+				});
+			});
+
+			function getParameterByName(name) {
+				name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+				var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+					results = regex.exec(location.search);
+				return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+			}
+		</script>
+    </head>
+    <body>
+		<h1>Calendar built using jQuery, clndr.js, moment.js, and handlebars.js</h1>
+		<p>
+			<span class="available">Available</span>
+			<span>Reserved</span>
+		</p>
+		<div id="cal1">
+			<script type="text/template" id="template-calendar">
+				<h1 class="month">{{month}}</h1>
+				<div class="clndr-grid">
+					<div class="days-of-the-week">
+						<div class="header">
+							{{#daylabel}}
+							{{/daylabel}}
+						</div>
+						<div class="days">
+							{{#weekday days}}
+							{{/weekday}}
+						</div>
+					</div>
+				</div>
+			</script>
+		</div>
+    </body>
+</html>

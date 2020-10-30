@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>HTML5 boilerplate</title>
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+		<title>Slider</title>
+		<style>
+			.slider {
+				position: relative;
+			}
+
+			.slider .handle {
+				position: absolute;
+				z-index: 10;
+				cursor: pointer;
+				background: #000;
+			}
+
+			.horizontal {
+				width: 200px;
+				padding: 10px 0;
+			}
+
+			.horizontal .handle {
+				width: 8px;
+				height: 30px;
+				top: 0;
+			}
+
+			.horizontal .slider_bar  {
+				background: #ccc;
+				height: 10px;
+				width: 100%;
+			}
+
+			.vertical {
+				height: 200px;
+				padding: 0 10px;
+				width: 10px;
+			}
+
+			.vertical .slider_bar {
+				background: #ccc;
+				width: 10px;
+				height: 100%;
+			}
+
+			.vertical .handle {
+				height: 8px;
+				width: 30px;
+				bottom: 0;
+				left: 0;
+			}
+		</style>
+		<script src="resources/js/slider.js"></script>
+		<script>
+			$(function(){
+				//minimal
+				var hSlider = new Slider($('.horizontal'), {
+					slide: function(value) {
+						$('#sliderHValue').text(value);
+					}
+				});
+
+				//advanced
+				vSlider = new Slider($('.vertical'), {
+					orientation: 'vertical',
+					startValue: 25, //unit is percentage
+					slide: function(value) { //called during sliding
+						$('#sliderVValue').text(value);
+					},
+					start: function(value) { //called when user starts sliding
+						console.log(value);
+					},
+					stop: function(value) { //called when user stops sliding
+						console.log(value);
+					}
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<div id="content">
+			<h3>Slider</h3>
+			<div class="slider horizontal">
+				<div class="slider_bar"></div>
+				<div class="handle"></div>
+			</div>
+			<p>Slider Value: <span id="sliderHValue">0</span>%</p>
+			<br />
+
+			<div class="slider vertical">
+				<div class="slider_bar"></div>
+				<div class="handle"></div>
+			</div>
+			<p>Slider Value: <span id="sliderVValue">0</span>%</p>
+		</div>
+	</body>
+</html>

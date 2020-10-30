@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+		<title>CSS-Only Tool Tips</title>
+		<style>
+			.thumb {
+				float: left;
+				margin-right: 20px;
+				position: relative;
+			}
+
+			.more_info {
+				display: none;
+				position: absolute;
+				background: #ddd;
+				border: solid 1px #999;
+				padding: 10px;
+				width: 200px;
+				height: 200px;
+				top: 0;
+				z-index: 100;
+			}
+
+			.thumb.right .more_info {
+				left: 170px;
+			}
+
+			.thumb.left .more_info {
+				left: -240px;
+			}
+
+			.thumb:hover .more_info {
+				display: block;
+			}
+
+			#content {
+				padding-bottom: 200px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="content">
+			<h3>CSS-Only Tool Tips</h3>
+			<div class="thumb right">
+				<img src="http://dummyimage.mohadjers.com/150x100/000/fff" />
+				<div class="more_info">
+					<h2>Interveniens sed dominum</h2>
+					<p>Convivium meum filiam rex in modo invenit Boreas ingreditur ipse scola veniamus.</p>
+				</div>
+			</div>
+			<div class="thumb right">
+				<img src="http://dummyimage.mohadjers.com/150x100/000/fff" />
+				<div class="more_info">
+					<h2>Reflexio mihi servitute</h2>
+					<p>Dicentem cives perfusa commendavit patris in deinde vero rex Dionysiadi suo Proiciens te princeps age meae ad te finis laeta quis mihi.</p>
+				</div>
+			</div>
+			<div class="thumb left">
+				<img src="http://dummyimage.mohadjers.com/150x100/000/fff" />
+				<div class="more_info">
+					<h2>Ad suis est</h2>
+					<p>Celebrantur nuptias iam custodio vocem magno cuidam puerum se vero diam ille Tharsos princeps audito dolet sit audivit.</p>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

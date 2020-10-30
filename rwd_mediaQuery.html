@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0">
+		<title>Media Query</title>
+		<script type="text/javascript">
+				var mql = window.matchMedia('screen and (min-width: 768px)');
+				mql.addListener(mQHandler);
+				mQHandler(mql);
+
+				function mQHandler(mql) {
+					if (mql.matches) {
+						console.log('viewport is 768px or wider');
+					} else {
+						console.log('viewport is narrower than 768px');
+					}
+				}
+		</script>
+	</head>
+	<body>
+		<h1>Media Query</h1>
+		<p class="default">See console for meda query change logs</p>
+	</body>
+</html>

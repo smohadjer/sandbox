@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+		<title>Responsive Navigation<</title>
+		<script>
+			breakpoints = {
+				set: function() {
+					if ($(window).width() < 480) {
+						$(window).trigger('breakpoint', '479');
+					} else if ( ($(window).width() >= 480) && ( $(window).width() < 768) ) {
+						$(window).trigger('breakpoint','767');
+					} else if ( ($(window).width() >= 768) && ( $(window).width() < 1024) )  {
+						$(window).trigger('breakpoint','1023');
+					} else {
+						$(window).trigger('breakpoint','above_1024');
+					}
+				},
+				handler: function(event, breakpoint) {
+					$('#test').text(breakpoint);
+					if (breakpoint == '479') $('#test').css('background','green');
+					if (breakpoint == '767') $('#test').css('background','yellow');
+					if (breakpoint == '1023') $('#test').css('background','red');
+					if (breakpoint == 'above_1024') $('#test').css('background','blue');
+				}
+			}
+
+			$(document).ready(function() {
+				//custom event for breakpoints
+				$(window).bind('breakpoint', breakpoints.handler);
+
+				$(window).resize(function() {
+					breakpoints.set();
+				});
+
+				$(window).trigger('resize');
+			});
+		</script>
+		<style>
+			#test {
+				padding: 3px 10px;
+				background: yellow;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="content">
+			<h3>Responsive: Triggering JavaScript Breakpoints</h3>
+			<p>Resize browser width to trigger breakpoint event/handler that would print breakpoint value below.</p>
+			<p>Breakpoint: <span id="test"></span></p>
+		</div>
+
+	</body>
+</html>

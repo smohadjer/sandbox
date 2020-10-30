@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+    <title>Vertical Navbar with 3 Levels of Subnav</title> 
+    <style type="text/css">
+      * {
+        margin: 0;
+        padding: 0;
+        font: bold 11px verdana, arial, sans-serif;
+      }
+      ul {
+        list-style-type: none;
+      }
+      ul#nav a {
+        text-decoration: none;
+        line-height: 28px;
+        display: block;        
+      }
+      ul#nav li {border-bottom: solid 2px #fff;}      
+      ul.level1 {
+        width:225px;      
+        margin: 20px 0px 0px 20px;
+        background: #e5e5e5;    
+      }    
+      ul.level1 li a {padding-left: 10px; color: #114264;}
+      ul.level2 li a {padding-left: 30px; color: #ffffff;}
+      ul.level3 li a {padding-left: 50px;}
+                  
+      ul.level1 li a:hover {background: #ccc;}
+      ul.level2 li a:hover, 
+      ul.level3 li a:hover {background: #209292;}
+      
+      ul.level2 {border-top: solid 2px #fff; background: #33bbbb;}
+      ul.level3 {border-top: solid 2px #fff;}
+      ul li.last {border-bottom: none !important;}
+    </style>
+  </head>
+  <body>
+    <ul id="nav" class="level1">
+      <li><a href="#">level1 item1</a></li>
+      <li><a href="#">level1 item2</a>
+        <ul class="level2">
+          <li><a href="#">level2 item1</a>
+          	<ul class="level3">
+          	  <li><a href="#">level3 item1</a></li>
+          	  <li class="last"><a href="#">level3 item2</a></li>              
+          	</ul>
+          </li>
+          <li class="last"><a href="#">level2 item2</a>
+          	<ul class="level3">
+           	  <li class="last"><a href="#">level3 item1</a></li>
+           	</ul>
+          </li>
+        </ul>
+      </li>
+      <li><a href="#">level1 item3</a></li>
+    </ul>
+  </body>
+</html>

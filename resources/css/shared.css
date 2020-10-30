@@ -1,0 +1,88 @@
+/******************** color scheme guide ***********************
+	Add frequently used color values here as reference
+****************************************************************/
+ 
+* {
+  margin: 0;
+	padding: 0;
+}
+html {
+	overflow-y: scroll; 
+}
+body {
+  font: normal 12px/14px arial, verdana, sans-serif;
+  color: #000;
+}
+p,h1,h2,h3,h4 {
+	margin: 10px 0px;
+}
+h1 {font-size: 18px;} 
+h2 {font-size: 16px;} 
+h3 {font-size: 14px;} 
+h4 {font-size: 12px;} 
+table {
+	border-collapse: collapse;
+}
+table td, table tr, img, object {
+  vertical-align: top;
+}
+li {
+	list-style-type: none; 
+}
+a img {
+	border: none;
+}
+a {
+  text-decoration: none;
+  color: #555;
+  outline: none;
+}
+a:hover {
+	text-decoration: underline;
+}
+object {
+	outline: none;
+}
+@font-face {
+	font-family: HSBold;
+	src: url('../fonts/HumstSlab721BTBold.ttf');
+}
+
+.hidden {
+  display: none;
+}
+.visible {
+  display: block;
+}
+a.pdf {
+  background: url(../images/ui/pdf_icon.png) no-repeat left center;
+  padding: 2px 0px 2px 20px;  
+}
+.round {
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;		
+	border-radius: 5px;
+}
+
+/*********************** forms ************************/
+form .error {
+  border: solid 2px #831212 !important;
+}
+form .error_message {
+  color: #831212;
+}
+form .required {
+  color: #831212;
+  font-style: italic;
+}
+/* use the next two lines for check boxes */
+form p.error label {background: url('../images/not_ok.gif') no-repeat #ff9f9f right center !important;}
+form p.pass label {background: url('../images/ok.gif') no-repeat #fff right center !important;}
+
+form input.error {background: url('../images/not_ok.gif') no-repeat #ff9f9f right center !important;}
+form input.pass {background: url('../images/ok.gif') no-repeat #fff right center !important;}
+
+form textarea.error {background: url('../images/not_ok.gif') no-repeat #ff9f9f right 5px !important;}
+form textarea.pass {background: url('../images/ok.gif') no-repeat #fff right 5px !important;}
+
+

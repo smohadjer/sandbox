@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>HTML5 boilerplate</title>
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+		<script>
+			$(document).ready(function() {
+
+			});
+		</script>
+    </head>
+    <body>
+		<form method="get" action="#">
+			<input id="first-name" type="text" name="first_name_fix" required="required" />
+			<button type="submit">Submit</button>
+		</form>
+
+		<div style="width: 640px;" id="step-3"></div>
+
+		<script>
+			$(document).ready(function() {
+				console.log('test');
+
+				$('form').on('submit', function(e) {
+					e.preventDefault();
+					loadForm();
+				});
+			});
+
+			function loadForm() {
+				var fbScript = document.createElement('script');
+
+				fbScript.type = 'text/javascript';
+				fbScript.src = 'https://secure.fundraisingbox.com/app/paymentJSdynamic?hash=VyhVHwAHWhd7dGAkNhJmJVRNFkRJTkJCPREkLS0gcypCThVDT3x7TjsVFCAlO2ciHlJdFmR8cAIXRkEwJmZtLXkVAlgtZCdSRAAFaQt2Zwd4TFYyLTo2UnJWWTVCbjBQNh1ZNB0JNkAnOA09Uz9iVg%3D%3D&containerId=step-3';
+				fbScript.src += "&first_name_fix=Max&last_name_fix=Muster&address_fix=myAddress&email_fix=test@test.com&city_fix=Freiburg&post_code_fix=12345&country_fix=DE&amount_fix=50"
+				document.getElementById('step-3').appendChild(fbScript);
+			}
+		</script>
+    </body>
+</html>

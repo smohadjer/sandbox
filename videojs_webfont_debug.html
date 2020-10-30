@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+		<base href="http://sandbox.saeidmohadjer.com/" />
+        <meta charset="utf-8" />
+        <title>Videojs Webfont</title>
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+        <script src="resources/bower_components/video.js/dist/video-js/video.js"></script>
+        <link rel="stylesheet" href="resources/bower_components/video.js/dist/video-js/video-js.css">
+		<script>
+			$(document).ready(function() {
+				videojs("myVideo");
+			});
+		</script>
+    </head>
+    <body>
+        <h1>Videojs: debug font loading when using base tag</h1>
+		<div class="video-container">
+			<video id="myVideo" class="video-js vjs-default-skin" controls preload="auto" width="500" height="281" poster="http://lorempixel.com/500/281/abstract/4">
+				<source src="_assets/video/dollarshaveclub.mp4" type='video/mp4'>
+				<source src="_assets/video/dollarshaveclub.ogv" type='video/ogg'>
+			</video>
+		</div>
+    </body>
+</html>

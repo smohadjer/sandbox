@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+		<title>Custom Events</title>
+		<script>
+			$(document).ready(function () {
+				var $item;
+				var data = [
+					{
+						'name': 'Saeid',
+						'location': 'Freiburg'
+					},
+					{
+						'name': 'Izma',
+						'location': 'Vancouver'
+					}
+				];
+
+				$('button.array').on('click', function() {
+					$(document).trigger('customEvent1', [data]);
+				});
+
+				$('button.object').on('click', function() {
+					$(document).trigger('customEvent2', data);
+				});
+
+				$(document).on('customEvent1', function(event, arg1) {
+					console.log(event, arg1); //arg1 is same as data array
+				});
+
+				$(document).on('customEvent2', function(event, arg1) {
+					console.log(event, arg1); //arg1 is first object in data array
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<h1>Use an array to send data to custom event handlers</h1>
+		<p>Always send parameters to an event handler inside an array. If you don't and instead send the data without an array around it, you can lose part of your data if data itself is inside an array. This problem happens if you click on 2nd button below (see results in concole). In other words jQuery trigger method sends content of an array as arguments to event handler.</p>
+		<button class="array">Trigger event with data sent in array</button>
+		<button class="object">Trigger event with data sent directly</button>
+	</body>
+</html>

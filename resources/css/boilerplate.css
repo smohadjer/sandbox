@@ -1,0 +1,105 @@
+body {
+	margin: 0;
+}
+
+section {
+	padding-bottom: 10px;
+	border-bottom: solid 1px #999;
+}
+
+
+.content, header {
+	margin: 10px 5% 0;
+}
+
+
+footer {
+	padding: 15px;
+	margin-top: 20px;
+	background: #eee;
+	font-size: 12px;
+}
+
+footer p {
+	margin-top: 0;
+}
+
+h1 {
+	font-family: trashhandregular, sans-serif;
+	font-size: 28px;
+	margin-top: 0;
+	font-weight: normal;
+}
+
+h2 {
+	font-size: 18px;
+}
+
+.form input.error,
+.form select.error {
+	border-color: #cc0033;
+}
+
+.form label.error {
+	color: #cc0033;
+	display: block;
+}
+
+.banner img {
+	max-width: 100%;
+}
+
+
+@media screen and (min-width: 768px){
+	body {
+		background: white;
+		color: black;
+	}
+	
+	article, aside {
+		margin: 0 5% 20px;
+	}
+	
+	header h1 {
+		margin-left: 5%;		
+	}
+	
+	footer p {
+		margin-left: 5%;
+	}	
+}
+
+@media screen and (min-width: 1025px){
+	html {
+		background: #eee;
+		height: 100%;
+	}
+	
+	body {
+		width: 980px;
+		margin: 0 auto;
+		height: 100%;
+	}
+	
+	article {
+		box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		float: left;
+		width: 60%;
+		margin: 0 5%;
+	}
+	
+	aside {
+		box-sizing: border-box;
+		-moz-box-sizing: border-box;	
+		width: 25%;
+		background: #eee;
+		padding: 0 20px;
+		float: right;
+		margin-right: 5%;
+		margin-left: 0;
+	}
+}
+
+
+

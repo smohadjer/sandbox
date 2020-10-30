@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+		"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<title>SEO Test</title>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				//to seee if google can crawl json data fetched via ajax
+				$.ajax({
+					url: 'json/seo.json',
+					dataType: 'JSON',
+					success: function(data) {
+						var html_snippet = '<h1>' + data.title + '</h1>';
+						$('.json').append(html_snippet);
+					}
+				});
+
+				//to see if google can crawl HTML data fetched via ajax
+				$.ajax({
+					url: '_mocks/_simple.html',
+					dataType: 'HTML',
+					success: function(data) {
+						$('.ajax').append(data);
+					}
+				});
+			});
+		</script>
+		<style type="text/css">
+			.ajax, .json {
+				padding: 20px;
+				background: #ddd;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Tesing Google's capability in indexing of content loaded via AJAX</h1>
+		<p>live since Feb 1, 2012</p>
+		<p>Content in below box is loaded on client side from "_mocks/_simple.html" via ajax.</p>
+		<div class="ajax"></div>
+
+		<p>Content in below box is generated via javascript from json ("json/seo.json").</p>
+		<div class="json"></div>
+	</body>
+</html>
+
+

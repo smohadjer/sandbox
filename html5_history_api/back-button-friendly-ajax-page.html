@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>HTML5 History API popstate event</title>
+		<meta name="description" content="HTML5 History API">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="style.css" />
+		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+		<script>
+		window.onpopstate = function(event) {
+			console.log('popstate fired', event.state);
+		};
+
+		window.onload = function(event) {
+			console.log('history.state: ', history.state)
+
+			if (history.state && history.state.page === 1) {
+				var str = localStorage.getItem('results');
+				var sctop = localStorage.getItem('sctop');
+
+				console.log(sctop);
+				$('.lightbox').html(str).show().scrollTop(sctop);
+
+			}
+		};
+
+		window.onunload = function() {
+			var sctop = $('.lightbox').scrollTop();
+			localStorage.setItem('sctop', sctop);
+		};
+
+		$(document).on('ready', function() {
+			$('button.open').on('click', function() {
+				history.replaceState({page: 1}, document.title);
+
+				$('.lightbox').load('mock.html', function() {
+					var str = $('.lightbox').html();
+
+					localStorage.setItem('results', str);
+				}).show();
+			});
+
+			$('button.close').on('click', function() {
+				history.replaceState({}, document.title);
+				$('.lightbox').hide();
+				localStorage.removeItem('results');
+			});
+		});
+		</script>
+		<style>
+			.lightbox {
+				display: none;
+				width: 50%;
+				height: 400px;
+				box-sizing: border-box;
+				overflow: auto;
+				background: #333;
+				color: #fff;
+				text-align: center;
+				padding: 30px 0px;
+				margin: 20px 0;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Return to ajax page via browser back button (via HTML5 history api and localStorage)</h1>
+		<p>This prototype shows how to implement a back-button friendly ajax page. If you use below buttons to show content via ajax and leave the page and return to it using browser back button, content will be still visible and at the same scroll location as when you left.</p>
+
+		<button class="open">Show ajax content</button>
+		<button class="close">Remove ajax content</button>
+		<a href="http://saeidmohadjer.com">link to external site</a>
+
+		<div class="lightbox"></div>
+	</body>
+</html>

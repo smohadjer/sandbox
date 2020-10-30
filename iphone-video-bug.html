@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>iPhone video bug</title>
+        <meta name="description" content="" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+		<script>
+			$(document).ready(function() {
+				var x = 0;
+
+				$('button').on('click', function() {
+					x = (x < 0) ? 0 : -400;
+
+					$('.wrapper').css({
+						'transform': 'translate3d(' + x + 'px, 0px, 0px)'
+					});
+				});
+			});
+		</script>
+		<style>
+			.wrapper {
+				position: relative;;
+				transition-duration: 1s;
+			}
+
+			.image {
+				position: absolute;
+				z-index: 100;
+				top: 0;
+				left: 0;
+				width: 40%;
+			}
+
+			video {
+				width: 100%;
+			}
+
+			button {
+				font-size: 1em;
+				margin: 10px 0;
+			}
+		</style>
+    </head>
+    <body>
+		<p>1. Open page in iPhone Safari<br />
+		2. Click on video play button in center of video.<br />
+		3. Stop video by pressing "Done" button.<br />
+		4. Tab "Slide In/Out" button and observe image that is positioned over video on left side. Whenever the slide comes into view you see that image is not displayed until animation ends.</p>
+		<button>Slide In/Out</button>
+		<div class="wrapper">
+			<video controls poster="_assets/video/dollarshaveclub.png">
+					<source src="_assets/video/dollarshaveclub.mp4" type="video/mp4" />
+			</video>
+  			<img class="image" src="_assets/images/Atep.png" />
+  		</div>
+    </body>
+</html>

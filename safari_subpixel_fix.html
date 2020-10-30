@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+		<style>
+			.wrapper {
+				width: 300px;
+				border: solid 5px #333;
+			}
+			.wrapper div {
+				width: 14.28571428571429%;
+				background: green;
+				display: inline-block;
+				text-align: center;
+				padding: 10px 0;
+			}
+		</style>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$('#fixed').fixSafariSubpixelBug();
+			});
+			
+			$.fn.fixSafariSubpixelBug = function() {
+				var containerWidth = this.width();
+				var $tiles = this.find('div');
+				var minTileWidth = Math.floor(containerWidth / $tiles.length);
+				var rem = containerWidth % $tiles.length;
+				
+				$tiles.width(minTileWidth).each(function() {
+					if (rem > 0) {
+						$(this).width(minTileWidth+1);
+						rem--;
+					}				
+				});
+			}	
+		</script>
+    </head>
+    <body>
+		<h1>fix for Safari <a href="http://ejohn.org/blog/sub-pixel-problems-in-css/">subpixel problem</a></h1>
+		
+		<h3>Before fix:</h3>
+		<div class="wrapper">
+			<div>1</div><div>2</div><div>3</div><div>4</div><div>5</div><div>6</div><div>7</div>			
+		</div>
+		
+		<h3>After fix:</h3>
+		<div id="fixed" class="wrapper">
+			<div>1</div><div>2</div><div>3</div><div>4</div><div>5</div><div>6</div><div>7</div>			
+		</div>		
+    </body>
+</html>
+

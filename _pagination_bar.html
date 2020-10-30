@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+		"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+	<head>
+		<meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+		<title>Pagination</title>
+		<meta name="robots" content="noindex" />		
+		<style type="text/css">
+			body {
+				margin: 10%;			
+			}
+			.pagination {
+				overflow: auto;
+				padding: 6px 10px;
+				font: normal 12px/15px arial, verdana, sans-serif;
+				color: #999;
+				background: #efefef;
+			}
+			.pagination .number {
+				float: left;
+				color: #000;
+			}
+			.pagination .links {
+				float: right;
+				overflow: hidden;
+			}			
+			.pagination p {
+				margin: 0;
+			}
+			.pagination a {
+				color: #333;
+				padding: 0 2px;
+				text-decoration: none;
+			}
+			.pagination a:hover {
+				text-decoration: underline;
+			}
+			.pagination a.selected {
+				font-weight: bold;
+				text-decoration: none;
+				color: #000;
+				cursor: default;
+			}
+			.pagination .links  img {
+				vertical-align: 0px;
+			}
+		</style>		
+	</head>
+	<body>
+		<div class="pagination">
+			<p class="number">1 - 10 of 125</p>
+			<p class="links">
+				<a class="prev" href="#">Previous <!--<img src="arrow_left.gif" alt="Previous" />--></a> |
+				<a href="">1</a> |
+				<a class="selected" href="">2</a> |
+				<a href="">3</a> |
+				<a class="next" href="#">Next <!--<img src="arrow_right.gif" alt="Next" />--></a>
+			</p>		
+		</div>
+		<p> Add content below...</p>
+	</body>
+</html>
+
+

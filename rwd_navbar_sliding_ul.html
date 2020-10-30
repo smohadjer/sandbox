@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+		<title>Responsive Navigation</title>
+		<script>
+			$(document).ready(function() {
+				$('ul ul').animate({
+					'margin-left' : 0
+				}, 500);
+			});
+		</script>
+		<style>
+			#nav ul {
+				position: absolute;
+				width : 100%;
+				top: 0;
+				background: yellow;
+				padding: 0;
+				margin: 0;
+				list-style: none;
+			}
+
+			#nav ul ul {
+				margin-left: 50%;
+			}
+
+			#nav {
+				width: 50%;
+				overflow: hidden;
+				position: absolute;
+				height: 100px;
+				background: red;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="content">
+			<h3>Responsive Navigation</h3>
+			<ul>
+				<li>Semantic markup which doesn't suffer from classitis or nested divs</li>
+				<li>works at all resolutions</li>
+			</ul>
+			<div id="nav">
+				<ul>
+					<li>lorem</li>
+					<li>ipsum
+						<ul>
+							<li>dolor</li>
+							<li>ist</li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+	</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>bxslider</title>
+		<meta name="description" content="" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+		<script>
+			$(function() {
+				var $div = $('div');
+
+				$div.on('pointerdown', function(e) {
+					console.log(e);
+					$div[0].setPointerCapture(e.pointerId);
+				});
+
+				$div.on('pointerup', function(e) {
+					console.log(e);
+				});
+
+				$div.on('pointermove', function(e) {
+					//console.log(e)
+				});
+
+
+
+				$div.on('click', function(e) {
+					console.log(e);
+				});
+			});
+		</script>
+		<style>
+			div {
+				background: yellow;
+				padding: 50px;
+			}
+
+			a {
+				background: salmon;
+				padding: 20px 100px;
+				margin: 10px;
+			}
+
+			span {
+				background: pink;
+				padding: 20px 100px;
+				margin: 10px;
+			}
+		</style>
+	</head>
+	<body>
+		<div>
+			<a href="http://google.com/">Hello World</a>
+			<span>Hello World</span>
+		</div>
+	</body>
+</html>

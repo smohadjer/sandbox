@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<style>
+
+	</style>	
+	<script type="text/javascript" src="js/vendor/jquery.min.js"></script>
+	<script type="text/javascript" src="js/jquery.pluginTemplate.js"></script>		
+	<script>
+		$(document).ready(function() {		
+			var myObj = $('p').pluginTemplate({
+				callback: function(obj) {
+					console.log(obj.text());
+				}
+			});
+			
+			//plugin is chainable
+			myObj.css('color', 'red');
+			
+			//call public method of plugin
+			myObj.publicMethod();
+			
+			//access public property of plugin
+			console.log(myObj.property1);
+			
+		});
+	</script>	
+</head>
+<body>
+	<div id="content">	
+		<h1>jQuery plugin template</h1>
+		<p>Mike</p>
+		<p>John</p>
+		<p>Tom</p>
+	</div>
+</body>  
+</html>
+
+

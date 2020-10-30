@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+		<title>Google Maps API V3</title>
+		<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+		<style type="text/css">
+			#map {
+				width: 500px;
+				height: 300px;
+				margin-top: 5px;
+			}
+			#info_window {
+				width: 300px;
+			}
+		</style>
+		<script type="text/javascript">
+			var geocoder = new google.maps.Geocoder();
+			var map;
+
+			$(document).ready(function(){
+				var latlng = new google.maps.LatLng(-34.397, 150.644);
+				var myOptions = {
+					zoom: 10,
+					center: latlng,
+					mapTypeId: google.maps.MapTypeId.ROADMAP
+				}
+				map = new google.maps.Map(document.getElementById("map"), myOptions);
+
+				//idle is more efficient than bounds_changed as it only fires when user stops panning
+				//google.maps.event.addListener(map, 'bounds_changed', function() {
+				google.maps.event.addListener(map, 'idle', function() {
+					var sw = 'South_West corner: '+map.getBounds().getSouthWest().toUrlValue(2);
+					var ne = 'North_East corner: '+map.getBounds().getNorthEast().toUrlValue(2);
+					$('#bound_corners').html(sw + '<br />' + ne);
+
+				});
+			});
+
+			function codeAddress() {
+				var address = document.getElementById("address").value;
+				geocoder.geocode( { 'address': address}, function(results, status) {
+					if (status == google.maps.GeocoderStatus.OK) {
+						var loc = results[0].geometry.location;
+						var bounds = new google.maps.LatLngBounds(map.getBounds().getSouthWest(), map.getBounds().getNorthEast());
+
+						if (bounds.contains(loc)) {
+							alert('This location is within map area');
+						} else {
+							alert('This location is outside map area.');
+							map.setCenter(loc);
+						}
+
+						var marker = new google.maps.Marker({
+							map: map,
+							position: loc,
+							title: results[0].geometry.location.toUrlValue(2)
+						});
+					} else {
+						alert("Geocode was not successful for the following reason: " + status);
+					}
+				});
+			}
+
+			/*
+			$(function (){
+				var sw = new google.maps.LatLng(59.0, 13.12);
+				var ne = new google.maps.LatLng(60.35, 16.90);
+				var bounds = new google.maps.LatLngBounds(sw, ne);
+				var options = {
+					mapTypeId: google.maps.MapTypeId.ROADMAP
+				};
+				var map = new google.maps.Map($('#map')[0], options);
+				map.fitBounds(bounds);
+
+				var marker = new google.maps.Marker({
+					position: bounds.getCenter(),
+					map: map,
+					title: 'My Location',
+					clickable: true,
+					visible: true
+				});
+				google.maps.event.addListener(marker, 'click', function() {
+					$.ajax({
+						url: '_mocks/xhr_info_window.json',
+						dataType: 'json',
+						success: function(data) {
+							infowindow = new google.maps.InfoWindow({
+								content: data.data_markup,
+								maxWidth: 480,
+								//size: new google.maps.Size(10,10)
+							});
+							infowindow.open(map, marker);
+						}
+					});
+				});
+
+			});
+			*/
+		</script>
+	</head>
+	<body>
+		<div id="content">
+			<h3>Google Map Bounds</h3>
+			<p>When maps bounding box changes, either via dragging of the map by user or
+			geocoding of a new location, the new values for map's bounding box are displayed below the map. If new location falls outside visible area of map, then map is centered on new location otherwise map's center stays as it was.</p>
+			<div>
+				<input id="address" type="textbox" value="Space Needle">
+				<input type="button" value="Encode" onclick="codeAddress()">
+			</div>
+			<div id="map"></div>
+			<p id="bound_corners"></p>
+		</div>
+
+	</body>
+</html>

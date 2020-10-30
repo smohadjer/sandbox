@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+		<title>Tabbed Widget</title>
+		<style>
+			.tabs {
+				border-bottom: 1px solid #bbb;
+				padding-bottom: 23px;
+			}
+			.tabs a {
+				background: #ddd;
+				font: normal 12px/15px verdana, arial, sans-serif !important;
+
+				border: 1px solid #bbb;
+				color: #000;
+				display: block;
+				float: left;
+				font-size: 11px;
+				line-height: 13px;
+				margin-right: 3px;
+				outline: medium none;
+				padding: 1px 10px 2px;
+				text-decoration: none;
+			}
+
+			.tabs a:hover {
+				background: #eee;
+			}
+
+			.tabs a.selected {
+				background: #FFFFFF;
+				border-bottom: none;
+				padding-bottom: 5px;
+				padding-top: 3px;
+			}
+
+			.tab_content {
+				border: solid 1px #bbb;
+				border-top: none;
+				padding: 50px;
+			}
+
+
+		</style>
+		<script>
+			$(function() {
+				$('.tabs').on('click', 'a', function(e) {
+					e.preventDefault();
+					if (!$(this).hasClass('selected')) {
+						$(this).closest('.tabs').find('.selected').removeClass('selected');
+						$(this).addClass('selected');
+					}
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<div id="content">
+			<h3>Tabbed Menu</h3>
+			<div class="tabs">
+				<a href="#">Apollonii</a>
+				<a class="selected" href="javascript:void(0)">Virginis Provolutus</a>
+				<a href="#">Scelerata</a>
+				<a href="#">Sustinuit</a>
+			</div>
+			<div class="tab_content">
+				put content for tabs here...
+			</div>
+		</div>
+	</body>
+</html>
+

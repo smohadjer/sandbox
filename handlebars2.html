@@ -1,0 +1,48 @@
+<html>
+<head>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.12/handlebars.runtime.min.js"></script>
+	<!-- precompiled handlebars template built in terminal: handlebars -m hbs/demo.hbs -f hbs/demo.js -->
+	<script src="resources/hbs/demo.js"></script>
+	<script>
+		$(document).ready(function() {
+			Handlebars.registerHelper('mylist', function(items, options) {
+				var out = "<ul>";
+				for (var i=0, l=items.length; i<l; i++) {
+					out = out + "<li>" + options.fn(items[i]) + "</li>";
+				}
+				return out + "</ul>";
+			});
+
+			Handlebars.registerHelper('agree_button', function(txt) {
+				console.log(txt);
+				var first = Handlebars.escapeExpression(this.firstName);
+
+				//Handlebars.SafeString required to return HTML that should not be escaped
+				return new Handlebars.SafeString(
+					"<button>" + txt + " " + first + "</button>"
+				);
+			});
+
+			var template = Handlebars.templates['demo.hbs'];
+			var context = {
+				title: "My New Post",
+				h2: "<h2>List of people:</h2>",
+				people: [
+					{firstName: "Yehuda", lastName: "Katz"},
+					{firstName: "Carl"},
+					{firstName: "Alan", lastName: "Johnson"}
+				],
+				mylist: "This list was generated using Handlebars.js!"
+			};
+			var html = template(context);
+
+			$('.content').html(html);
+		});
+	</script>
+</head>
+<body>
+	<h1>Handlebars: Using precompiled templates</h1>
+	<div class="content"></div>
+</body>
+</html>
