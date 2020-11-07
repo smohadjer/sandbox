@@ -11,23 +11,42 @@
 				var $person = $('#person');
 				var $area = $('.area');
 				var isfirstMove = true;
-				var lastLeftPosition = $person.position().left;
 				var lastMouseX;
 				var areaWidth = $area.width();
 				var maxX = areaWidth - $person.width();
 				var minX = 0;
+				var lastLeftPositionOfPerson;
 
-				$('.pos span').text(lastLeftPosition);
+				// put person in center of area
+				$person.css({
+					left: maxX/2 + 'px'
+				});
+
+				// animate person to center on page load as a hint to user that person
+				// can be dragged.
+				$person.on('transitionend', function() {
+					lastLeftPositionOfPerson = $person.position().left;
+
+					$('.pos span').text(Math.round(lastLeftPositionOfPerson/maxX * 100));
+
+					// we don't need transition effect when dragging
+					$person.css({
+						'transition': 'none'
+					});
+				});
 
 				$(window).on('resize', function() {
+					// if area is not resized do nothing
 					if ($area.width() === areaWidth) {
 						return;
 					}
 
-					var areaChange = $area.width() / areaWidth;
+					// keep position of person the same relative to area
+					var newAreaWidth = $area.width();
+					var areaChange = newAreaWidth / areaWidth;
 					var newPosition = $person.position().left * areaChange;
 
-					maxX = $area.width() - $person.width();
+					maxX = newAreaWidth - $person.width();
 
 					if (newPosition > maxX) {
 						newPosition = maxX;
@@ -37,8 +56,8 @@
 						left: newPosition + 'px'
 					});
 
-					lastLeftPosition = newPosition;
-					areaWidth = $area.width();
+					lastLeftPositionOfPerson = newPosition;
+					areaWidth = newAreaWidth;
 				});
 
 				$person.on('mousedown', function(e) {
@@ -51,22 +70,28 @@
 						}
 
 						var distance = e.pageX - lastMouseX;
-						var newPosition = lastLeftPosition + distance;
+						var newPosition = lastLeftPositionOfPerson + distance;
 
-						if (newPosition > minX && newPosition < maxX) {
-							$person.css({
-								left: newPosition + 'px'
-							});
-
-							$('.pos span').text(Math.round(newPosition/maxX * 100));
+						if (newPosition < minX) {
+							newPosition = 0;
 						}
+
+						if (newPosition > maxX) {
+							newPosition = maxX;
+						}
+
+						$person.css({
+							left: newPosition + 'px'
+						});
+
+						$('.pos span').text(Math.round(newPosition/maxX * 100));
 					});
 				});
 
 				$(document).on('mouseup', function(e) {
 					console.log('end drag');
 					isfirstMove = true;
-					lastLeftPosition = $person.position().left;
+					lastLeftPositionOfPerson = $person.position().left;
 					$(document).off('mousemove');
 				});
 			});
@@ -101,6 +126,7 @@
 				top: 0;
 				left: 0;
 				cursor: ew-resize;
+				transition: left 0.5s;
 			}
 		</style>
 	</head>
@@ -108,6 +134,6 @@
 		<div class="area">
 			<div id="person"></div>
 		</div>
-		<p class="pos"><span></span>%</p>
+		<p class="pos"><span>0</span>%</p>
 	</body>
 </html>
