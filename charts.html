@@ -5,8 +5,8 @@
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-		<script src="js/vendor/raphael.js"></script>
-		<script src="js/charts.js"></script>
+		<script src="resources/js/vendor/raphael.js"></script>
+		<script src="resources/js/charts.js"></script>
 		<script>
 			var data = {
 				xyz: {
@@ -35,7 +35,7 @@
 					type: 'pie',
 					delta: 30,
 					init_callback: function(paper) {
-						$('#chart_pie p span').text(addCommas(paper.total()));
+						$('#chart_pie p span').text(paper.total());
 						//fixing bug that icons are covered by slice's stroke if slice is small
 						$('#chart_pie image').each(function() {
 							$(this).remove();

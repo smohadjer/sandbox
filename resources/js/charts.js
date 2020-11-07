@@ -31,6 +31,10 @@ Raphael.fn.chart = function (options) {
 		IMG_H = defaults.icon_height,
 		delta = defaults.delta,
 		size_factor = defaults.size_factor;
+		
+	var addCommas = function(t) {
+		return t;
+	}
 	
 	//public methods
 	this.total = function() {
@@ -40,6 +44,8 @@ Raphael.fn.chart = function (options) {
 		}	
 		return temp;
 	}
+	
+	
 	
 	//private methods
 	var sector = function(cx, cy, r, startAngle, endAngle, params) {

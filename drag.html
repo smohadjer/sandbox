@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>HTML5 test</title>
+		<meta name="description" content="" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+		<script>
+			$(function() {
+				var $person = $('#person');
+				var $area = $('.area');
+				var isfirstMove = true;
+				var left = $person.position().left;
+				var mouseX;
+				var areaWidth = $area.width();
+				var maxX = areaWidth - $person.width();
+				var minX = 0;
+
+				$(window).on('resize', function() {
+					if ($area.width() === areaWidth) {
+						return;
+					}
+
+					var areaChange = $area.width() / areaWidth;
+					var newPosition = $person.position().left * areaChange;
+
+					console.log(newPosition);
+
+					maxX = $area.width() - $person.width();
+
+					if (newPosition > maxX) {
+						newPosition = maxX;
+					}
+
+					left = newPosition;
+
+					$person.css({
+						left: left + 'px'
+					});
+
+					areaWidth = $area.width();
+				});
+
+				$person.on('mousedown', function(e) {
+					console.log('start drag');
+					$(document).on('mousemove', function(e) {
+						if (isfirstMove) {
+							isfirstMove = false;
+							mouseX = e.pageX;
+							return;
+						}
+
+						var distance = e.pageX - mouseX;
+						var newPosition = left + distance;
+
+						if (newPosition > minX && newPosition < maxX) {
+							$person.css({
+								left: newPosition + 'px'
+							});
+						}
+					});
+				});
+
+				$(document).on('mouseup', function(e) {
+					console.log('end drag');
+					isfirstMove = true;
+					left = $person.position().left;
+					$(document).off('mousemove');
+				});
+			});
+		</script>
+		<style>
+			.area {
+				border-bottom: solid 3px;
+				padding-bottom: 145px;
+				position: relative;
+				margin: 2em;
+			}
+
+			@media (min-width: 768px) {
+				.area {
+					margin: 2em auto;
+					max-width: 600px;
+				}
+			}
+
+			#person {
+				position: absolute;
+				background-repeat: no-repeat;
+				width: 75px;
+				height: 150px;
+				background-image: url('_assets/images/person.png');
+				background-size: contain;
+				top: 0;
+				left: 0;
+				cursor: ew-resize;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="area">
+			<div id="person"></div>
+		</div>
+	</body>
+</html>
