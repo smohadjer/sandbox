@@ -11,11 +11,13 @@
 				var $person = $('#person');
 				var $area = $('.area');
 				var isfirstMove = true;
-				var left = $person.position().left;
-				var mouseX;
+				var lastLeftPosition = $person.position().left;
+				var lastMouseX;
 				var areaWidth = $area.width();
 				var maxX = areaWidth - $person.width();
 				var minX = 0;
+
+				$('.pos span').text(lastLeftPosition);
 
 				$(window).on('resize', function() {
 					if ($area.width() === areaWidth) {
@@ -25,20 +27,17 @@
 					var areaChange = $area.width() / areaWidth;
 					var newPosition = $person.position().left * areaChange;
 
-					console.log(newPosition);
-
 					maxX = $area.width() - $person.width();
 
 					if (newPosition > maxX) {
 						newPosition = maxX;
 					}
 
-					left = newPosition;
-
 					$person.css({
-						left: left + 'px'
+						left: newPosition + 'px'
 					});
 
+					lastLeftPosition = newPosition;
 					areaWidth = $area.width();
 				});
 
@@ -47,17 +46,19 @@
 					$(document).on('mousemove', function(e) {
 						if (isfirstMove) {
 							isfirstMove = false;
-							mouseX = e.pageX;
+							lastMouseX = e.pageX;
 							return;
 						}
 
-						var distance = e.pageX - mouseX;
-						var newPosition = left + distance;
+						var distance = e.pageX - lastMouseX;
+						var newPosition = lastLeftPosition + distance;
 
 						if (newPosition > minX && newPosition < maxX) {
 							$person.css({
 								left: newPosition + 'px'
 							});
+
+							$('.pos span').text(Math.round(newPosition/maxX * 100));
 						}
 					});
 				});
@@ -65,14 +66,14 @@
 				$(document).on('mouseup', function(e) {
 					console.log('end drag');
 					isfirstMove = true;
-					left = $person.position().left;
+					lastLeftPosition = $person.position().left;
 					$(document).off('mousemove');
 				});
 			});
 		</script>
 		<style>
 			.area {
-				border-bottom: solid 3px;
+				border-bottom: solid 2px #ccc;
 				padding-bottom: 145px;
 				position: relative;
 				margin: 2em;
@@ -80,9 +81,14 @@
 
 			@media (min-width: 768px) {
 				.area {
-					margin: 2em auto;
+					margin: 2em auto 1em;
 					max-width: 600px;
 				}
+			}
+
+			.pos {
+				text-align: center;
+				margin: 0;
 			}
 
 			#person {
@@ -102,5 +108,6 @@
 		<div class="area">
 			<div id="person"></div>
 		</div>
+		<p class="pos"><span></span>%</p>
 	</body>
 </html>
