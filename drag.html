@@ -16,14 +16,21 @@
 				var maxX = lastAreaWidth - $person.width();
 				var minX = 0;
 				var lastLeftPositionOfPerson = $person.position().left;
-    			var mouseMoveHandler = function(e) {
+				var mouseMoveHandler = function(e) {
+					// support for touch devices
+					if (e.originalEvent.touches) {
+						var touch = e.originalEvent.touches[0]
+					}
+
+					var pageX = e.pageX || touch.pageX;
+
 					if (isfirstMove) {
 						isfirstMove = false;
-						lastMouseX = e.pageX;
+						lastMouseX = pageX;
 						return;
 					}
 
-					var distance = e.pageX - lastMouseX;
+					var distance = pageX - lastMouseX;
 					var newPosition = lastLeftPositionOfPerson + distance;
 
 					if (newPosition < minX) {
@@ -67,15 +74,15 @@
 
 				$(window).on('resize', resizeHandler);
 
-				$person.on('mousedown', function(e) {
-			        // use preventDefault() to stop browser from native drag and dropping of element
-			        //https://stackoverflow.com/questions/13236484/mouseup-not-working-after-mousemove-on-img
-			        e.preventDefault();
+				$person.on('mousedown, touchstart', function(e) {
+					// use preventDefault() to stop browser from native drag and dropping of element
+					//https://stackoverflow.com/questions/13236484/mouseup-not-working-after-mousemove-on-img
+					e.preventDefault();
 					console.log('start drag');
-			        $(document).on('mousemove', mouseMoveHandler);
-			    });
+					$(document).on('mousemove, touchmove', mouseMoveHandler);
+				});
 
-				$(document).on('mouseup', function(e) {
+				$(document).on('mouseup, touchend', function(e) {
 					console.log('end drag');
 					isfirstMove = true;
 					lastLeftPositionOfPerson = $person.position().left;
