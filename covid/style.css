@@ -1,0 +1,166 @@
+@media (min-width: 768px) {
+    .component {
+        font-family: arial, verdana;
+        margin: 2em auto 1em;
+        max-width: 600px;
+    }
+}
+
+.area {
+    border: solid 1px #aaa;
+    padding-bottom: 174px;
+    position: relative;
+    background-image: url('chart2.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.pos {
+    text-align: center;
+    margin: 1em 0 0 ;
+}
+
+#person {
+    position: absolute;
+    background-repeat: no-repeat;
+    width: 80px;
+    height: 150px;
+    background-image: url('body.svg');
+    background-size: cover;
+    background-position: center;
+    top: 26px;
+    left: 0;
+    cursor: ew-resize;
+    opacity: 0.9;
+}
+
+#person.hasTransition {
+    transition: left 1s;
+}
+
+.antibodies {
+    pointer-events: none;
+    position: absolute;
+    left: -35px;
+}
+
+.antibody {
+    position: absolute;
+    opacity: 0;
+    transition: opacity 0.5s;
+    transform-origin: center;
+    animation: float 3s ease-out infinite;
+}
+
+.antibody svg {
+    fill: green;
+}
+
+@keyframes float {
+  50% {
+     transform: translateX(0px) translateY(2px);
+  }
+}
+
+.antibody.active {
+    opacity: 1;
+}
+
+#antibody_1 {
+    left: 51px;
+    top: 32px;
+    animation-delay: 0.25s;
+}
+#antibody_1 svg {
+    width: 0.6em;
+    height: 0.6em;
+    transform: rotate(29deg);
+}
+#antibody_2 {
+    left: 76px;
+    top: 37px;
+    animation-delay: 1s;
+}
+#antibody_2 svg {
+    width: 0.9em;
+    height: 0.9em;
+    transform: rotate(67deg);
+}
+#antibody_3 {
+    left: 63px;
+    top: 66px;
+    animation-delay: 1.25s;
+}
+#antibody_3 svg {
+    width: 0.8em;
+    height: 0.8em;
+    transform: rotate(-113deg);
+}
+#antibody_4 {
+    left: 55px;
+    top: 113px;
+    animation-delay: 0.5s;
+  }
+#antibody_4 svg {
+    width: 1.1em;
+    height: 1.1em;
+    transform: rotate(125deg);
+}
+#antibody_5 {
+    left: 42px;
+    top: 55px;
+    animation-delay: 1.5s;
+}
+#antibody_5 svg {
+    width: 0.6em;
+    height: 0.6em;
+    transform: rotate(-12deg);
+}
+#antibody_6 {
+    left: 97px;
+    top: 46px;
+    animation-delay: 2.5s;
+}
+#antibody_6 svg {
+    width: 0.6em;
+    height: 0.6em;
+    transform: rotate(-48deg);
+}
+#antibody_7 {
+    left: 72px;
+    top: 59px;
+    animation-delay: 1.75s;
+}
+#antibody_7 svg {
+    width: 1.2em;
+    height: 1.2em;
+    transform: rotate(-60deg);
+}
+#antibody_8 {
+    left: 60px;
+    top: 91px;
+}
+#antibody_8 svg {
+    width: .6em;
+    height: .6em;
+}
+#antibody_9 {
+    left: 76px;
+    top: 100px;
+    animation-delay: 0.75s;
+}
+#antibody_9 svg {
+    width: 1.2em;
+    height: 1.2em;
+    transform: rotate(-39deg);
+}
+#antibody_10 {
+    left: 58px;
+    top: 34px;
+    animation-delay: 2.25s;
+}
+#antibody_10 svg {
+    transform: rotate(-21deg);
+    width: 1.4em;
+    height: 1.4em;
+}

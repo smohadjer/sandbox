@@ -12,38 +12,43 @@
 				var $area = $('.area');
 				var isfirstMove = true;
 				var lastMouseX;
-				var areaWidth = $area.width();
-				var maxX = areaWidth - $person.width();
+				var lastAreaWidth = $area.width();
+				var maxX = lastAreaWidth - $person.width();
 				var minX = 0;
-				var lastLeftPositionOfPerson;
+				var lastLeftPositionOfPerson = $person.position().left;
+    			var mouseMoveHandler = function(e) {
+					if (isfirstMove) {
+						isfirstMove = false;
+						lastMouseX = e.pageX;
+						return;
+					}
 
-				// put person in center of area
-				$person.css({
-					left: maxX/2 + 'px'
-				});
+					var distance = e.pageX - lastMouseX;
+					var newPosition = lastLeftPositionOfPerson + distance;
 
-				// animate person to center on page load as a hint to user that person
-				// can be dragged.
-				$person.on('transitionend', function() {
-					lastLeftPositionOfPerson = $person.position().left;
+					if (newPosition < minX) {
+						newPosition = 0;
+					}
 
-					$('.pos span').text(Math.round(lastLeftPositionOfPerson/maxX * 100));
+					if (newPosition > maxX) {
+						newPosition = maxX;
+					}
 
-					// we don't need transition effect when dragging
 					$person.css({
-						'transition': 'none'
+						left: newPosition + 'px'
 					});
-				});
 
-				$(window).on('resize', function() {
-					// if area is not resized do nothing
-					if ($area.width() === areaWidth) {
+					var percent = Math.round(newPosition/maxX * 100);
+					$('.pos span').text(percent);
+				};
+				var resizeHandler = function(e) {
+					if ($area.width() === lastAreaWidth) {
 						return;
 					}
 
 					// keep position of person the same relative to area
 					var newAreaWidth = $area.width();
-					var areaChange = newAreaWidth / areaWidth;
+					var areaChange = newAreaWidth / lastAreaWidth;
 					var newPosition = $person.position().left * areaChange;
 
 					maxX = newAreaWidth - $person.width();
@@ -57,36 +62,18 @@
 					});
 
 					lastLeftPositionOfPerson = newPosition;
-					areaWidth = newAreaWidth;
-				});
+					lastAreaWidth = newAreaWidth;
+				};
+
+				$(window).on('resize', resizeHandler);
 
 				$person.on('mousedown', function(e) {
+			        // use preventDefault() to stop browser from native drag and dropping of element
+			        //https://stackoverflow.com/questions/13236484/mouseup-not-working-after-mousemove-on-img
+			        e.preventDefault();
 					console.log('start drag');
-					$(document).on('mousemove', function(e) {
-						if (isfirstMove) {
-							isfirstMove = false;
-							lastMouseX = e.pageX;
-							return;
-						}
-
-						var distance = e.pageX - lastMouseX;
-						var newPosition = lastLeftPositionOfPerson + distance;
-
-						if (newPosition < minX) {
-							newPosition = 0;
-						}
-
-						if (newPosition > maxX) {
-							newPosition = maxX;
-						}
-
-						$person.css({
-							left: newPosition + 'px'
-						});
-
-						$('.pos span').text(Math.round(newPosition/maxX * 100));
-					});
-				});
+			        $(document).on('mousemove', mouseMoveHandler);
+			    });
 
 				$(document).on('mouseup', function(e) {
 					console.log('end drag');
@@ -126,7 +113,6 @@
 				top: 0;
 				left: 0;
 				cursor: ew-resize;
-				transition: left 0.5s;
 			}
 		</style>
 	</head>
