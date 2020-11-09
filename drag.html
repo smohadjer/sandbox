@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8" />
-		<title>HTML5 test</title>
+		<title>Drag</title>
 		<meta name="description" content="" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
@@ -21,7 +21,6 @@
 					if (e.originalEvent.touches) {
 						var touch = e.originalEvent.touches[0]
 					}
-
 					var pageX = e.pageX || touch.pageX;
 
 					if (isfirstMove) {
@@ -74,16 +73,14 @@
 
 				$(window).on('resize', resizeHandler);
 
-				$person.on('mousedown, touchstart', function(e) {
+				$person.on('mousedown touchstart', function(e) {
 					// use preventDefault() to stop browser from native drag and dropping of element
 					//https://stackoverflow.com/questions/13236484/mouseup-not-working-after-mousemove-on-img
 					e.preventDefault();
-					console.log('start drag');
-					$(document).on('mousemove, touchmove', mouseMoveHandler);
+					$(document).on('mousemove touchmove', mouseMoveHandler);
 				});
 
-				$(document).on('mouseup, touchend', function(e) {
-					console.log('end drag');
+				$(document).on('mouseup touchend', function(e) {
 					isfirstMove = true;
 					lastLeftPositionOfPerson = $person.position().left;
 					$(document).off('mousemove');

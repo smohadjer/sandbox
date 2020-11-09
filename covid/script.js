@@ -113,13 +113,19 @@ $(function() {
         });
     };
     var mouseMoveHandler = function(e) {
+        // support for touch devices
+        if (e.originalEvent.touches) {
+            var touch = e.originalEvent.touches[0]
+        }
+        var pageX = e.pageX || touch.pageX;
+
         if (isfirstMove) {
             isfirstMove = false;
-            lastMouseX = e.pageX;
+            lastMouseX = pageX;
             return;
         }
 
-        var distance = e.pageX - lastMouseX;
+        var distance = pageX - lastMouseX;
         var newPosition = lastLeftPositionOfPerson + distance;
 
         if (newPosition < minX) {
@@ -167,15 +173,14 @@ $(function() {
         areaWidth = newAreaWidth;
     });
 
-    $person.on('mousedown', function(e) {
+    $person.on('mousedown touchstart', function(e) {
         // use preventDefault() to stop browser from native drag and dropping of element
         //https://stackoverflow.com/questions/13236484/mouseup-not-working-after-mousemove-on-img
         e.preventDefault();
-        $(document).on('mousemove', mouseMoveHandler);
+        $(document).on('mousemove touchmove', mouseMoveHandler);
     });
 
-    $(document).on('mouseup', function(e) {
-        console.log('end drag');
+    $(document).on('mouseup touchend', function(e) {
         isfirstMove = true;
         lastLeftPositionOfPerson = $person.position().left;
         $(document).off('mousemove');
