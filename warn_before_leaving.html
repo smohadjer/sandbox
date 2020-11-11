@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>HTML5 test</title>
+		<meta name="description" content="" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+		<script>
+			$(function() {
+				var $form = $('form');
+				var initialState = $form.serialize();
+				var isSubmitting = false;
+
+				$form.on('submit', function() {
+					isSubmitting = true;
+				});
+
+				window.addEventListener('beforeunload', function (e) {
+					if (initialState !== $form.serialize() && !isSubmitting) {
+						// Cancel the event
+	  				  e.preventDefault(); // If you prevent default behavior in Mozilla Firefox prompt will always be shown
+
+	  				  // Chrome requires returnValue to be set
+	  				  e.returnValue = '';
+					}
+				});
+			});
+		</script>
+	</head>
+	<body>
+		<form method="post" action="http://saeidmohadjer.com/">
+			<label>Name:</label>
+			<input type="text" name="name" /><br /><br />
+			<select name="age">
+				<option selected value="0">Select</option>
+				<option value="1">Child</option>
+				<option value="2">Adult</option>
+				<option value="3">Senior</option>
+			</select><br /><br />
+			<button>Submit</button>
+			<a href="http://saeidmohadjer.com/">link to another page</a>
+		</form>
+	</body>
+</html>
