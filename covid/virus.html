@@ -98,6 +98,10 @@
 			});
 		</script>
 		<style>
+			article {
+				position: relative;
+			}
+
 			body, h1, h2, p {
 				margin: 0;
 				font-weight: normal;
@@ -113,20 +117,18 @@
 			}
 
 			div.background {
-				position: fixed;
+				position: absolute;
 				width: 100vw;
-				height: 100vh;
-				background: rgb(250,250,250);
-				background: radial-gradient(circle, rgba(250,250,250,1) 0%, rgba(229,229,229,1) 100%);
+				height: 100%;
+
+				background: rgb(50,250,250);
+				/*background: radial-gradient(circle, rgba(250,250,250,1) 0%, rgba(229,229,229,1) 100%);
+				*/
 				z-index: -1;
-				opacity: 0;
+				opacity: 0.2;
 			}
 
 			@media (min-width: 768px) {
-				div.background {
-					opacity: 1;
-				}
-
 				div.intro {
 					text-align: left;
 					margin-left: 50%;
@@ -173,7 +175,7 @@
 				margin: 5em auto 1em;
 			}
 
-			img {
+			#virus {
 				width: 100%;
 				transition: transform 1s;
 				transform: translate(-35vw, 100px) rotate(90deg) scale(2.8);
@@ -187,19 +189,19 @@
 					margin-top: 50vh;
 				}
 
-				img {
+				#virus {
 					transform: translate(-35vw, -40vh) rotate(90deg) scale(3.8);
 				}
 			}
 
-			img.animated {
+			#virus.animated {
 				transform: translate(0, 190px) rotate(0deg) scale(1);
 			}
 		</style>
 	</head>
 	<body>
-		<div class="background"></div>
 		<article>
+			<div class="background"></div>
 			<section>
 				<div class="intro">
 					<h1>3 Factors</h1>
