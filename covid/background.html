@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Background depth</title>
+		<meta name="description" content="" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+		<script>
+			$(function() {
+				var current = 0;
+				var target = 0;
+				var ease = 0.1;
+				var $bg = $('.background');
+				var rafActive = false;
+				var rafId;
+				var svgs = $bg.find('img');
+
+				$(window).on('scroll', function(e) {
+					target = window.scrollY || window.pageYOffset;
+					//startAnimation();
+				});
+
+				// Start the animation, if it is not running already
+				function startAnimation () {
+				  if (!rafActive) {
+				    rafActive = true
+				    rafId = requestAnimationFrame(updateAnimation)
+				  }
+				}
+
+				function updateAnimation () {
+					  // Difference between `target` and `current` scroll position
+					  var diff = target - current;
+					  // `delta` is the value for adding to the `current` scroll position
+					  // If `diff < 0.1`, make `delta = 0`, so the animation would not be endless
+					  var delta = Math.abs(diff) < 0.1 ? 0 : diff * ease;
+
+					  if (delta) { // If `delta !== 0`
+					    // Update `current` scroll position
+					    current += delta;
+					    // Round value for better performance
+					    current = parseFloat(current.toFixed(2));
+					    // Call `update` again, using `requestAnimationFrame`
+					    rafId = requestAnimationFrame(updateAnimation);
+					  } else { // If `delta === 0`
+					    // Update `current`, and finish the animation loop
+					    current = target;
+					    rafActive = false;
+					    window.cancelAnimationFrame(rafId);
+
+					  }
+
+					  // Update images (explained below)
+					  //updateAnimationImages()
+
+					  //console.log({current});
+
+					  $bg.css({
+						  'transform': 'translateY(' + delta + 'px)'
+					  });
+				}
+
+			});
+		</script>
+		<style>
+			body {
+				margin: 0;
+				font-size: 2em;
+				color: white;
+			}
+
+			article {
+		        position: relative;
+				margin: 0;
+		    }
+
+			section {
+				padding: 5em 2em;
+				max-width: 800px;
+				margin: 0 auto;
+			}
+
+			section:first-of-type {
+				margin-top: 0;
+			}
+
+		    div.background {
+		        position: absolute;
+		        width: 100%;
+		        height: 100%;
+		        background: #284863;
+		        opacity: 1;
+				z-index: -1;
+				overflow: hidden;
+		    }
+
+			div.background img {
+				position: absolute;
+			}
+
+			#virus_1 {
+				left: 5vw;
+			    top: 100px;
+			    filter: blur(1px);
+			    animation-delay: 1s;
+			    opacity: 0.5;
+			    width: 10vw;
+			}
+			#virus_2 {
+				left: 80vw;
+				    top: 16%;
+				    filter: blur(1px);
+				    opacity: 0.35;
+				    width: 10vw;
+			}
+			#virus_3 {
+				left: 55vw;
+			    top: 6%;
+			    filter: blur(1.5px);
+			    animation-delay: 2s;
+			    opacity: 0.2;
+			    width: 5vw;
+			}
+			#virus_4 {
+				left: 25vw;
+				top: 30%;
+				filter: blur(3px);
+				opacity: 0.5;
+				width: 8vw;
+			}
+			#virus_5 {
+				left: 5vw;
+				top: 40%;
+				filter: blur(1px);
+				opacity: 0.5;
+				width: 5vw;
+			}
+			#virus_6 {
+				left: 95vw;
+				top: 70%;
+				filter: blur(1px);
+				opacity: 0.25;
+				width: 10vw;
+			}
+			#virus_7 {
+				left: 60vw;
+				top: 550%;
+				filter: blur(1px);
+				opacity: 0.15;
+				width: 16vw;
+			}
+			#virus_8 {
+				left: 35vw;
+				top: 90%;
+				filter: blur(1px);
+				opacity: 0.25;
+				width: 10vw;
+			}
+
+			#virus_11 {
+				left: 35vw;
+			    top: -8vw;
+			    filter: blur(1px);
+			    animation-delay: 1s;
+			    width: 16vw;
+			    opacity: .5;
+			}
+			#virus_12 {
+				left: 83vw;
+				top: 30%;
+				filter: blur(2px);
+				width: 30vw;
+				opacity: 0.5;
+			}
+			#virus_13 {
+				left: 55vw;
+				top: 45%;
+				filter: blur(3px);
+				animation-delay: 2s;
+				width: 10vw;
+				opacity: 0.5;
+			}
+			#virus_14 {
+				left: 35vw;
+				top: 40%;
+				filter: blur(3px);
+				width: 8vw;
+				opacity: 0.25;
+			}
+			#virus_15 {
+				left: -15vw;
+				top: 70%;
+				filter: blur(2px);
+				width: 30vw;
+				opacity: 0.15;
+			}
+			#virus_16 {
+				left: 40vw;
+				top: 66%;
+				filter: blur(2px);
+				width: 6vw;
+				opacity: 0.25;
+			}
+			#virus_17 {
+				left: 0;
+				top: 25%;
+				filter: blur(2px);
+				width: 10vw;
+				opacity: 0.35;
+			}
+			#virus_18 {
+				left: 65vw;
+				top: 80%;
+				filter: blur(2px);
+				width: 5vw;
+				opacity: 0.25;
+			}
+		</style>
+	</head>
+	<body>
+		<article>
+			<div class="background">
+				<img id="virus_1" src="../assets/images/background_virus.png" />
+				<img id="virus_2" src="../assets/images/background_virus.png" />
+				<img id="virus_3" src="../assets/images/background_virus.png" />
+				<img id="virus_4" src="../assets/images/background_virus.png" />
+				<img id="virus_5" src="../assets/images/background_virus.png" />
+				<img id="virus_6" src="../assets/images/background_virus.png" />
+				<img id="virus_7" src="../assets/images/background_virus.png" />
+				<img id="virus_8" src="../assets/images/background_virus.png" />
+
+				<img id="virus_11" src="../assets/images/background_virus.png" />
+				<img id="virus_12" src="../assets/images/background_virus.png" />
+				<img id="virus_13" src="../assets/images/background_virus.png" />
+				<img id="virus_14" src="../assets/images/background_virus.png" />
+				<img id="virus_15" src="../assets/images/background_virus.png" />
+				<img id="virus_16" src="../assets/images/background_virus.png" />
+				<img id="virus_17" src="../assets/images/background_virus.png" />
+				<img id="virus_18" src="../assets/images/background_virus.png" />
+			</div>
+			<section>
+				<h1>3 Factors</h1>
+				<p>that decide on the apprpriate <span>SARS-CoV-2 test</span></p>
+			</section>
+			<section>
+				<h2>Questions</h2>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliquatur. Excepteur sint occaecat cupidatat non proident.</p>
+			</section>
+			<section>
+				<h2>Incididunt</h2>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliquatur. Excepteur sint occaecat cupidatat non proident.</p>
+			</section>
+			<section>
+				<h2>Sunt in Culpa qui Officia</h2>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+			</section>
+		</article>
+	</body>
+</html>
