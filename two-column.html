@@ -13,8 +13,14 @@
 		</script>
 		<style>
 			.grid {
+				display: -ms-grid;
 				display: grid;
+
+				-ms-grid-columns: 1fr 1fr;
 				grid-template-columns: fit-content(25%) 1fr;
+
+				-ms-grid-rows: 1fr 1fr;
+
 				margin-bottom: 1em;
 				background: #eee;
 			}
@@ -22,6 +28,11 @@
 			.column {
 				padding: 1em;
 				border-bottom: solid 1px #ccc;
+
+				-ms-grid-column: 1;
+				-ms-grid-row: 1;
+				-ms-grid-row-span: 1;
+				-ms-grid-column-span: 1;
 			}
 		</style>
 	</head>
