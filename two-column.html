@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>HTML5 test</title>
+		<meta name="description" content="" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+		<script>
+			$(function() {
+				//DOM is ready...
+			});
+		</script>
+		<style>
+			.grid {
+				display: grid;
+				grid-template-columns: fit-content(25%) 1fr;
+				margin-bottom: 1em;
+				background: #eee;
+			}
+
+			.column {
+				padding: 1em;
+				border-bottom: solid 1px #ccc;
+			}
+		</style>
+	</head>
+	<body>
+		<h1>Two-column grid</h1>
+		<div class="grid">
+			<div class="column">short text</div>
+			<div class="column">Lorem ipsum dolor</div>
+
+			<div class="column">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</div>
+			<div class="column">Lorem ipsum</div>
+
+			<div class="column">short text</div>
+			<div class="column">Lorem ipsum dolor sit amet</div>
+
+			<div class="column">short text</div>
+			<div class="column">Lorem ipsum dolor sit amet</div>
+		</div>
+		<div class="grid">
+			<div class="column">short text</div>
+			<div class="column">Lorem ipsum dolor</div>
+
+			<div class="column">short text</div>
+			<div class="column">Lorem ipsum dolor sit amet</div>
+
+			<div class="column">short text</div>
+			<div class="column">Lorem ipsum dolor sit amet</div>
+		</div>
+	</body>
+</html>
