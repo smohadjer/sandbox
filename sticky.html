@@ -6,64 +6,69 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
 		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
 		<style>
-			.sticky.fixed {
-				position: fixed;
-				width: 100%;
+			.sticky {
+                background: #ddd;
+                margin: 0;
+                padding: 1em;
+				position: sticky;
 				top: 0;
-				left: 0;
+                z-index: 10;
 			}
 
-			ul {
-				background: #ddd;
-				margin: 0;
-				padding: 10px;
-			}
+            footer.sticky {
+                top: auto;
+				bottom: 0;
+            }
 
-			#navbar li {
+            li {
 				display: inline-block;
 				list-style: none;
 				margin-right: 10px;
 			}
 
 			article {
-				width: 25%;
-				margin: 20px auto;
+                font-size: 30px;
 			}
+
+            .sticky-wrapper {
+                min-height: 100vh;
+            }
+
+            .sticky-element {
+                position: sticky;
+                background: yellow;
+                padding: 1em;
+                top: 100px;
+                width: 50%;
+                margin: 0 auto;
+            }
 		</style>
-		<script>
-			$(document).ready(function() {
-				$('.sticky').sticky();
-			});
-
-			$.fn.sticky = function() {
-				var $this = $(this);
-				var top = $this.offset().top;
-
-				$(window).on('scroll', function() {
-					if ($(window).scrollTop() > top) {
-						$this.addClass('fixed');
-					} else {
-						$this.removeClass('fixed');
-					}
-				});
-			};
-		</script>
 	</head>
 	<body>
-		<h1>Sticky Nav</h1>
-		<ul id="navbar" class="sticky">
-			<li>Lorem</li>
-			<li>Ipsum</li>
-			<li>Dolor</li>
-			<li>Sit Amet</li>
-			<li>Vigilans</li>
-		</ul>
-		<article>
-			<h2>Scroll down to see header sticking to the top keeping navbar always visible...</h2>
-			<p>Lorem ipsum dolor sit amet, vigilans insaniae gaudens ergo accipiet. Patrem dixit regem adventu nihil labore accusam amici dabit es ego esse more filiam. Aeolus immanitate excidit ipsum longinquas Aeolus immanitate excidit ipsum dolore facto similia. Iuvenem quasi certum ait regem adventu nihil civitatis civium takimata scias nutrix. Amet amet consensit cellula filia omnes, quaestiones proponitur caelum ad te. In fuerat eum filiam rex Dionysiadi rex cum autem nobiscum paulo aureos. Domini includeret Tharsiam si non coepit contingere. Audito sed haec vidit tam gratia de. Alia vero diam dominum sit in rei civibus corporis particularis in rei finibus veteres hoc. Reflexio mihi servitute coniunx rex Stranguillio sit audivit per. Coniungitur vestra felicitatem suam non coepit cognitionis huius beneficium peregrina fletus castitatem itaque sed eu. Sui in fuerat se est se in. Mauricii materialia sola dum est in lucem exitum vivit in modo ad te finis puellam materia puella.</p>
-			<p>Lorem ipsum dolor sit amet, vigilans insaniae gaudens ergo accipiet. Patrem dixit regem adventu nihil labore accusam amici dabit es ego esse more filiam. Aeolus immanitate excidit ipsum longinquas Aeolus immanitate excidit ipsum dolore facto similia. Iuvenem quasi certum ait regem adventu nihil civitatis civium takimata scias nutrix. Amet amet consensit cellula filia omnes, quaestiones proponitur caelum ad te. In fuerat eum filiam rex Dionysiadi rex cum autem nobiscum paulo aureos. Domini includeret Tharsiam si non coepit contingere. Audito sed haec vidit tam gratia de. Alia vero diam dominum sit in rei civibus corporis particularis in rei finibus veteres hoc. Reflexio mihi servitute coniunx rex Stranguillio sit audivit per. Coniungitur vestra felicitatem suam non coepit cognitionis huius beneficium peregrina fletus castitatem itaque sed eu. Sui in fuerat se est se in. Mauricii materialia sola dum est in lucem exitum vivit in modo ad te finis puellam materia puella.</p>
+        <header>
+            <h1>Sticky Nav and Footer</h1>
+        </header>
+        <main>
+    		<ul class="nav sticky">
+    			<li>Lorem</li>
+    			<li>Ipsum</li>
+    			<li>Dolor</li>
+    			<li>Sit Amet</li>
+    			<li>Vigilans</li>
+    		</ul>
+		    <article>
+			    <h2>Scroll down to see header sticking to the top keeping navbar always visible...</h2>
+			    <p>Lorem ipsum dolor sit amet, vigilans insaniae gaudens ergo accipiet. Patrem dixit regem adventu nihil labore accusam amici dabit es ego esse more filiam. Aeolus immanitate excidit ipsum longinquas Aeolus immanitate excidit ipsum dolore facto similia. Iuvenem quasi certum ait regem adventu nihil civitatis civium takimata scias nutrix. Amet amet consensit cellula filia omnes, quaestiones proponitur caelum ad te. In fuerat eum filiam rex Dionysiadi rex cum autem nobiscum paulo aureos. Domini includeret Tharsiam si non coepit contingere. Audito sed haec vidit tam gratia de. Alia vero diam dominum sit in rei civibus corporis particularis in rei finibus veteres hoc. Reflexio mihi servitute coniunx rex Stranguillio sit audivit per. Coniungitur vestra felicitatem suam non coepit cognitionis huius beneficium peregrina fletus castitatem itaque sed eu. Sui in fuerat se est se in. Mauricii materialia sola dum est in lucem exitum vivit in modo ad te finis puellam materia puella.</p>
+                <div class="sticky-wrapper">
+                    <div class="sticky-element">
+                        I'm a sticky box <br />
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequatollit anim id est laborum.
+                    </div>
+                </div>
+			    <p>Lorem ipsum dolor sit amet, vigilans insaniae gaudens ergo accipiet. Patrem dixit regem adventu nihil labore accusam amici dabit es ego esse more filiam. Aeolus immanitate excidit ipsum longinquas Aeolus immanitate excidit ipsum dolore facto similia. Iuvenem quasi certum ait regem adventu nihil civitatis civium takimata scias nutrix. Amet amet consensit cellula filia omnes, quaestiones proponitur caelum ad te. In fuerat eum filiam rex Dionysiadi rex cum autem nobiscum paulo aureos. Domini includeret Tharsiam si non coepit contingere. Audito sed haec vidit tam gratia de. Alia vero diam dominum sit in rei civibus corporis particularis in rei finibus veteres hoc. Reflexio mihi servitute coniunx rex Stranguillio sit audivit per. Coniungitur vestra felicitatem suam non coepit cognitionis huius beneficium peregrina fletus castitatem itaque sed eu. Sui in fuerat se est se in. Mauricii materialia sola dum est in lucem exitum vivit in modo ad te finis puellam materia puella.</p>
 			<p>Lorem ipsum dolor sit amet, vigilans insaniae gaudens ergo accipiet. Patrem dixit regem adventu nihil labore accusam amici dabit es ego esse more filiam. Aeolus immanitate excidit ipsum longinquas Aeolus immanitate excidit ipsum dolore facto similia. Iuvenem quasi certum ait regem adventu nihil civitatis civium takimata scias nutrix. Amet amet consensit cellula filia omnes, quaestiones proponitur caelum ad te. In fuerat eum filiam rex Dionysiadi rex cum autem nobiscum paulo aureos. Domini includeret Tharsiam si non coepit contingere. Audito sed haec vidit tam gratia de. Alia vero diam dominum sit in rei civibus corporis particularis in rei finibus veteres hoc. Reflexio mihi servitute coniunx rex Stranguillio sit audivit per. Coniungitur vestra felicitatem suam non coepit cognitionis huius beneficium peregrina fletus castitatem itaque sed eu. Sui in fuerat se est se in. Mauricii materialia sola dum est in lucem exitum vivit in modo ad te finis puellam materia puella.</p>
 		</article>
-	</body>
+        </main>
+        <footer class="sticky">Footer comes here</footer>
+    </body>
 </html>
-
