@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Recaptcha V3</title>
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <script>
+            function onSubmit(token) {
+                document.getElementById("demo-form").submit();
+            }
+        </script>
+        <script src="https://www.google.com/recaptcha/api.js"></script>
+    </head>
+    <body>
+        <h1>Recaptcha demo (v3)</h1>
+        <p>This page only works from following domains:</p>
+        <ul>
+            <li>saeidmohadjer.com</li>
+            <li>lcoalhost</li>
+            <li>127.0.0.1</li>
+        </ul>
+        <p>Additional domains can be added at: <a href="https://www.google.com/recaptcha/admin/">https://www.google.com/recaptcha/admin/</a>.</p>
+        <ul>
+            <li><a href="https://developers.google.com/recaptcha/docs/v3">Client-side integration</a></li>
+            <li><a href="https://developers.google.com/recaptcha/docs/verify">Server-side verification</a></li>
+        </ul>
+        <form id="demo-form" method="post" action="recaptcha.php">
+            <p><label>Age: <input name="age" /></label></p>
+            <button class="g-recaptcha"
+                    data-sitekey="6LdDoLYaAAAAAAW2WDxzSo7qbQnCGKCcuPLMkr7U"
+                    data-callback='onSubmit'
+                    data-action='submit'>Submit</button>
+        </form>
+    </body>
+</html>
