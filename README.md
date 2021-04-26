@@ -1,3 +1,3 @@
 # sandbox
 
-https://smohadjer.github.io/sandbox/
+https://sandbox.saeidmohadjer.com/_phpinfo.php
