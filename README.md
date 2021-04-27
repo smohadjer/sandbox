@@ -1,6 +1,6 @@
 # sandbox
 
-Sandbox available at:
+Available on:
 VPS with PHP support:
 https://sandbox.saeidmohadjer.com/_phpinfo.php
 
