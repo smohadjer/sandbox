@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>HTML5 Push Notification</title>
+		<meta name="description" content="" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+		<script>
+			$(function() {
+				//DOM is ready...
+				$('#enable').on('click', function(e) {
+					Notification.requestPermission().then(function(result) {
+					  console.log(result);
+					});
+				});
+
+				$('#disable').on('click', function(e) {
+					console.log(Notification.permission);
+				});
+
+				if (window.Notification && Notification.permission === "granted") {
+					console.log('user has already agreed to be notified');
+					var text = 'HEY! Your task is now overdue.';
+					var n = new Notification('To do list', { body: text });
+				}
+
+
+			});
+		</script>
+	</head>
+	<body>
+		<button id="enable">Enable Notification</button>
+		<button id="disable">Disable Notification</button>
+	</body>
+</html>
