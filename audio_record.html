@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>Record audio</title>
+		<meta name="description" content="Record audio" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+        <style>
+            .disabled {
+                pointer-events: none;
+                color: #ccc;
+            }
+        </style>
+	</head>
+	<body>
+        <!-- for ie11 -->
+        <input hidden type="file" accept="audio/*" capture id="ie-recorder">
+
+        <!-- for other browsers -->
+        <div class="hidden" id="audio-recorder">
+            <audio id="player" controls></audio><br />
+            <button id="start">Start recording</button>
+            <button disabled id="stop">Stop recording</button>
+            <button disabled id="play">Play recorded audio</button>
+            <a class="disabled" id="download" href="">Download audio file</a>
+        </div>
+
+        <script>
+            // https://developers.google.com/web/fundamentals/media/recording-audio
+            function init(stream) {
+                const downloadLink = document.getElementById('download');
+                const stopButton = document.getElementById('stop');
+                const playButton = document.getElementById('play');
+                const startButton = document.getElementById('start');
+                const player = document.getElementById('player');
+                let mediaRecorder;
+                let recordedChunks = [];
+
+                startButton.addEventListener('click', function(e) {
+                    console.log('start');
+                    const options = {mimeType: 'audio/webm'};
+                    recordedChunks = [];
+                    mediaRecorder = new MediaRecorder(stream, options);
+                    mediaRecorder.start(1000);
+                    e.target.setAttribute('disabled', 'disabled');
+                    stopButton.removeAttribute('disabled');
+                    playButton.setAttribute('disabled', 'disabled');
+                   
+                    mediaRecorder.addEventListener('dataavailable', function(e) {
+                        console.log('dataavailable fired');
+                        if (e.data.size > 0) {
+                            recordedChunks.push(e.data);
+                        }
+                    });
+
+                    mediaRecorder.addEventListener('stop', function() {
+                        console.log('stop fired');
+                        downloadLink.href = URL.createObjectURL(new Blob(recordedChunks));
+                        downloadLink.download = 'test.wav';
+                        download.classList.remove('disabled');
+                        playButton.removeAttribute('disabled');
+                        startButton.removeAttribute('diabled');
+                    });
+                });
+
+                stopButton.addEventListener('click', function(e) {
+                    mediaRecorder.stop();
+                    playButton.removeAttribute('disabled');
+                    startButton.removeAttribute('disabled');
+                    e.target.setAttribute('disabled', 'disabled');
+
+                });
+
+                playButton.addEventListener('click', function() {
+                    var type = (recordedChunks[0] || {}).type;
+                    var superBuffer = new Blob(recordedChunks, {type});
+                    player.src = window.URL.createObjectURL(superBuffer);
+                    player.play();
+                });
+            }            
+
+            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                console.log('getUserMedia supported.');
+                document.getElementById('audio-recorder').classList.remove('hidden');
+
+                // approach 1
+                navigator.mediaDevices.getUserMedia ({audio: true})
+                    .then(init)
+                    .catch(function(err) {
+                        console.log('The following getUserMedia error occurred: ' + err);
+                    }
+                );
+
+                // approach 2
+                /*
+                navigator.mediaDevices.enumerateDevices().then((devices) => {
+                    devices = devices.filter((d) => d.kind === 'audioinput');
+                    navigator.mediaDevices.getUserMedia({
+                        audio: {deviceId: devices[0].deviceId}
+                    }).then(init);
+                });
+                */
+            } else {
+                // fallback for older browsers using an input field to allow uploading audio file
+                const recorder = document.getElementById('ie-recorder');
+                const player = document.getElementById('player');
+
+                recorder.removeAttribute('hidden');
+                recorder.addEventListener('change', function(e) {
+                    const file = e.target.files[0];
+                    const url = URL.createObjectURL(file);
+                    // Do something with the audio file.
+                    player.src = url;
+                });
+            }
+        </script>
+	</body>
+</html>
