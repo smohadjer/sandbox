@@ -10,15 +10,19 @@
                 pointer-events: none;
                 color: #ccc;
             }
+            .hidden {
+                display: none;
+            }
         </style>
 	</head>
 	<body>
+        <audio id="player" controls></audio><br />
+
         <!-- for ie11 -->
         <input hidden type="file" accept="audio/*" capture id="ie-recorder">
 
         <!-- for other browsers -->
         <div class="hidden" id="audio-recorder">
-            <audio id="player" controls></audio><br />
             <button id="start">Start recording</button>
             <button disabled id="stop">Stop recording</button>
             <button disabled id="play">Play recorded audio</button>
@@ -73,7 +77,7 @@
 
                 playButton.addEventListener('click', function() {
                     var type = (recordedChunks[0] || {}).type;
-                    var superBuffer = new Blob(recordedChunks, {type});
+                    var superBuffer = new Blob(recordedChunks, {type: type});
                     player.src = window.URL.createObjectURL(superBuffer);
                     player.play();
                 });
@@ -104,7 +108,7 @@
                 // fallback for older browsers using an input field to allow uploading audio file
                 const recorder = document.getElementById('ie-recorder');
                 const player = document.getElementById('player');
-
+                console.log(recorder);
                 recorder.removeAttribute('hidden');
                 recorder.addEventListener('change', function(e) {
                     const file = e.target.files[0];
