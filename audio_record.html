@@ -16,17 +16,22 @@
         </style>
 	</head>
 	<body>
-        <audio id="player" controls></audio><br />
-
         <!-- for ie11 -->
-        <input hidden type="file" accept="audio/*" capture id="ie-recorder">
+        <div class="hidden" id="audio-upload">
+            <form>
+                <label>Select audio file:</label>
+                <input type="file" accept="audio/*" />
+                <button type="submit">Upload</button>
+            </form>
+        </div>
 
         <!-- for other browsers -->
         <div class="hidden" id="audio-recorder">
-            <button id="start">Start recording</button>
-            <button disabled id="stop">Stop recording</button>
-            <button disabled id="play">Play recorded audio</button>
-            <a class="disabled" id="download" href="">Download audio file</a>
+            <audio id="player" controls></audio><br />
+            <button id="start">Record</button>
+            <button disabled id="stop">Stop</button>
+            <button disabled id="play">Play</button>
+            <a class="disabled" id="download" href="">Download</a>
         </div>
 
         <script>
@@ -106,16 +111,7 @@
                 */
             } else {
                 // fallback for older browsers using an input field to allow uploading audio file
-                const recorder = document.getElementById('ie-recorder');
-                const player = document.getElementById('player');
-                console.log(recorder);
-                recorder.removeAttribute('hidden');
-                recorder.addEventListener('change', function(e) {
-                    const file = e.target.files[0];
-                    const url = URL.createObjectURL(file);
-                    // Do something with the audio file.
-                    player.src = url;
-                });
+                document.getElementById('audio-upload').classList.remove('hidden');
             }
         </script>
 	</body>
