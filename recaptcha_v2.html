@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Recaptcha V2</title>
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <script type="text/javascript">
+          var onloadCallback = function() {
+            console.log("grecaptcha is ready!");
+            grecaptcha.render('html_element', {
+              'sitekey' : '6Le1IPAbAAAAABATBGU5kzXUt2HBWL9NqEG9sjAw'
+            });
+          };
+        </script>
+    </head>
+    <body>
+        <h1>Recaptcha demo (v2)</h1>
+        <body>
+          <form action="recaptcha_v2.php" method="POST">
+            <p><label>Age: <input name="age" /></label></p>
+            <div id="html_element"></div>
+            <br>
+            <input type="submit" value="Submit">
+          </form>
+          <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
+              async defer>
+          </script>
+        </body>
+    </body>
+</html>
