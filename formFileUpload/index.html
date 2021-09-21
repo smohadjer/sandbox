@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>HTML5</title>
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <script>
+            document.addEventListener('DOMContentLoaded', (event) => {
+                console.log('Hello World');
+                var form = document.querySelector('form');
+                form.addEventListener('submit', function(e) {
+                    var fd = new FormData(form);
+                    console.log(...fd);
+                });
+            })
+        </script>
+    </head>
+    <body>
+        <h1>Upload multiple files</h1>
+        <form method="post" enctype="multipart/form-data" action="http://127.0.0.1:3001/">
+            <div>
+                <label for="firstname">Your Name:</label>
+                <input name="firstname" />
+            </div>
+            <div>
+              <label for="file">Select files:</label>
+              <input type="file" name="file" multiple />
+            </div>
+            <div>
+              <button>Submit</button>
+            </div>
+        </form>           
+    </body>
+</html>
