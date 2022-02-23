@@ -6,12 +6,15 @@
   width: 50%;
 }
 
+.myComponent form {
+  text-align: center;
+}
+
 #drop_zone {
   padding: 75px 10px;
   background: #eee;
   text-align: center;
   border: dashed 2px #333;
-  max-width: 320px;
 }
 
 #drop_zone.dragging {
@@ -21,6 +24,13 @@
 #drop_zone.dragging #prompt {
   opacity: 0.5;
   pointer-events: none;
+}
+
+#file-manager li {
+  border-bottom: solid 1px #ccc;
+  margin-bottom: 5px;
+  padding-bottom: 5px;
+  list-style-type: none;
 }
 
 #file-manager li > span {

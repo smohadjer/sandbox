@@ -9,6 +9,10 @@
             //https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API/File_drag_and_drop
             const init = () => {
               const myForm = document.querySelector('#upload-form');
+              const fileManagerElement = document.querySelector('#file-manager');
+              const bytesToSize = function(bytes) {
+                return Math.round(bytes * 100 / (1024 * 1024)) /100 + ' MB';
+              };
               const fileManager = {
                 data: [],
                 add: function(files) {
@@ -16,9 +20,28 @@
                     this.data.push(files[i]);
                   }  
                   console.log(this.data);
+                  this.updateView();
                 },
-                remove: function(file) {
-                  
+                remove: function(fileName) {
+                  for (var i = 0; i < this.data.length; i++) {
+                    file = this.data[i];
+                    if (file.name === fileName) {
+                      this.data.splice(i, 1); 
+                    }
+                  }
+                  console.log(this.data);
+                },
+                updateView: function() {
+                  fileManagerElement.innerHTML = '';
+                  for (var i = 0; i < this.data.length; i++) {
+                    const file = this.data[i];
+                    const entry = document.createElement('li');
+                    const fileData = `<span class="name">${file.name}</span>
+                      <span class="size">${bytesToSize(file.size)}</span>
+                      <span class="action"><button>Delete</button></span>`;
+                    entry.innerHTML = fileData;
+                    fileManagerElement.appendChild(entry);
+                  }  
                 }
               };
               const dropZone = document.querySelector('#drop_zone');
@@ -87,11 +110,15 @@
                 event.preventDefault();
                 const formData = new FormData(myForm);
 
-                if (files && files.length) {
-                  for (var i=0; i<files.length; i++) {
-                    formData.append('myfiles[]', files[i]);
-                    console.log(files[i]);
+                if (fileManager.data && fileManager.data.length) {
+                  for (var i=0; i<fileManager.data.length; i++) {
+                    const file = fileManager.data[i];
+                    formData.append('myfiles[]', file);
+                    console.log(file);
                   }
+                } else {
+                  alert('No file is selected');
+                  return;
                 }
 
                 //console.dir(formData.get('myfiles[]'));
@@ -100,9 +127,23 @@
                     method: myForm.getAttribute('method'),
                     body: formData
                 })
-                .then(() => { console.log('Done!'); })
+                .then(() => { 
+                  console.log('Done!'); 
+                  alert(fileManager.data.length + ' files were uploaded!');
+                  fileManager.data = [];
+                  fileManagerElement.innerHTML = '';
+                })
                 .catch(() => { console.log('Error'); });
                 
+              });
+              fileManagerElement.addEventListener('click', (event) => {
+                  console.log(event.target.nodeName);
+                  if (event.target.nodeName === 'BUTTON') {
+                    const item = event.target.closest('li');
+                    const fileName = item.querySelector('span.name').textContent;
+                    item.remove();
+                    fileManager.remove(fileName);
+                  }
               });
             };
 
@@ -113,14 +154,16 @@
     </head>
     <body>
       <h1>Upload multiple files using drag and drop</h1>
-      <form id="upload-form" method="post" enctype="multipart/form-data" action="backend.php">
+      <div class="myComponent">
+        <form id="upload-form" method="post" enctype="multipart/form-data" action="backend.php">
           <div id="drop_zone">
-              <span id="prompt">Drag files or <a id="browse" href="">Browse</a><br />
-                (Only jpg files are allowed)</span>
+              <span id="prompt">Drag files or <a id="browse" href="">Browse</a></span>
               <input id="myfiles" hidden type="file" name="myfiles[]" multiple />
           </div>
           <p><button>Upload Files</button></p>
-      </form>
+        </form>
+        <ul id="file-manager"></ul>
+      </div>
     </body>
 </html>
 
