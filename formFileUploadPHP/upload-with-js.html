@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>HTML5</title>
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <script>
+            document.addEventListener('DOMContentLoaded', (event) => {
+                document.querySelector('form').addEventListener('submit', (event) => {
+                    event.preventDefault();
+                    console.log('submitting form with js...');
+                    
+                    const formData = new FormData(document.querySelector('form'))
+                    formData.append('lastname', 'mohadjer');
+                    for (var key of formData.entries()) {
+                        console.log(key[0] + ': ' + key[1]);
+                    }
+                    console.dir(formData.get('myfiles[]'));
+
+                    // this won't send the field lastname with post request, you need to use ajax or fetch api to do that. See upload-with-js-fetch.html
+                    event.target.submit();
+                });
+            })
+        </script>
+    </head>
+    <body>
+        <h1>Upload multiple files (via js)</h1>
+        <form method="post" enctype="multipart/form-data" action="backend.php">
+            <div>
+                <label for="firstname">Name:</label>
+                <input name="firstname" />
+            </div>
+            <div>
+              <label for="file">Select files:</label>
+              <input type="file" name="myfiles[]" multiple />
+            </div>
+            <div>
+              <button>Submit</button>
+            </div>
+        </form>           
+    </body>
+</html>

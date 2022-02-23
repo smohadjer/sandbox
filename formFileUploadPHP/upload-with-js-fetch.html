@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>HTML5</title>
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <script>
+            document.addEventListener('DOMContentLoaded', (event) => {
+                const myForm = document.querySelector('form')
+                myForm.addEventListener('submit', (event) => {
+                    event.preventDefault();
+                    console.log('submitting form with js...');
+                    
+                    const formData = new FormData(myForm);
+                    formData.append('lastname', 'mohadjer');
+                    for (var key of formData.entries()) {
+                        console.log(key[0] + ': ' + key[1]);
+                    }
+                    console.dir(formData.get('myfiles[]'));
+
+                    fetch(myForm.getAttribute('action'), {
+                        method: myForm.getAttribute('method'),
+                        body: formData
+                    })
+                    .then(() => { console.log('Done!'); })
+                    .catch(() => { console.log('Error'); });
+                });
+            })
+        </script>
+    </head>
+    <body>
+        <h1>Upload multiple files (via fetch api)</h1>
+        <p>We use javascript to add a new field (lastname) and submit data using fetch api to server.</p>
+        <form method="post" enctype="multipart/form-data" action="backend.php">
+            <div>
+                <label for="firstname">Name:</label>
+                <input name="firstname" />
+            </div>
+            <div>
+              <label for="file">Select files:</label>
+              <input type="file" name="myfiles[]" multiple />
+            </div>
+            <div>
+              <button>Submit</button>
+            </div>
+        </form>           
+    </body>
+</html>

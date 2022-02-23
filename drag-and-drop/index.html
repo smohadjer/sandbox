@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Drag and drop file upload</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" type="text/css" href="style.css" />
+        <script>
+            //https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API/File_drag_and_drop
+            const init = () => {
+              const myForm = document.querySelector('#upload-form');
+              const fileManager = {
+                data: [],
+                add: function(files) {
+                  for (var i = 0; i < files.length; i++) {
+                    this.data.push(files[i]);
+                  }  
+                  console.log(this.data);
+                },
+                remove: function(file) {
+                  
+                }
+              };
+              const dropZone = document.querySelector('#drop_zone');
+              const hiddenFileInput = dropZone.querySelector('#myfiles');
+              const browseButton = dropZone.querySelector('#browse');
+              const dropHandler = (event) => {
+                event.preventDefault();
+                event.target.classList.remove('dragging');
+                fileManager.add(event.dataTransfer.files);
+                /*
+                const fileManager = document.querySelector('#file-manager');
+                function bytesToSize(bytes) {
+                  return Math.round(bytes * 100 / (1024 * 1024)) /100 + ' MB';
+                }
+
+                if (event.dataTransfer.items) {
+                  for (var i = 0; i < event.dataTransfer.items.length; i++) {
+                    if (event.dataTransfer.items[i].kind === 'file') {
+                      var file = event.dataTransfer.items[i].getAsFile();
+                      if (file.type === 'image/jpeg') {
+                        files.push(file);
+
+                        formData = new FormData(myForm);
+                        formData.append('file', file);
+
+                        const entry = document.createElement('li');
+                        const fileData = `<span class="name">${file.name}</span>
+                        <span class="size">${bytesToSize(file.size)}</span>
+                        <span class="action"><button>Delete</button></span>`;
+                        entry.innerHTML = fileData;
+                        fileManager.appendChild(entry);
+                      }
+                    }
+                  }
+                } else {
+                  console.log('Use a modern browser that supports DataTransferItemList interface.');
+                }
+                */
+              };
+              const dragOverHandler = (event) => {
+                event.preventDefault();
+              };
+              const dragEnterHandler = (event) => {
+                event.preventDefault();
+                event.target.classList.add('dragging');
+              };
+              const dragLeaveHandler = (event) => {
+                event.preventDefault();
+                event.target.classList.remove('dragging');
+              };
+
+              dropZone.addEventListener('drop', dropHandler);
+              dropZone.addEventListener('dragover', dragOverHandler);
+              dropZone.addEventListener('dragenter', dragEnterHandler);
+              dropZone.addEventListener('dragleave', dragLeaveHandler);
+              dropZone.addEventListener('dragend', dragLeaveHandler);
+              browseButton.addEventListener('click', event => {
+                event.preventDefault();
+                hiddenFileInput.click();
+              });
+              hiddenFileInput.addEventListener('change', (event) => {
+                fileManager.add(event.target.files);       
+              });
+
+              myForm.addEventListener('submit', event => {
+                event.preventDefault();
+                const formData = new FormData(myForm);
+
+                if (files && files.length) {
+                  for (var i=0; i<files.length; i++) {
+                    formData.append('myfiles[]', files[i]);
+                    console.log(files[i]);
+                  }
+                }
+
+                //console.dir(formData.get('myfiles[]'));
+
+                fetch(myForm.getAttribute('action'), {
+                    method: myForm.getAttribute('method'),
+                    body: formData
+                })
+                .then(() => { console.log('Done!'); })
+                .catch(() => { console.log('Error'); });
+                
+              });
+            };
+
+            document.addEventListener('DOMContentLoaded', (event) => {
+              init();
+            });
+        </script>
+    </head>
+    <body>
+      <h1>Upload multiple files using drag and drop</h1>
+      <form id="upload-form" method="post" enctype="multipart/form-data" action="backend.php">
+          <div id="drop_zone">
+              <span id="prompt">Drag files or <a id="browse" href="">Browse</a><br />
+                (Only jpg files are allowed)</span>
+              <input id="myfiles" hidden type="file" name="myfiles[]" multiple />
+          </div>
+          <p><button>Upload Files</button></p>
+      </form>
+    </body>
+</html>
+
