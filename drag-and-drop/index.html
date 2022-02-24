@@ -17,10 +17,24 @@
                 data: [],
                 add: function(files) {
                   for (var i = 0; i < files.length; i++) {
-                    this.data.push(files[i]);
+                    let fileExists = false;
+                    fileName = files[i].name;
+
+                    for (var j = 0; j < this.data.length; j++) {
+                      file = this.data[j];
+                      if (file.name === fileName) {
+                        fileExists = true;
+                        this.data[j] = files[i];
+                        break;
+                      }
+                    }
+
+                    if (!fileExists) {
+                      this.data.push(files[i]);
+                    }
                   }  
                   console.log(this.data);
-                  this.updateView();
+                  this.updateMarkup();
                 },
                 remove: function(fileName) {
                   for (var i = 0; i < this.data.length; i++) {
@@ -31,7 +45,7 @@
                   }
                   console.log(this.data);
                 },
-                updateView: function() {
+                updateMarkup: function() {
                   fileManagerElement.innerHTML = '';
                   for (var i = 0; i < this.data.length; i++) {
                     const file = this.data[i];
@@ -51,35 +65,6 @@
                 event.preventDefault();
                 event.target.classList.remove('dragging');
                 fileManager.add(event.dataTransfer.files);
-                /*
-                const fileManager = document.querySelector('#file-manager');
-                function bytesToSize(bytes) {
-                  return Math.round(bytes * 100 / (1024 * 1024)) /100 + ' MB';
-                }
-
-                if (event.dataTransfer.items) {
-                  for (var i = 0; i < event.dataTransfer.items.length; i++) {
-                    if (event.dataTransfer.items[i].kind === 'file') {
-                      var file = event.dataTransfer.items[i].getAsFile();
-                      if (file.type === 'image/jpeg') {
-                        files.push(file);
-
-                        formData = new FormData(myForm);
-                        formData.append('file', file);
-
-                        const entry = document.createElement('li');
-                        const fileData = `<span class="name">${file.name}</span>
-                        <span class="size">${bytesToSize(file.size)}</span>
-                        <span class="action"><button>Delete</button></span>`;
-                        entry.innerHTML = fileData;
-                        fileManager.appendChild(entry);
-                      }
-                    }
-                  }
-                } else {
-                  console.log('Use a modern browser that supports DataTransferItemList interface.');
-                }
-                */
               };
               const dragOverHandler = (event) => {
                 event.preventDefault();
@@ -110,25 +95,29 @@
                 event.preventDefault();
                 const formData = new FormData(myForm);
 
+                // remove files that are uploaded in the form
+                for (var key of formData.entries()) {
+                  if (key[0] === 'myfiles[]') {
+                    formData.delete('myfiles[]');
+                  }
+                }
+
+                // add files stored in fileManager to formData
                 if (fileManager.data && fileManager.data.length) {
                   for (var i=0; i<fileManager.data.length; i++) {
                     const file = fileManager.data[i];
                     formData.append('myfiles[]', file);
-                    console.log(file);
                   }
                 } else {
                   alert('No file is selected');
                   return;
                 }
 
-                //console.dir(formData.get('myfiles[]'));
-
                 fetch(myForm.getAttribute('action'), {
                     method: myForm.getAttribute('method'),
                     body: formData
                 })
                 .then(() => { 
-                  console.log('Done!'); 
                   alert(fileManager.data.length + ' files were uploaded!');
                   fileManager.data = [];
                   fileManagerElement.innerHTML = '';
@@ -137,13 +126,12 @@
                 
               });
               fileManagerElement.addEventListener('click', (event) => {
-                  console.log(event.target.nodeName);
-                  if (event.target.nodeName === 'BUTTON') {
-                    const item = event.target.closest('li');
-                    const fileName = item.querySelector('span.name').textContent;
-                    item.remove();
-                    fileManager.remove(fileName);
-                  }
+                if (event.target.nodeName === 'BUTTON') {
+                  const item = event.target.closest('li');
+                  const fileName = item.querySelector('span.name').textContent;
+                  item.remove();
+                  fileManager.remove(fileName);
+                }
               });
             };
 
