@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>HTML5</title>
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <script src="https://cdn.jsdelivr.net/npm/scandit-sdk@5.x"></script>
+        <style>
+          body {
+            text-align: center;
+          }
+          .wrapper {
+            display: flex;
+            text-align: left;
+            justify-content: center;
+          }
+          .wrapper > * {
+            margin: 20px;
+          }
+
+          button {
+            margin: 20px;
+            background: green;
+            padding: 10px;
+            color: white;
+          }
+          #scandit-barcode-picker {
+            background: #ccc;
+          }
+
+          ul#product-info {
+            margin: 0;
+            padding: 0;
+            margin-left: 17px;
+          }
+
+          #product-image {
+            max-width: 320px;
+            margin-top: 20px;
+          }
+        </style>
+        <script>
+            document.addEventListener('DOMContentLoaded', (event) => {
+                const licenseKey = 'AXqxzgXHJJ07JXsYrDJOM7kGqfcpIvm8VzDnEq1nRt3oZPdYsHtEbnZBVsTreN5Hc3RcLANGVIHHWxlLoEuYoN1UDQr4S50atGO4FwFSeLP2S6V9XEklDJdqspYAfovDd1NbMzIl+Zx+RdIv5TAkjmlI5QpqbHX2aBv4HbFDMXE6CIvNFnL0JjJNOKo6ettuHFhJXRUA9XtJwWrBbSS//nPYTxXPzyPK1poHE/OoIAQPEjxQ9TPAyCV/Vyrxjsa00Dz+NTyOxnpwO6zGtHjdZui7oOnpX4pgQjnXjWX7tj0NoOIvgui9YNBLUM5VgrlXP/w9Ond4w9v+5QRRqx3PMFPue/K+vu23PhBBHQf1awQS6vYNY5hhtaPK1mgFg+9MI/c8mYZ7iwGFWgmvfw92Bjk3PU9boTuizLibkpCgHtaj8+bTtwiNCaWrHI1U9yp3mFC1AYtmQDCaoof/B0NR++LR3m+sJhnCW9ny445SHmAKyWPnY3fJNPbKusFu2L0LlgJ1NLTVcE3jnr3e4JNPHfu+XulC7Dl7QNp74wL4hlqQuBMYi7iotMAHSIiN4agP+N6znfTApwlYvlc43Au+V+fBpykCH/pXVVMwfGoADpZw5vn4xInQ1437+czQ/PCocsoToEA6ORUrlAJbdPehAMK5L6n6ur3UMxp9Ha1/X6aSmBSHAs8seZz1zTiieugAh+U02b3VBWuaqAAo583w9qVYgABzdaDNQlBx6T+sWnRjdKmny9Dw7vkIb6NcTMLK1EMBEPHVJ85S2/jlu3XbNyQkmNqf1lWVz/Gmajh+63Tyb1ajWWQL6hck0ErhF/0tDeX9oErhxwc+CNgrIzfDennyHAFdKRl59cWDv/iKUo1v9oU=';
+                const btn = document.querySelector('#barcode-btn');
+                const barcodeLabel = document.querySelector('.label');
+                const barcodeData = document.querySelector('.data');
+                const initScanner = function() {
+                  ScanditSDK.BarcodePicker.create(document.getElementById("scandit-barcode-picker"), {
+                    scanSettings: new ScanditSDK.ScanSettings({ 
+                      enabledSymbologies: ["ean8", "ean13", "upca", "upce"],
+                      playSoundOnScan: true
+                    })
+                  }).then((barcodePicker) => {
+                    barcodePicker.on("scan", (scanResult) => {
+                      barcodePicker.removeListener('scan');
+                      showResult(scanResult)
+                    });
+                    barcodePicker.on('scanError', (error) => console.error(error));
+                  });
+                };
+                const showResult = function(scanResult) {
+                  console.log(scanResult);
+                  const productInfo = document.getElementById('product-info');
+                  const addItem = function(key, value) {
+                    const liElm = document.createElement('li');
+                    liElm.appendChild(document.createTextNode(key + ': ' + value));
+                    productInfo.appendChild(liElm);
+                  }
+                  const barcode = scanResult.barcodes[0];
+
+                  addItem('Symbology', barcode.symbology);
+                  addItem('Barcode', barcode.data)
+
+                  fetch('https://world.openfoodfacts.org/api/v2/product/' + barcode.data)
+                    .then(res => res.json())
+                    .then(data => {
+                      const product = data.product;
+                      for (const [key, value] of Object.entries(product)) {
+                        if (key === 'brands' || key === 'categories' || key === 'countries') {
+                          addItem(key, value)
+                        }
+
+                        if (key === 'image_url') {
+                          document.getElementById('product-image').setAttribute('src', value);
+                        }
+                      }
+                    });
+                };
+
+                ScanditSDK.configure(licenseKey, {
+                  engineLocation: "https://cdn.jsdelivr.net/npm/scandit-sdk@5.x/build/",
+                }).then(() => {
+                  console.log('ScanditSDK is configured...');
+                  btn.addEventListener('click', initScanner);
+                });
+            });
+       </script>
+    </head>
+    <body>
+      <button id="barcode-btn">Start Scanning Barcodes...</button>
+      <div class="wrapper">
+        <div class="left" id="scandit-barcode-picker"></div>
+        <div class="right">
+          <ul id="product-info"></ul>
+          <img id="product-image" src="" />
+        </div>
+      </div>
+    </body>
+</html>
