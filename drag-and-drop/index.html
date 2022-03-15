@@ -18,10 +18,10 @@
                 add: function(files) {
                   for (var i = 0; i < files.length; i++) {
                     let fileExists = false;
-                    fileName = files[i].name;
+                    const fileName = files[i].name;
 
                     for (var j = 0; j < this.data.length; j++) {
-                      file = this.data[j];
+                      const file = this.data[j];
                       if (file.name === fileName) {
                         fileExists = true;
                         this.data[j] = files[i];
@@ -38,7 +38,7 @@
                 },
                 remove: function(fileName) {
                   for (var i = 0; i < this.data.length; i++) {
-                    file = this.data[i];
+                    const file = this.data[i];
                     if (file.name === fileName) {
                       this.data.splice(i, 1); 
                     }
