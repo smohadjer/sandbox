@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>HTML5</title>
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <script>
+            document.addEventListener('DOMContentLoaded', (event) => {
+                const datalist = document.querySelector('#my-list');
+                document.querySelector('#blah').addEventListener('input', function(e) {
+                    datalist.innerHTML = '<option value="fetching data...">';
+                    fetch('data.json')
+                    .then(response => response.json())
+                    .then(data => {
+                        markup = ''
+                        data.forEach(item => {
+                            //console.log(item);
+                            markup += `<option value="${item.name}">`
+                        });
+
+                        setTimeout(function() {
+                            datalist.innerHTML = markup;
+                        }, 1000);
+                    });                   
+                });
+            })
+        </script>
+    </head>
+    <body>
+      <label for="blah">Choose a country:</label>
+      <input list="my-list" name="blah" id="blah" />
+      <datalist id="my-list">
+          <!--
+          <option value="Chocolate">
+          <option value="Coconut">
+          <option value="Mint">
+          <option value="Strawberry">
+          <option value="Vanilla">
+          -->
+      </datalist>
+    </body>
+</html>
