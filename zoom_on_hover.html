@@ -5,14 +5,8 @@
         <title>Zoom on hover</title>
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-		<script>
-			$(function() {
-				//DOM is ready...
-			});
-		</script>
 		<style>
-            a {
+            span {
                 width: 150px;
                 overflow: hidden;
                 float: left;
@@ -23,14 +17,12 @@
                 transition: transform 0.5s ease-out;
                 transform-origin: bottom left;
             }
-
-            a:hover img {
+            span:hover img {
                 transform: scale(1.2);
             }
 		</style>
     </head>
     <body>
-		<a href="javascript:void(0);"><img alt="image" src="assets/images/image_scale.jpg"></a> Image will zoom when link is hovered.
-
+		<span><img alt="image" src="assets/images/image_scale.jpg"></span> Image will zoom when hovered.
     </body>
 </html>
