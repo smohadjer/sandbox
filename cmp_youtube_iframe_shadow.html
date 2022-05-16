@@ -8,6 +8,10 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 	</head>
 	<body>
+		<div>
+			<button onclick="enableYoutube()">Enable Youtube Video</button>
+		</div>
+		<br />
 		<template id="my-video">
 			<iframe id="ytplayer" type="text/html" width="640" height="360"
 			data-cmp-src="https://www.youtube-nocookie.com/embed/4D3GLCygUh4"
@@ -17,12 +21,11 @@
 			frameborder="0"></iframe>
 		</template>
 		<my-video></my-video>
-
 		<script>
 			class MyVideo extends HTMLElement {
 				constructor() {
 					super();
-					const shadow = this.attachShadow({ mode: "closed" });
+					const shadow = this.attachShadow({ mode: 'open' });
 					const temp = document.importNode(template.content, true);
 					shadow.appendChild(temp);
 				}
@@ -30,6 +33,13 @@
 
 			const template = document.querySelector('#my-video');
 			window.customElements.define('my-video', MyVideo);
+
+			function enableYoutube() {
+				const shadow = document.querySelector('my-video').shadowRoot;
+				const iframe = shadow.querySelector('iframe');
+				const path = iframe.getAttribute('data-cmp-src');
+				iframe.setAttribute('src', path);
+			}
 		</script>
 	</body>
 </html>
