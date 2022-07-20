@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>HTML5</title>
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/>
+        <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+        <script>
+            document.addEventListener('DOMContentLoaded', (event) => {
+                class MySlide extends HTMLElement {
+                    constructor() {
+                        super();
+                        this.attachShadow({ mode: "open" });
+                        const src = this.getAttribute('src');
+                        const temp = document.createElement('img');
+                        temp.setAttribute('src', src);
+                        // add the text node to the newly created div
+                        //temp.appendChild(newContent);
+                        this.shadowRoot.appendChild(temp);
+                    }
+                    connectedCallback() {
+                        // this.shadowRoot is null if mode is closed
+                        console.log(this.shadowRoot);
+                    }
+                }
+
+                window.customElements.define('my-slide', MySlide);
+
+                const swiper = new Swiper('.swiper', {
+                    // Optional parameters
+                    loop: true,
+
+                    // If we need pagination
+                    pagination: {
+                        el: '.swiper-pagination',
+                    },
+
+                    // Navigation arrows
+                    navigation: {
+                        nextEl: '.swiper-button-next',
+                        prevEl: '.swiper-button-prev',
+                    },
+
+                    // And if we need scrollbar
+                    scrollbar: {
+                        el: '.swiper-scrollbar',
+                    },
+                });
+            })
+        </script>
+        <style>
+            .swiper {
+                width: 600px;
+                height: 300px;
+            }
+            my-slide ::slotted(img) {
+                width: 100%;
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Slider main container -->
+        <div class="swiper">
+            <!-- Additional required wrapper -->
+            <div class="swiper-wrapper">
+                <!-- Slides -->
+                <div class="swiper-slide">
+                    <my-slide src="https://i.picsum.photos/id/100/2500/1656.jpg?hmac=gWyN-7ZB32rkAjMhKXQgdHOIBRHyTSgzuOK6U0vXb1w" />
+                </div>
+                <div class="swiper-slide">
+                    <my-slide src="https://i.picsum.photos/id/1000/5626/3635.jpg?hmac=qWh065Fr_M8Oa3sNsdDL8ngWXv2Jb-EE49ZIn6c0P-g" />
+                </div>
+                <div class="swiper-slide">
+                    <my-slide src="https://i.picsum.photos/id/101/2621/1747.jpg?hmac=cu15YGotS0gIYdBbR1he5NtBLZAAY6aIY5AbORRAngs" />
+                </div>
+            </div>
+            <!-- If we need pagination -->
+            <div class="swiper-pagination"></div>
+        
+            <!-- If we need navigation buttons -->
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+        </div>
+    </body>
+</html>
