@@ -6,82 +6,71 @@
         <meta name="description" content="" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/>
-        <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/8.3.1/swiper-bundle.js "></script>
         <script>
             document.addEventListener('DOMContentLoaded', (event) => {
-                class MySlide extends HTMLElement {
+                class MySlider extends HTMLElement {
                     constructor() {
                         super();
-                        this.attachShadow({ mode: "open" });
-                        const src = this.getAttribute('src');
-                        const temp = document.createElement('img');
-                        temp.setAttribute('src', src);
-                        // add the text node to the newly created div
-                        //temp.appendChild(newContent);
-                        this.shadowRoot.appendChild(temp);
+                        const shadowRoot = this.attachShadow({ mode: "open" });
+                        const template = document.querySelector('#my-template').content;
+                        const wrapper = template.querySelector('.swiper-wrapper');
+                        const images = this.children;
+                        let markup = '';
+                        for (let item of images) {
+                            markup += `<div class="swiper-slide">${item.outerHTML}</div>`;
+                        }
+                        wrapper.innerHTML = markup;
+                        shadowRoot.appendChild(template.cloneNode(true));
                     }
+
                     connectedCallback() {
-                        // this.shadowRoot is null if mode is closed
-                        console.log(this.shadowRoot);
+                        const shadow = this.shadowRoot;
+                        const swiperElm = shadow.querySelector('.swiper');
+                        const swiper = new Swiper(swiperElm, {
+                            loop: true,
+                            pagination: {
+                                el:  shadow.querySelector('.swiper-pagination')
+                            },
+                            navigation: {
+                                nextEl: shadow.querySelector('.swiper-button-next'),
+                                prevEl: shadow.querySelector('.swiper-button-prev'),
+                            }
+                        });
                     }
                 }
 
-                window.customElements.define('my-slide', MySlide);
-
-                const swiper = new Swiper('.swiper', {
-                    // Optional parameters
-                    loop: true,
-
-                    // If we need pagination
-                    pagination: {
-                        el: '.swiper-pagination',
-                    },
-
-                    // Navigation arrows
-                    navigation: {
-                        nextEl: '.swiper-button-next',
-                        prevEl: '.swiper-button-prev',
-                    },
-
-                    // And if we need scrollbar
-                    scrollbar: {
-                        el: '.swiper-scrollbar',
-                    },
-                });
+                window.customElements.define('my-slider', MySlider);
             })
         </script>
         <style>
-            .swiper {
+            my-slider {
                 width: 600px;
                 height: 300px;
-            }
-            my-slide ::slotted(img) {
-                width: 100%;
             }
         </style>
     </head>
     <body>
-        <!-- Slider main container -->
-        <div class="swiper">
-            <!-- Additional required wrapper -->
-            <div class="swiper-wrapper">
-                <!-- Slides -->
-                <div class="swiper-slide">
-                    <my-slide src="https://i.picsum.photos/id/100/2500/1656.jpg?hmac=gWyN-7ZB32rkAjMhKXQgdHOIBRHyTSgzuOK6U0vXb1w" />
-                </div>
-                <div class="swiper-slide">
-                    <my-slide src="https://i.picsum.photos/id/1000/5626/3635.jpg?hmac=qWh065Fr_M8Oa3sNsdDL8ngWXv2Jb-EE49ZIn6c0P-g" />
-                </div>
-                <div class="swiper-slide">
-                    <my-slide src="https://i.picsum.photos/id/101/2621/1747.jpg?hmac=cu15YGotS0gIYdBbR1he5NtBLZAAY6aIY5AbORRAngs" />
-                </div>
+        <template id="my-template">
+            <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css">
+            <div class="swiper">
+                <div class="swiper-wrapper"></div>
+                <div class="swiper-pagination"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
             </div>
-            <!-- If we need pagination -->
-            <div class="swiper-pagination"></div>
-        
-            <!-- If we need navigation buttons -->
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-button-next"></div>
-        </div>
+            <style>
+                .swiper {
+                    width: 600px;
+                    height: 300px;
+                }
+            </style>
+        </template>
+
+        <my-slider>
+            <img src="https://i.picsum.photos/id/534/600/300.jpg?hmac=LgRCXqCFuD8eEu4pRmVKl6G-RQxrWox1t6VmOvihQwg"/>
+            <img src="https://i.picsum.photos/id/512/600/300.jpg?hmac=EIFIGisqTgapXYQbHyCSEfb3CdVBmatAGoXGSxI68wo"/>
+            <img src="https://i.picsum.photos/id/523/600/300.jpg?hmac=AUScy2faIf3m0trXMpnQbLd2dryVsMk5MLJhRJZUVy8"/>
+        </my-slider>
     </body>
 </html>
