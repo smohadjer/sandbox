@@ -3,33 +3,25 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title>iFrame</title>
+	<title>Resizable Iframe</title>
 	<style>
 		iframe {
 			width: 100%;
-			background: #efefef;
-		}
-
-		#iframeContainer {
-			padding: 1em;
-			background: green;
+            border: solid 1px;
+            box-sizing: content-box;
+            padding: 0;
+            overflow-y: hidden;
 		}
 	</style>
 </head>
 <body>
-	<div id="iframeContainer"></div>
-	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-	<script src="../resources/js/vendor/easyXDM.min.js"></script>
-	<script>
-		new easyXDM.Socket({
-			remote: "iframe-resize_content.html",
-			container: document.getElementById("iframeContainer"),
-			onMessage: function(message, origin){
-				var height = JSON.parse(message).height;
-				this.container.getElementsByTagName("iframe")[0].style.height = height + "px";
-			}
-		});
-	</script>
+	<iframe id="myIframe" title="IFrame Example" scrolling="no" src="iframe-resize_content.html"></iframe>
+    <script>
+        const iframe = document.getElementById('myIframe');
+        window.addEventListener("message", (event) => {
+            console.log('Message:', event.data);
+            iframe.height = event.data;
+        }, false);
+    </script>
 </body>
 </html>
