@@ -1,12 +1,20 @@
 //https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API/File_drag_and_drop
 
-const init = () => {
-  const myForm = document.querySelector('#upload-form');
-  const fileManagerElement = document.querySelector('#file-manager');
+const init = (myForm) => {
+  const fileManagerElement = myForm.querySelector('.file-manager');
+  const error = myForm.querySelector('.error');
 
   const bytesToSize = function(bytes) {
     return Math.round(bytes * 100 / (1024 * 1024)) /100 + ' MB';
   };
+
+  const showError = function() {
+    error.removeAttribute('hidden');
+  };
+  const hideError = function() {
+    error.setAttribute('hidden', 'hidden');
+  }
+
   const fileManager = {
     data: [],
     add: function(files) {
@@ -25,11 +33,12 @@ const init = () => {
 
         if (!fileExists) {
           this.data.push(files[i]);
+          hideError();
         }
       }  
-      console.log(this.data);
       this.updateMarkup();
     },
+
     remove: function(fileName) {
       for (var i = 0; i < this.data.length; i++) {
         const file = this.data[i];
@@ -37,24 +46,22 @@ const init = () => {
           this.data.splice(i, 1); 
         }
       }
-      console.log(this.data);
     },
+
     updateMarkup: function() {
       fileManagerElement.innerHTML = '';
       for (var i = 0; i < this.data.length; i++) {
         const file = this.data[i];
         const entry = document.createElement('li');
-        const fileData = `<span class="name">${file.name}</span>
-          <span class="size">${bytesToSize(file.size)}</span>
-          <span class="action"><button>Delete</button></span>`;
+        const fileData = `<div><span class="name">${file.name}</span> (<span class="size">${bytesToSize(file.size)}</span>)</div><button>Delete</button>`;
         entry.innerHTML = fileData;
         fileManagerElement.appendChild(entry);
       }  
     }
   };
-  const dropZone = document.querySelector('#drop_zone');
-  const hiddenFileInput = dropZone.querySelector('#myfiles');
-  const browseButton = dropZone.querySelector('#browse');
+  const dropZone = myForm.querySelector('.drop_zone');
+  const hiddenFileInput = dropZone.querySelector('input[hidden]');
+  const browseButton = dropZone.querySelector('a');
   const dropHandler = (event) => {
     event.preventDefault();
     event.target.classList.remove('dragging');
@@ -71,6 +78,7 @@ const init = () => {
     event.preventDefault();
     event.target.classList.remove('dragging');
   };
+
   const submitHandler = (myForm) => {
     const formData = new FormData(myForm);
 
@@ -88,7 +96,7 @@ const init = () => {
         formData.append('myfiles[]', file);
       }
     } else {
-      alert('No file is selected');
+      showError();
       return;
     }
 
@@ -113,6 +121,7 @@ const init = () => {
     event.preventDefault();
     hiddenFileInput.click();
   });
+
   hiddenFileInput.addEventListener('change', (event) => {
     fileManager.add(event.target.files);
   });
@@ -121,16 +130,19 @@ const init = () => {
     event.preventDefault();
     submitHandler(myForm);
   });
+
   fileManagerElement.addEventListener('click', (event) => {
     if (event.target.nodeName === 'BUTTON') {
       const item = event.target.closest('li');
-      const fileName = item.querySelector('span.name').textContent;
+      const fileName = item.querySelector('.name').textContent;
       item.remove();
+      // we need to reset hidden input field so that if user selects the file he just removed the change event of hidden input field fires again
+      hiddenFileInput.value = '';
       fileManager.remove(fileName);
     }
   });
 };
 
 document.addEventListener('DOMContentLoaded', (event) => {
-  init();
+  init(document.querySelector('.myform'));
 });

@@ -8,18 +8,33 @@
         <script src="index.js"></script>
     </head>
     <body>
-      <h1>Upload multiple files using drag and drop</h1>
-      <h2>This demo allows reviewig files before upload.</h2>
-      <div class="myComponent">
-        <form id="upload-form" method="post" enctype="multipart/form-data" action="backend.php">
-          <div id="drop_zone">
-              <span id="prompt">Drag files or <a id="browse" href="">Browse</a></span>
-              <input id="myfiles" hidden type="file" name="myfiles[]" multiple />
-          </div>
-          <p><button>Upload Files</button></p>
+        <h1>Upload files in a multipart form</h1>
+        <form class="myform" method="post" enctype="multipart/form-data" action="backend.php">
+            <fieldset>
+                <div class="row">
+                    <div class="col1"><label for="name">My name:</label></div>
+                    <div class="col2"><input id="name" name="name" required /></div>
+                </div>
+                <div class="row">
+                    <div class="col1"><label>My files:</label></div>
+                    <div class="col2">
+                        <div class="myComponent">
+                            <div class="drop_zone">
+                                <span class="prompt">Drag files or <a href="">Browse</a></span>
+                                <input hidden type="file" name="myfiles[]" multiple />
+                            </div> 
+                            <ul class="file-manager"></ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col1"></div>
+                    <div class="col2"> <button class="submit">Submit</button>
+                        <p class="error error-file" hidden>No file is selected!</p>
+                    </div>
+                </div>
+            </fieldset>
         </form>
-        <ul id="file-manager"></ul>
-      </div>
     </body>
 </html>
 
