@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+<title>jQuery Calendars Datepicker</title>
+<link rel="stylesheet" href="css/jquery.calendars.picker.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="js/jquery.plugin.js"></script>
+
+<script src="js/jquery.calendars.js"></script>
+<script src="js/jquery.calendars.plus.js"></script>
+<script src="js/jquery.calendars.picker.js"></script>
+
+<!-- needed for Perisan calendar -->
+<script src="js/jquery.calendars.picker-fa.js"></script>
+<script src="js/jquery.calendars.persian.js"></script>
+<script src="js/jquery.calendars.persian-fa.js"></script>
+
+<!-- needed for German calendar -->
+<script src="js/jquery.calendars.picker-de.js"></script>
+<script src="js/jquery.calendars-de.js"></script>
+
+<script>
+    $(function() {
+        $('#popupDatepickerPersian').calendarsPicker({
+            calendar: $.calendars.instance('persian', 'fa'),
+            localNumbers: true
+        });
+        $('#popupDatepickerGerman').calendarsPicker({
+            calendar: $.calendars.instance('gregorian', 'de'),
+            localNumbers: false
+        });
+    });
+</script>
+</head>
+<body>
+<article>
+    <h1>jQuery Calendars Datepicker</h1>
+    <p><a href="http://keith-wood.name/calendarsPicker.html">http://keith-wood.name/calendarsPicker.html</a></p>
+    <p>
+        <label for="popupDatepickerPersian">Persian date picker</label>
+        <input type="text" id="popupDatepickerPersian">
+    </p>
+    <p>
+        <label for="popupDatepickerGerman">German date picker</label>
+        <input type="text" id="popupDatepickerGerman">
+    </p>
+</article>
+</body>
+</html>
