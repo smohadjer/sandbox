@@ -39,22 +39,24 @@
     $(function() {
         $('#rtlLanguage').change(function() { 
             var language = $(this).val(); 
-            console.log(language, typeof $.localise);
             $.localise(['js/jquery.calendars', 'js/jquery.calendars.picker'], language); 
-            $('#datepicker').calendarsPicker('option', $.extend({
-                calendar: $.calendars.instance( 
-                    calendar.name == 'Julian' ? 'julian' : 'gregorian', language)
+            $('#datepicker').calendarsPicker('option', $.extend(
+                {
+                    calendar: $.calendars.instance(calendar.name == 'Julian' ? 'julian' : 'gregorian', language),
+                    minDate: calendar.newDate(),
+                    localNumbers: true,
                 }, 
-                $.calendarsPicker.regionalOptions[language])); 
+                $.calendarsPicker.regionalOptions[language]
+            )); 
             $.calendarsPicker.setDefaults($.calendarsPicker.regionalOptions['']); 
         }); 
 
+
+
         $('#datepicker').calendarsPicker(
             $.extend({
-                showTrigger: '#calImg', 
-                altField: '#rtlAlternate', 
-                altFormat: 'DD, d MM, yyyy', 
-                localNumbers: true
+                localNumbers: true,
+                minDate: calendar.newDate() /* disabling selection of previous dates */
             }, 
             $.calendarsPicker.regionalOptions[''])
         ); 
