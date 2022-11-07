@@ -5,17 +5,26 @@
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
 <title>jQuery Calendars Datepicker</title>
 <link rel="stylesheet" href="css/jquery.calendars.picker.css">
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 <script src="js/jquery.plugin.js"></script>
+<script src="js/jquery.localisation.js"></script>
 
 <script src="js/jquery.calendars.js"></script>
 <script src="js/jquery.calendars.plus.js"></script>
 <script src="js/jquery.calendars.picker.js"></script>
 
+<!--
+<script src="js/jquery.calendars.picker.lang.js"></script>
+-->
+
 <!-- needed for Perisan calendar -->
+<!--
 <script src="js/jquery.calendars.picker-fa.js"></script>
 <script src="js/jquery.calendars.persian.js"></script>
 <script src="js/jquery.calendars.persian-fa.js"></script>
+-->
+
 
 <!-- needed for German calendar -->
 <!--
@@ -23,19 +32,32 @@
 <script src="js/jquery.calendars-de.js"></script>
 -->
 
+
 <script>
+    var calendar = $.calendars.instance();
+
     $(function() {
-        //$.calendarsPicker.setDefaults($.calendarsPicker.regionalOptions['']); 
+        $('#rtlLanguage').change(function() { 
+            var language = $(this).val(); 
+            console.log(language, typeof $.localise);
+            $.localise(['js/jquery.calendars', 'js/jquery.calendars.picker'], language); 
+            $('#datepicker').calendarsPicker('option', $.extend({
+                calendar: $.calendars.instance( 
+                    calendar.name == 'Julian' ? 'julian' : 'gregorian', language)
+                }, 
+                $.calendarsPicker.regionalOptions[language])); 
+            $.calendarsPicker.setDefaults($.calendarsPicker.regionalOptions['']); 
+        }); 
 
-        $('#popupDatepickerPersian').calendarsPicker({
-            calendar: $.calendars.instance('persian', 'fa'),
-            localNumbers: true
-        });
-
-        $('#popupDatepickerGerman').calendarsPicker({
-            calendar: $.calendars.instance('gregorian', 'de'),
-            localNumbers: false
-        });
+        $('#datepicker').calendarsPicker(
+            $.extend({
+                showTrigger: '#calImg', 
+                altField: '#rtlAlternate', 
+                altFormat: 'DD, d MM, yyyy', 
+                localNumbers: true
+            }, 
+            $.calendarsPicker.regionalOptions[''])
+        ); 
     });
 </script>
 </head>
@@ -47,17 +69,19 @@
         <li><a href="http://keith-wood.name/calendarsPicker.html">http://keith-wood.name/calendarsPicker.html</a></li>
         <li><a href="https://github.com/kbwood/calendars">https://github.com/kbwood/calendars</a></li>
     </ul>
-    <p>
-        <label for="popupDatepickerPersian">Persian date picker</label>
-        <input type="text" id="popupDatepickerPersian">
-    </p>
-    <!--
-    <p>
-        <label for="popupDatepickerGerman">German date picker</label>
-        <input type="text" id="popupDatepickerGerman">
-    </p>
-    -->
-
+    <fieldset>
+        <p>Select language:
+            <select id="rtlLanguage">
+            <option value="">English</option>
+            <option value="de">German</option>
+            <option value="fa">Farsi/Persian</option>
+        </select>
+        </p>
+        <p>
+            <label for="datepicker">Date picker</label>
+            <input type="text" id="datepicker">
+        </p>
+    </fieldset>
 </article>
 </body>
 </html>
