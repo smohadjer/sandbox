@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+		<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+		<title>On-demand Marker Loading</title>
+		<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+		<script src="js/vendor/markerclusterer.js"></script>
+		<style type="text/css">
+			#map {
+				width: 500px;
+				height: 300px;
+			}
+		</style>
+		<script type="text/javascript">
+			var map;
+			var all_markers = [];
+			var markers = [];
+			var mc;
+
+			$(document).ready(function(){
+				create_map();
+				load_markers();
+			});
+
+			function load_markers() {
+				$.ajax({
+					'url' : '_mocks/markers.json',
+					'success' : function(data) {
+						all_markers = data.activities;
+						google.maps.event.addListener(map, 'idle', idle_handler);
+
+						$('#status').append('<p>JSON is loaded ('+ all_markers.length +' markers)</p>');
+						idle_handler();
+					}
+				});
+			}
+
+			function create_map() {
+				var latlng = new google.maps.LatLng(34.397, -120.644);
+				var myOptions = {
+					zoom: 5,
+					center: latlng,
+					mapTypeId: google.maps.MapTypeId.ROADMAP
+				}
+				map = new google.maps.Map(document.getElementById("map"), myOptions);
+				mc = new MarkerClusterer(map, [], {gridSize: 50, maxZoom: 15});
+
+				google.maps.event.addListener(mc, 'click', function(cluster) {
+					//mc.clearMarkers();
+					//console.log(cluster.getMarkers().length);
+				});
+			}
+
+			function idle_handler() {
+				$('#status').append('<p>Idle handler is evoked...</p>');
+				var bounds = new google.maps.LatLngBounds(map.getBounds().getSouthWest(), map.getBounds().getNorthEast());
+				var new_marker_found = false;
+
+				$(all_markers).each(function(index){
+					var loc = new google.maps.LatLng(this.lat, this.lng);
+					if (this.on_map != true) {
+						if (bounds.contains(loc) ) {
+							var gmarker = new google.maps.Marker({
+								map: map,
+								position: loc
+							});
+							this.on_map = true;
+							markers.push(gmarker);
+							mc.addMarker(gmarker);
+							new_marker_found = true;
+						}
+					}
+				});
+			}
+		</script>
+	</head>
+	<body>
+		<div id="content">
+			<h3>On-demand Marker Loading</h3>
+			<p>Markers are added to map when map's bound changes by dragging...</p>
+			<div id="map"></div>
+			<div id="status">
+				<p>Loading JSON...</p>
+			</div>
+		</div>
+
+	</body>
+</html>
