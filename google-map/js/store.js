@@ -1,6 +1,6 @@
 import { MarkerClusterer } from "https://cdn.skypack.dev/@googlemaps/markerclusterer@2.0.3";
 
-const LOCATIONS_COUNT = 100;
+const LOCATIONS_COUNT = 500;
 const DISTANCE_IN_METER = 50000;
 const markers = [];
 const visibleMarkers = [];
@@ -9,17 +9,19 @@ const getDistanceInKM = (distance) => {
 };
 const showStoresList = (stores) => {
     const panel = document.getElementById('panel');
+    let markup = '';
 
     if (stores.length == 0) {
       console.log('empty stores');
-      panel.innerHTML = '';
+      markup = `<h3>No location found!</h3>`;
+      panel.innerHTML = markup;
       return;
     }
 
     // sort stores based on their distance
     stores.sort((a, b) => a.getProperty('distance') > b.getProperty('distance') ? 1 : -1);
 
-    let markup = `<h3>Found ${stores.length} Locations within ${getDistanceInKM(DISTANCE_IN_METER)} KM</h3>`;
+    markup = `<h3>Found ${stores.length} Locations within ${getDistanceInKM(DISTANCE_IN_METER)} KM</h3>`;
     stores.forEach((store) => {
       const storeName = store.getProperty('name');
       markup += `<p class="place">${storeName}</p>
