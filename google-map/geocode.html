@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="description" content="" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>Geocoder</title>
+		<style type="text/css">
+			#map {
+				width: 400px;
+				height: 400px;
+				margin-bottom: 10px;
+				float: left;
+				margin-right: 10px;
+			}
+
+			#address {
+				width: 300px;
+				margin-bottom: 10px;
+			}
+
+			table td {
+				background: #eee;
+				border-bottom: solid 1px #fff;
+				padding: 2px 20px 2px 5px;
+			}
+		</style>
+		<script type="text/javascript">
+            function initMap() {
+                const codeAddress = (event) => {
+                    const address = document.getElementById("address").value;
+                    const geocoder = new google.maps.Geocoder().geocode(
+                        {'address': address},
+                        function(results, status) {
+                            if (status == google.maps.GeocoderStatus.OK) {
+
+                                //display returned address info
+                                let row = '<table>';
+                                for (let i=0; i<results[0].address_components.length; i++) {
+                                    let result = results[0].address_components[i];
+                                    row += '<tr><td>' + result.types[0] + '</td><td>' + result.long_name + '</td></tr>';
+                                }
+                                row += '<tr><td>Latitude</td><td>' + results[0].geometry.location.lat() + '</td></tr>';
+                                row += '<tr><td>Longitude</td><td>' + results[0].geometry.location.lng() + '</td></tr></table>';
+
+                                document.querySelector('#table').innerHTML = row;
+
+                                //update map and show a marker
+                                map.setCenter(results[0].geometry.location);
+                                const marker = new google.maps.Marker({
+                                    map: map,
+                                    position: results[0].geometry.location
+                                });
+                            } else {
+                                alert("Geocode was not successful for the following reason: " + status);
+                            }
+                        }
+                    );
+                };
+                const btn = document.getElementById('geocodeBtn');
+                if (btn) {
+                    btn.addEventListener('click', codeAddress);
+                }
+                const latlng = new google.maps.LatLng(-34.397, 150.644);
+                const myOptions = {
+                    zoom: 10,
+                    center: latlng,
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                }
+                const map = new google.maps.Map(document.getElementById("map"), myOptions);
+            }
+		</script>
+	</head>
+	<body>
+		<div id="content">
+			<h3>Google Map Geocoding</h3>
+			<div>
+				<input id="address" type="textbox" value="Space Needle">
+				<input id="geocodeBtn" type="button" value="Encode">
+			</div>
+			<div id="map"></div>
+			<div id="table"></div>
+		</div>
+        <script defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAZf7Qj7NwK3Obgva9WNd1IqV_9_wzncDo&callback=initMap&v=weekly"></script>
+	</body>
+</html>

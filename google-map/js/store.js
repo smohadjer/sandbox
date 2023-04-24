@@ -1,4 +1,6 @@
-const LOCATIONS_COUNT = 5000;
+import { MarkerClusterer } from "https://cdn.skypack.dev/@googlemaps/markerclusterer@2.0.3";
+
+const LOCATIONS_COUNT = 10;
 const DISTANCE_IN_METER = 50000;
 
 const showStoresList = (stores) => {
@@ -52,18 +54,66 @@ const getGeoJson = async (url) => {
 };
 
 async function initMap() {
+    const bounds = new google.maps.LatLngBounds();
     const map = new google.maps.Map(document.getElementById("map"), {
         center: {lat: 52.632469, lng: -1.689423},
         zoom: 2
     });
     const dataIsGeoJSON = false;
+    let allFeatures;
+    const markers = [];
+
+    // stackoverflow: https://stackoverflow.com/questions/25267146/google-maps-javascript-api-v3-data-layer-markerclusterer
+    map.data.addListener('addfeature', function(e) {
+        const geo = e.feature.getGeometry();
+        if (geo.getType() === 'Point') {
+            const marker = new google.maps.Marker({
+                position: geo.get(),
+                title: e.feature.getProperty('name'),
+                map: map
+            });
+
+            markers.push(marker);
+            bounds.extend(e.feature.getGeometry().get());
+            //map.data.remove(e.feature);
+        }
+    });
 
     if (dataIsGeoJSON) {
         map.data.loadGeoJson('data/stores.json', {idPropertyName: 'storeid'});
     } else {
         const data = await getGeoJson('data/locations.json')
-        map.data.addGeoJson(data, {idPropertyName: 'storeid'});
+        allFeatures = map.data.addGeoJson(data, {idPropertyName: 'storeid'});
     }
+
+    map.data.setMap(null);
+    new MarkerClusterer({ markers, map });
+    map.fitBounds(bounds);
+
+/*
+    let counter = 0;
+    const locations = [];
+    //console.log(allFeatures);
+
+    map.data.forEach((feature) => {
+        counter++;
+        const geometry = feature.getGeometry();
+        geometry.forEachLatLng((position) => {
+            locations.push(position);
+        });
+    });
+
+    map.data.addListener('click', function(event) {
+        const feature = event.feature;
+        //console.log(feature.getProperty('name'));
+        const geometry = feature.getGeometry();
+        console.log(geometry);
+        geometry.forEachLatLng((position) => {
+            //console.log(position);
+            map.setCenter(position);
+        });
+    });
+*/
 
     enhanceMap(map);
 }
@@ -163,6 +213,8 @@ function enhanceMap(map) {
                 rankedStores.push(store);
             }
         });
+
+
 
         showStoresList(rankedStores);
     });
