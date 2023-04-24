@@ -1,8 +1,12 @@
 import { MarkerClusterer } from "https://cdn.skypack.dev/@googlemaps/markerclusterer@2.0.3";
 
-const LOCATIONS_COUNT = 10;
+const LOCATIONS_COUNT = 100;
 const DISTANCE_IN_METER = 50000;
-
+const markers = [];
+const visibleMarkers = [];
+const getDistanceInKM = (distance) => {
+    return Math.round(distance/10)/100;
+};
 const showStoresList = (stores) => {
     const panel = document.getElementById('panel');
 
@@ -12,9 +16,11 @@ const showStoresList = (stores) => {
       return;
     }
 
-    let markup = `<h3>${stores.length} Found!</h3>`;
+    // sort stores based on their distance
+    stores.sort((a, b) => a.getProperty('distance') > b.getProperty('distance') ? 1 : -1);
+
+    let markup = `<h3>Found ${stores.length} Locations within ${getDistanceInKM(DISTANCE_IN_METER)} KM</h3>`;
     stores.forEach((store) => {
-      console.log(store);
       const storeName = store.getProperty('name');
       markup += `<p class="place">${storeName}</p>
       <p class="distanceText">${store.getProperty('distance')}km</p>`;
@@ -61,7 +67,6 @@ async function initMap() {
     });
     const dataIsGeoJSON = false;
     let allFeatures;
-    const markers = [];
 
     // stackoverflow: https://stackoverflow.com/questions/25267146/google-maps-javascript-api-v3-data-layer-markerclusterer
     map.data.addListener('addfeature', function(e) {
@@ -72,6 +77,8 @@ async function initMap() {
                 title: e.feature.getProperty('name'),
                 map: map
             });
+
+            marker.set('id', e.feature.getProperty('storeid'));
 
             markers.push(marker);
             bounds.extend(e.feature.getGeometry().get());
@@ -87,7 +94,7 @@ async function initMap() {
     }
 
     map.data.setMap(null);
-    new MarkerClusterer({ markers, map });
+    const mc = new MarkerClusterer({ markers, map });
     map.fitBounds(bounds);
 
 /*
@@ -115,10 +122,10 @@ async function initMap() {
     });
 */
 
-    enhanceMap(map);
+    enhanceMap(map, mc);
 }
 
-function enhanceMap(map) {
+function enhanceMap(map, mc) {
     const infoWindow = new google.maps.InfoWindow();
 
     // Show the information for a store when its marker is clicked.
@@ -205,16 +212,29 @@ function enhanceMap(map) {
             const storeId = store.getProperty('storeid');
             const storeLocation = store.getGeometry().get();
 
-            console.log(storeCountry, storeId, storeLocation);
+            //console.log(storeCountry, storeId, storeLocation);
             const distance = google.maps.geometry.spherical.computeDistanceBetween(originLocation, storeLocation);
-            console.log(distance);
+            //console.log(distance);
             if (distance < DISTANCE_IN_METER) {
-                store.setProperty('distance', Math.round(distance/10)/100);
+                store.setProperty('distance', getDistanceInKM(distance));
                 rankedStores.push(store);
             }
         });
 
+        // update markers on the map
+        mc.clearMarkers();
+        visibleMarkers.length = 0;
 
+        rankedStores.forEach((store) => {
+            const tmp_id = store.getProperty('storeid');
+            markers.forEach((marker) => {
+                if (marker.get('id') === tmp_id) {
+                    visibleMarkers.push(marker);
+                }
+            });
+        });
+
+        mc.addMarkers(visibleMarkers);
 
         showStoresList(rankedStores);
     });
