@@ -5,6 +5,7 @@ const DISTANCE_IN_METER = 50000;
 const markers = [];
 const visibleMarkers = [];
 const getDistanceInKM = (distance) => {
+    // returns distance in km with two decimals
     return Math.round(distance/10)/100;
 };
 const showStoresList = (stores) => {
@@ -24,8 +25,7 @@ const showStoresList = (stores) => {
     markup = `<h3>Found ${stores.length} Locations within ${getDistanceInKM(DISTANCE_IN_METER)} KM</h3>`;
     stores.forEach((store) => {
       const storeName = store.getProperty('name');
-      markup += `<p class="place">${storeName}</p>
-      <p class="distanceText">${store.getProperty('distance')}km</p>`;
+      markup += `<p>${storeName} (${store.getProperty('distance')}km)</p>`;
     });
     panel.innerHTML = markup;
 };
