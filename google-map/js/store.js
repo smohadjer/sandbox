@@ -1,6 +1,6 @@
 import { MarkerClusterer } from "https://cdn.skypack.dev/@googlemaps/markerclusterer@2.0.3";
 
-const LOCATIONS_COUNT = 500;
+const LOCATIONS_COUNT = 1000;
 const DISTANCE_IN_METER = 50000;
 const markers = [];
 const visibleMarkers = [];
