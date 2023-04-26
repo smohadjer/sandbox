@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>HTML5 test</title>
+		<meta name="description" content="" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+		<link rel="stylesheet" href="virus.css" />
+		<script src="fn.js"></script>
+		<script>
+			$(function() {
+				// Current scroll position
+				var current = 0;
+				// Target scroll position
+				var target = 0;
+				// Ease or speed for moving from `current` to `target`
+				var ease = 1;
+				// Utility variables for `requestAnimationFrame`
+				var virus = document.getElementById('virus');
+				var vh = window.innerHeight;
+				var vw= window.innerWidth;
+				var $circle = $('#circle');
+				var bgOpacity = 0;
+				var animateVirus = function() {
+					if (target > 50) {
+						virus.classList.add('animated');
+					} else {
+						virus.classList.remove('animated');
+					}
+				}
+				var updateScroll = function(e) {
+					target = window.scrollY || window.pageYOffset;
+					animateVirus();
+				};
+				var showBackground = function() {
+					$circle.css({
+						opacity: 1,
+						transform: 'scale(10)'
+					});
+				};
+				var hideBackground = function() {
+					$circle.css({
+						opacity: 0,
+						transform: 'scale(1)'
+					});
+				}
+
+				window.addEventListener('scroll', updateScroll);
+
+				var rafId = requestAnimationFrame(updateAnimation)
+
+				// Start the animation, if it is not running already
+				function startAnimation () {
+				  if (!rafActive) {
+				    rafActive = true
+				  }
+				}
+
+				var section2 = document.querySelector('#section2');
+
+				function updateAnimation () {
+					if (isElementInViewport(section2)) {
+				      section2.classList.add('is-visible');
+					  showBackground();
+				    } else {
+				      section2.classList.remove('is-visible');
+					  hideBackground();
+				    }
+
+					rafId = requestAnimationFrame(updateAnimation);
+				}
+
+				// Set CSS `tranform` property for an element
+				function setTransform (el, ratio) {
+					var scale = 1;
+					var top = 0;
+					var left = 0;
+					var rotation = 0;
+
+					//var left =  - vw/4 + ratio * vw;
+					//var rotation = 90 - ratio * 90;
+					//var top = -vw/4 + ratio * vw/4 + ratio * vh;
+
+					el.style.transform = 'scale(' + scale + ') translateY(' + top + 'px) translateX(' + left + 'px) rotate(' + rotation + 'deg)';
+				}
+			});
+		</script>
+		<style>
+			article {
+		        position: relative;
+		    }
+
+		    body, h1, h2, p {
+		        margin: 0;
+		        font-weight: normal;
+		    }
+
+		    p {
+		        font-family: arial, verdana, sans-serif;
+		    }
+
+		    p span {
+		        font-weight: bold;
+		        display: block;
+		    }
+
+		    div.background {
+		        position: absolute;
+		        width: 100vw;
+		        height: 100%;
+		        background: #0C0C35;
+		        /*background: radial-gradient(circle, rgba(250,250,250,1) 0%, rgba(229,229,229,1) 100%);
+		        */
+		        z-index: -1;
+		        opacity: 1;
+		    }
+
+			div.intro  {
+				color: white;
+			}
+
+		    @media (min-width: 768px) {
+		        div.intro {
+		            text-align: left;
+		            margin-left: 50%;
+		        }
+
+		        div.intro p {
+		            margin: 0;
+		        }
+		    }
+
+		    section {
+		        padding: 1em;
+		        text-align: center;
+		    }
+
+		    h1 {
+		        margin-top: 1em;
+		        font-size: 3em;
+		        line-height: 1em;
+		    }
+
+		    @media (min-width: 768px) {
+		        h1 {
+		            font-size: 6em;
+		            line-height: 1em;
+		        }
+		    }
+
+		    h2 {
+		        font-size: 4em;
+		        margin-top: 3em;
+		    }
+
+		    p {
+		        font-size: 1.4em;
+		        line-height: 1.6;
+		        max-width: 700px;
+		        margin: 1em auto;
+		    }
+
+		    figure {
+		        width: 40vw;
+		        max-width: 200px;
+		        margin: 5em auto 1em;
+		    }
+
+		    #virus {
+		        width: 100%;
+		        transition: transform 1s;
+		        transform: translate(-35vw, 100px) rotate(90deg) scale(2.8);
+		        pointer-events: none;
+		        will-change: transform;
+		        transform-origin: center;
+		    }
+
+		    @media (min-width: 1024px) {
+		        figure {
+		            margin-top: 50vh;
+		        }
+
+		        #virus {
+		            transform: translate(-35vw, -40vh) rotate(90deg) scale(3.8);
+		        }
+		    }
+
+		    #virus.animated {
+		        transform: translate(0, 180px) rotate(0deg) scale(1);
+		    }
+
+			#circle {
+				width: 100px;
+				height: 100px;
+				background: white;
+				opacity: 1;
+				position: fixed;
+				z-index: -1;
+				left: calc(50vw - 50px);
+				top: calc(50vh - 50px);
+				transform: scale(1);
+				border-radius: 50%;
+				opacity: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<article>
+			<div class="background"></div>
+			<div id="circle"></div>
+			<section id="section1">
+				<div class="intro">
+					<h1>3 Factors</h1>
+					<p>that decide on the apprpriate <span>SARS-CoV-2 test</span></p>
+				</div>
+				<figure>
+					<img id="virus" src="../assets/images/virus_blue.svg" />
+				</figure>
+				<h2>Questions</h2>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliquatur. Excepteur sint occaecat cupidatat non proident.</p>
+			</section>
+			<section id="section2">
+				<h2>Incididunt</h2>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliquatur. Excepteur sint occaecat cupidatat non proident.</p>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+			</section>
+			<section id="section3">
+				<h2>Consectetur Adipisicing Elit</h2>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliquatur. Excepteur sint occaecat cupidatat non proident.</p>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+			</section>
+		</article>
+	</body>
+</html>
