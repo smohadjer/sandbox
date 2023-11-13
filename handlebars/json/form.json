@@ -1,0 +1,17 @@
+{
+    "action": "https://path/to/endpoint/",
+    "method": "POST",
+    "fields": [
+      {
+        "name": "username",
+        "label": "Username",
+        "required": true
+      },
+      {
+        "type": "password",
+        "name": "username",
+        "label": "Password",
+        "required": true
+      }
+    ]
+  }

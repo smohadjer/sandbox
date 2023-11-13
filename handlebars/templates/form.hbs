@@ -1,0 +1,13 @@
+<h1>Minimal demo of using handlebars.js to generate HTML from JSON</h1>
+<form method="{{method}}" action="{{action}}">
+  {{#each fields}}
+  <div>
+    <label>{{label}}:</label>
+    <input
+        {{#if type}} type="{{type}}" {{/if}}
+        {{#if required}} required {{/if}}
+        name="{{name}}">
+  </div>
+  {{/each}}
+  <button>Submit</button>
+</from>
