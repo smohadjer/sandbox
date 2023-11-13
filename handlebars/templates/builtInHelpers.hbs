@@ -1,0 +1,13 @@
+<!-- example of built-in helpers -->
+<!-- tilde removes white space after/before handlebar expression -->
+<ul>
+	{{#each people}}
+		<li><strong>First name:</strong> {{firstName~}}
+			{{#if lastName~}}
+				, <strong>Last name:</strong> {{lastName}}
+			{{else}}
+				(no last name?)
+			{{/if}}
+		</li>
+	{{/each}}
+</ul>

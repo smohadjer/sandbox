@@ -1,0 +1,12 @@
+<!-- example of custom block helper -->
+<!-- tilde removes white space after/before handlebar expression -->
+{{#myBlockHelper people}}
+	{{~firstName~}}
+{{/myBlockHelper}}
+
+<!-- example of custom expression helper -->
+<p>
+{{#each people}}
+	{{myExpressionHelper firstName}}
+{{/each}}
+</p>

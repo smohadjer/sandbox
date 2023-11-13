@@ -1,0 +1,39 @@
+<div class="entry">
+	<!-- example of a handlebars exmpression -->
+	<h1>{{title}}</h1>
+
+	<div class="body">
+		<!-- example of using expression with triple stash to avoid html escaping -->
+		{{{h2}}}
+
+		<!-- example of built-in helpers -->
+		<!-- tilde removes white space after/before handlebar expression -->
+		<ul>
+			{{#each people}}
+				<li><strong>First name:</strong> {{firstName~}}
+					{{#if lastName~}}
+						, <strong>Last name:</strong> {{lastName}}
+					{{else}}
+						(no last name?)
+					{{/if}}
+				</li>
+			{{/each}}
+		</ul>
+
+		<!-- example of custom block helper -->
+		<!-- tilde removes white space after/before handlebar expression -->
+		{{#myBlockHelper people}}
+			{{~firstName~}}
+		{{/myBlockHelper}}
+
+		<!-- example of custom expression helper -->
+		<p>
+		{{#each people}}
+			{{myExpressionHelper firstName}}
+		{{/each}}
+		</p>
+
+		<!-- example of loading a partial with custom context -->
+		{{> person partialContext}}
+	</div>
+</div>

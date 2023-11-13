@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Handlebars</title>
+		<meta name="description" content="Boilerplate for Web projects">
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.10/handlebars.runtime.js"></script>
+		<script src="templates/templates.js"></script>
+		<script>
+			$(document).ready(function() {
+				Handlebars.registerHelper('myBlockHelper', function(items, options) {
+					var out = "<ul>";
+					for (var i=0, l=items.length; i<l; i++) {
+						out = out + "<li>" + options.fn(items[i]) + "</li>";
+					}
+					return out + "</ul>";
+				});
+
+				Handlebars.registerHelper('myExpressionHelper', function(name) {
+					//Handlebars.SafeString required to return HTML that should not be escaped
+					return new Handlebars.SafeString(
+						"<span>" + name + "</span>"
+					);
+				});
+
+				Handlebars.registerPartial('person', MyApp.templates.person);
+
+				var template1 = MyApp.templates.entry;
+				var template2 = MyApp.templates.customHelpers;
+				var template3 = MyApp.templates.customHelpers;
+				var context = {
+					title: "My New Post",
+					h2: "<h2>List of people:</h2>",
+					people: [
+						{firstName: "Yehuda", lastName: "Katz"},
+						{firstName: "Carl"},
+						{firstName: "Alan", lastName: "Johnson"}
+					],
+					partialContext: {
+						first_name: 'saeid',
+						last_name: 'mohadjer',
+						phone: '2342343',
+						email: 'test@adfsdf.com'
+					}
+				};
+				var html = template1(context) + template2(context) + template3(context);
+
+				$('body').append(html);
+			});
+		</script>
+	</head>
+	<body>
+	</body>
+</html>

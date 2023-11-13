@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>Handlebars</title>
+		<meta name="description" content="handlebars">
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.8/handlebars.js"></script>
+	</head>
+	<body>
+		<h1>Demo of using Handlebars with partials and helpers</h1>
+		<div id="app"></div>
+		<script>
+			async function fetchTemplate(path) {
+				const response = await fetch(path);
+				const responseText = await response.text();
+				return responseText;
+			}
+
+			async function fetchData(path) {
+				const response = await fetch(path);
+				const json = await response.json();
+				return json;
+			}
+
+			const registerHelpers = () => {
+				Handlebars.registerHelper('myBlockHelper', function(items, options) {
+					var out = "<ul>";
+					for (var i=0, l=items.length; i<l; i++) {
+						out = out + "<li>" + options.fn(items[i]) + "</li>";
+					}
+					return out + "</ul>";
+				});
+
+				Handlebars.registerHelper('myExpressionHelper', function(name) {
+					//Handlebars.SafeString required to return HTML that should not be escaped
+					return new Handlebars.SafeString(
+						"<span>" + name + "</span>"
+					);
+				});
+			}
+
+			async function init() {
+				registerHelpers();
+
+				/* person partial is used by entry.hbs */
+				const personTemplate = await fetchTemplate('templates/person.hbs');
+				Handlebars.registerPartial('person', personTemplate);
+
+				const template = await fetchTemplate('templates/entry.hbs');
+				const compiledTemplate = Handlebars.compile(template);
+				const data = await fetchData('json/context.json');
+				const html = compiledTemplate(data);
+				document.querySelector('#app').innerHTML = html;
+			}
+
+			init();
+		</script>
+	</body>
+</html>

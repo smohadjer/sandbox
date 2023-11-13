@@ -1,0 +1,15 @@
+{
+  "title": "My New Post",
+  "h2": "<h2>List of people:</h2>",
+  "people": [
+    {"firstName": "Yehuda", "lastName": "Katz"},
+    {"firstName": "Carl"},
+    {"firstName": "Alan", "lastName": "Johnson"}
+  ],
+  "partialContext": {
+    "first_name": "saeid",
+    "last_name": "mohadjer",
+    "phone": "2342343",
+    "email": "test@adfsdf.com"
+  }
+}
