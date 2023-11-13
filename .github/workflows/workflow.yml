@@ -9,7 +9,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v3
         with:
-          ref: dummy-data    #checkout different branch
+          ref: ''
 
       - name: Generate Directory Listings
         uses: jayanta525/github-pages-directory-listing@v3.0.0
@@ -20,7 +20,7 @@ jobs:
         uses: actions/upload-pages-artifact@v1
         with:
           path: 'data'      # upload generated folder
-  
+
   deploy:
     needs: pages-directory-listing
     permissions:
