@@ -7,15 +7,21 @@ body {
 }
 
 header {
-    margin: 1em;
-    padding-bottom: 1em;
-    border-bottom: solid 1px #F0F0F0;
+    margin: 1em 0;
+    padding: 0 0 1em 0;
+    /* border-bottom: solid 1px #F0F0F0; */
 }
 
 header img {
     display: block;
-    width: 150px;
+    width: 120px;
     height: auto;
+}
+
+@media (min-width: 768px) {
+    header img {
+        width: 150px;
+    }
 }
 
 main {
@@ -239,7 +245,7 @@ footer img {
     padding: 0.5em 1em;
     background: #fdc04c;
     font-weight: 500;
-    margin: 1.5em 0;
+    margin: 1em 0;
 }
 
 .wrapper {
