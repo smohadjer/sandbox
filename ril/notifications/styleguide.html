@@ -1,0 +1,183 @@
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <main>
+        <div class="banner">Simulated/Practice Mode</div>
+        <ul class="meta">
+            <li><span>Incident Type</span> Withdrawal</li>
+            <li><span>Event Type</span> Product Removal</li>
+            <li><span>Classification</span> Class I</li>
+        </ul>
+        <h1>Notifications Styleguide</h1>
+        <p>Optional paragraphs of text can follow the main heading of email. We may also have raw links displayed in content area as shown below.</p>
+        <p><a href="">https://dashboard.recallinfolink.dev/p/QjBp9VoURBWSzCBxTcICGg</a></p>
+
+        <section>
+            <h2>CTA</h2>
+            <p>Emails can contain a call to action button which is a link styled as button with padding around it:</p>
+            <p class="cta">
+                <a class="button" href="http://link.to.reset.password">Call to Action Button</a>
+            </p>
+            <p>We can have two buttons with same or different backgrounds when more than one action is required:</p>
+            <p class="cta">
+                <a class="button" href="http://link.to.reset.password">Call to Action Button</a>
+                <a class="button button__secondary" href="http://link.to.reset.password">Delete/Reject Button</a>
+            </p>
+            <p>While we can have links <a hef="#">inline like this</a> if more emphasis is needed a link can be displayed as below:</p>
+            <p class="cta cta--background">
+                <a class="link" href="http://link.to.reset.password">Call to Action Link</a></p>
+            </p>  
+            <p>We can also have a CTA button and CTA link beside one another:</p>
+            <p class="cta">
+                <a class="button" href="http://link.to.reset.password">Call to Action Button</a>
+                <a class="link" href="http://link.to.reset.password">Call to Action Link</a>
+            </p>
+        </section>
+        <section>
+            <h2>PIN</h2>
+            <p class="pin">
+                <span>123456</span>
+                Please enter this code on verification page to proceed.
+            </p>
+        </section>
+        <section class="wrapper">
+            <h2>Table styled as name/value list</h2>
+            <table>
+                <tr>
+                    <td>Event Name</td>
+                    <td>DairyHealth yogurt</td>
+                </tr>
+                <tr>
+                    <td>Event Type</td>
+                    <td>Product Removal</td>
+                </tr>
+                <tr>
+                    <td>Event ID</td>
+                    <td>24347</td>
+                </tr>
+                <tr>
+                    <td>Effective Date</td>
+                    <td>2022-01-20</td>
+                </tr>
+                <tr>
+                    <td>Classification Type</td>
+                    <td>Class I</td>
+                </tr>
+                <tr>
+                    <td>Reason or Description</td>
+                    <td>Potentially contains undeclared allergen (Milk).</td>
+                </tr>
+                <tr>
+                    <td>Own Brand Item?</td>
+                    <td>N/A</td>
+                </tr>
+                <tr>
+                    <td>Disposition (Additional Notes)	</td>
+                    <td>
+                        <p>Disposition:  Scan out as Recall Reclamation and destroy at Store Level **If you do not scan out as recall reclamation, you will NOT receive credit at store level!**</p>
+                        <p>Any product that is pulled must have the name of the Responsible Party and a separate Witness noted.</p>
+                        <p>Supplier Contact Info:  Haylee French, 806-472-5921 or Haylie Hicks, 806-472-5924</p>
+                    </td>
+                </tr>
+            </table>
+        </section>
+        <section class="wrapper">
+            <h2>Second table styled as name/value list</h2>
+            <table>
+                <tr>
+                    <td>Incident Name</td>
+                    <td>DairyHealth yogurt</td>
+                </tr>
+                <tr>
+                    <td>Incident Type</td>
+                    <td>Withdrawal</td>
+                </tr>
+                <tr>
+                    <td>Area of Concern</td>
+                    <td>Consumer Products</td>
+                </tr>
+            </table>
+        </section>
+        <p>If we have tables with many rows of same type or with many columns we display them as table and not as a listing:</p>
+        <section class="wrapper wrapper--table">
+            <h2>Table styled as table with few columns</h2>
+            <table>
+                <tr>
+                    <th>Item Name</th> 
+                    <th>Item Number</th> 
+                </tr>
+                <tr>
+                    <td>Amys Kitchen Rice Mac & Cheeze Non Dairy</td> 
+                    <td>4227200043</td>
+                </tr>
+                <tr>
+                    <td>Another product</td>  
+                    <td>1227200041</td>
+                </tr>
+                <tr>
+                    <td>Some other product</td>  
+                    <td>3227200047</td>
+                </tr>
+            </table>
+        </section>
+        <section class="wrapper wrapper--table">
+            <h2>Table styled as table with many columns</h2>
+            <table>
+                <tr>
+                    <th>Item Name</th>
+                    <th>Brand</th>
+                    <th>Item Number</th>
+                    <th>UPC</th>
+                    <th>Size</th>
+                    <th>Lot Code</th>
+                    <th>Use-by Date</th>
+                    <th>Own Brand</th>
+                </tr>
+                <tr>
+                    <td>BrightFarms Southwest Chipotle</td>
+                    <td>BrightFarms</td>
+                    <td>850051825011</td>
+                    <td>10850051825001 (case)</td>
+                    <td>5.85 oz x 24 Count</td>
+                    <td>-</td>
+                    <td>1/15/2024</td>
+                    <td>No</td>
+                </tr>
+                <tr>
+                    <td>BrightFarms Chickpea Caesar Crunch Kit</td>
+                    <td>BrightFarms</td>
+                    <td>857062004152</td>
+                    <td>10850051825001 (each)</td>
+                    <td>24 Count</td>
+                    <td>-</td>
+                    <td>1/15/2024</td>
+                    <td>No</td>
+                </tr>
+                <tr>
+                    <td>BrightFarms Mediterranean Crunch Kit</td>
+                    <td>BrightFarms</td>
+                    <td>850051825011</td>
+                    <td>10850051825001 (each)</td>
+                    <td>24 Count</td>
+                    <td>-</td>
+                    <td>1/15/2024</td>
+                    <td>Yes</td>
+                </tr>
+            </table>
+        </section>
+        <p>If we have some information that is not as important as the rest of content we can display them with smaller font size and in a callout like this:</p>
+        <section class="footnote">
+            <p>This email message was sent from an address that is not monitored. Do not reply to this email. Contact <a href="mailto:support@recallinfolink.com">support@recallinfolink.com</a> or call 1 (208) 890-9169 if you need support.</p>
+            <p>If you have received this email in error, or to opt out of these emails, please adjust your <a href="">notification preferences</a>.</p>
+        </section>
+    </main>
+    <footer>
+        <!-- we use inline img element instead of css background-image since some email clients don't render background images (e.g. macOS Mail app) -->
+        <img width="17" src="ril.svg" alt="logo">
+        <span>Powered by Recall InfoLink</span>
+    </footer>
+</body>
+</html>
