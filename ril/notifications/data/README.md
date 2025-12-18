@@ -1,0 +1,3 @@
+# Usage
+
+This directory is used by the application scripts that download company configurations, notification templates, ...
