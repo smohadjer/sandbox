@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Email Viewer</title>
     <script src="https://cdn.jsdelivr.net/npm/mustache@4.2.0/mustache.min.js"></script>
+    <script type="module" src="scripts/main.js"></script>
     <style>
         .resizable-frame {
             resize: both;
@@ -23,7 +24,7 @@
     </style>
 </head>
 <body>
-    <p><a href="original.html">Original Email Templates</a></p>
+    <p><a class="toggle" href="original.html">Original Template</a></p>
     <p>Select email template:
         <select>
             <option value="authentication_nonce">authentication_nonce</option>
@@ -54,21 +55,5 @@
     <div class="resizable-frame">
         <iframe id="frame"></iframe>
     </div>
-    <script type="module">
-        document.querySelector('select').addEventListener('change', async (e) => {
-            renderTemplate(e.target.value);
-        });
-        const data = await fetch(`./data.json`).then(res => res.json());
-
-        async function renderTemplate(templateName) {
-            const template = await fetch(`./data/${templateName}/email_en.html`).then(res => res.text());
-            const rendered = Mustache.render(template, data);
-            document.querySelector('iframe').srcdoc = rendered;
-        }
-
-        // Initial render
-        const templateName = document.querySelector('select').value;
-        renderTemplate(templateName);
-    </script>
 </body>
 </html>
