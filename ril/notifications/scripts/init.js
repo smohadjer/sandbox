@@ -24,8 +24,9 @@ export function init() {
 }
 
 async function renderTemplate(templateName) {
-    const data = await fetch(`./data.json`).then(res => res.json());
-    const folder = window.location.pathname.indexOf('original.html') > 0 ? 'data-original' : 'data'
+    const folder = window.location.pathname.indexOf('original.html') > 0 ? 'templates-original' : 'templates';
+    const file = window.location.pathname.indexOf('original.html') > 0 ? './data-original.json' : './data.json';
+    const data = await fetch(file).then(res => res.json());
     const template = await fetch(`./${folder}/${templateName}/email_en.html`).then(res => res.text());
     const rendered = Mustache.render(template, data);
     document.querySelector('iframe').srcdoc = rendered;
