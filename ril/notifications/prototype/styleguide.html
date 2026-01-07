@@ -4,24 +4,27 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <header>
+        <p class="center">Do not share this email with anyone.</p>
+    </header>
+    <div class="banner">Practice</div>
     <main>
-        <div class="banner">Simulated/Practice Mode</div>
-        <header>
+        <div class="header">
             <img src="ril-logo.png" alt="logo">
-        </header>
+        </div>
+        <h1 class="center">Email Styleguide</h1>
         <ul class="meta">
-            <li><span>Incident Type</span> Withdrawal</li>
-            <li><span>Event Type</span> Product Removal</li>
+            <li><span>Event Type</span> Withdrawal</li>
             <li><span>Classification</span> Class I</li>
+            <li><span>Event ID</span> #355</li>
+            <li><span>Event Date</span>10/20/2025</li>
         </ul>
-        <h1>Notifications Styleguide</h1>
-        <p>Optional paragraphs of text can follow the main heading of email. We may also have raw links displayed in content area as shown below.</p>
-        <p><a href="">https://dashboard.recallinfolink.dev/p/QjBp9VoURBWSzCBxTcICGg</a></p>
+        <p>Do not forward this email as the link displays information intended specifically for channel <a href="#">responder-test@albertsons.com</a>.</p>
 
-        <section>
+       <section class="wrapper">
             <h2>CTA</h2>
-            <p>Emails can contain a call to action button which is a link styled as button with padding around it:</p>
-            <p class="cta">
+            <p>Emails can contain a call to action button which is a link styled as button with padding around it and an optional background:</p>
+            <p class="cta cta--background">
                 <a class="button" href="http://link.to.reset.password">Call to Action button</a>
             </p>
             <p>While we can have links <a hef="#">inline like this</a> if more emphasis is needed a link can be displayed as below:</p>
@@ -29,12 +32,12 @@
                 <a class="link" href="http://link.to.reset.password">Call to Action Link</a></p>
             </p>  
             <p>We can also have a CTA button and CTA link beside one another:</p>
-            <p class="cta">
+            <p class="cta cta--background">
                 <a class="button" href="http://link.to.reset.password">Call to Action Button</a>
                 <a class="link" href="http://link.to.reset.password">Call to Action Link</a>
             </p>
         </section>
-        <section>
+        <section class="wrapper">
             <h2>PIN</h2>
             <p class="pin">
                 <span>123456</span>
@@ -166,15 +169,14 @@
                 </tr>
             </table>
         </section>
-        <p>If we have some information that is not as important as the rest of content we can display them with smaller font size and in a callout like this:</p>
-        <section class="footnote">
-            <p>This email message was sent from an address that is not monitored. Do not reply to this email. Contact <a href="mailto:support@recallinfolink.com">support@recallinfolink.com</a> or call 1 (208) 890-9169 if you need support.</p>
-            <p>If you have received this email in error, or to opt out of these emails, please adjust your <a href="">notification preferences</a>.</p>
-        </section>
     </main>
     <footer>
+        <div>
+            <p>This email message was sent from an address that is not monitored. Do not reply to this email. Contact <a href="mailto:support@recallinfolink.com">support@recallinfolink.com</a> or call 1 (208) 890-9169 if you need support.</p>
+            <p>If you have received this email in error, or to opt out of these emails, please adjust your <a href="">notification preferences</a>.</p>
+        </div>
         <!-- we use inline img element instead of css background-image since some email clients don't render background images (e.g. macOS Mail app) -->
-        <img width="17" src="ril.svg" alt="logo">
+        <img width="15" src="ril.svg" alt="logo">
         <span>Powered by Recall InfoLink</span>
     </footer>
 </body>

@@ -8,8 +8,8 @@
     "expires_in_days": 7, 
     "invite_link": "https://example.com/invite",
     "branding": {
-        "email_header_image": "https://picsum.photos/seed/picsum/600/100",
-        "email_footer_image": "https://picsum.photos/seed/picsum/600/100",
+        "email_header_image": "",
+        "email_footer_image": "",
         "theme": {
             "email_border_color": "#cccccc",
             "email_button_color": "#cccccc"
@@ -53,13 +53,14 @@
         },
         "incident_purview": {
             "purview_is_live": false,
-            "purview_label": "Customer Data",
+            "purview_label": "Practice",
             "purview_value": "customer_data"
         }
     },
     "channel_value": "channel blah blah",
     "ril_corporate": {
-        "support_phone": "1-800-555-1234",
+        "support_phone": "1 (208) 890-9169",
+        "support_email": "support@recallinfolink.com",
         "name": "Recall Inc.",
         "address": "123 Main St, Anytown, USA"
     },
@@ -110,5 +111,6 @@
         }
     },
     "nonce": "123456",
-    "body_content": "<body>\n<p>You've been invited to join Acme Corp on Recall InfoLink.</p>\n<p>Please visit this link to accept the invitation:<br><a href=\"https://example.com/invite\">https://example.com/invite</a></p>\n<p>Your link will expire after 7 days.</p>\n\n</body>"
+    "body_content": "<body>\n<p>You've been invited to join Acme Corp on Recall InfoLink.</p>\n<p>Please visit this link to accept the invitation:<br><a href=\"https://example.com/invite\">https://example.com/invite</a></p>\n<p>Your link will expire after 7 days.</p>\n\n</body>",
+    "preamble": "<h2>Important Withdrawal Notification from Demo Company</h2>"
 }
