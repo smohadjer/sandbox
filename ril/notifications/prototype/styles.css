@@ -334,16 +334,32 @@ header {
 }
 
 .wrapper table.alternate-rows {
-    background: #e9e9e9;
+    /* background: #e9e9e9; */
     width: 100%;
+    margin-top: 0;
 }
 
 .wrapper table.alternate-rows td {
-    padding: 0.5em 0.5em 0.5em 0.75em;
+    padding: 1em 0;
+    border-bottom: solid 1px #ddd;
 }
 
+.wrapper table.alternate-rows td:first-child {
+    padding-right: 1em;
+}
+
+.wrapper table.alternate-rows tr:first-child td {
+    padding-top: 0;
+}
+
+.wrapper table.alternate-rows tr:last-child td {
+    border-bottom: none;
+}
+
+
+
 .wrapper table.alternate-rows tr:nth-child(even) td {
-    background: #fff;
+    /* background: #fff; */
 }
 
 .wrapper h2 {
