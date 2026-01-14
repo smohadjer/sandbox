@@ -1,2 +1,3 @@
 .DS_Store
 drag-and-drop/upload/*
+node_modules
