@@ -1,0 +1,161 @@
+:root {
+  --bg: #e7e0d4;
+  --surface: #fffdf9;
+  --border: #d8d0c4;
+  --text: #1f2933;
+  --muted: #5b6570;
+  --heading: #18212a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+  line-height: 1.45;
+}
+
+.page {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 32px 20px 48px;
+}
+
+h1 {
+  margin: 0 0 24px;
+  font-size: 32px;
+  line-height: 1.1;
+  color: var(--heading);
+}
+
+.stack {
+  display: grid;
+  gap: 20px;
+}
+
+.section {
+  background: var(--surface);
+  border: 1px solid var(--border);
+}
+
+.section-title {
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--border);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--heading);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.facts td,
+.notes-table td,
+.notes-table th,
+.product-table td,
+.product-table th {
+  padding: 10px 18px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+
+.facts tr:last-child td,
+.notes-table tbody tr:last-child td,
+.product-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.notes-table th,
+.product-table th {
+  color: var(--heading);
+  font-weight: 600;
+}
+
+.facts td:first-child {
+  width: 44%;
+  color: var(--heading);
+  font-weight: 400;
+}
+
+.facts tr.spacer td {
+  padding: 8px 18px;
+  background: rgba(216, 208, 196, 0.12);
+}
+
+.list-row td {
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+.two-col {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 1fr;
+}
+
+.product-table th {
+  text-align: left;
+  font-size: 13px;
+  letter-spacing: 0.01em;
+}
+
+.product-table .meta-row td {
+  padding-top: 6px;
+  padding-bottom: 6px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.history {
+  padding: 0 18px 14px;
+}
+
+.history-label {
+  margin: 10px 0 8px;
+  font-weight: 600;
+  color: var(--heading);
+}
+
+.history ul {
+  margin: 0;
+  padding-left: 18px;
+}
+
+.history li + li {
+  margin-top: 6px;
+}
+
+.notes-table th {
+  text-align: left;
+}
+
+.comparison-block {
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--border);
+}
+
+.comparison-block:last-child {
+  border-bottom: 0;
+}
+
+.comparison-label {
+  font-weight: 600;
+  color: var(--heading);
+  margin-bottom: 6px;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+@media (min-width: 900px) {
+  .two-col {
+    grid-template-columns: 1fr 1fr;
+  }
+}

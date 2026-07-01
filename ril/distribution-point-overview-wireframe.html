@@ -4,163 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Distribution Point Overview Wireframe</title>
-    <style>
-      :root {
-        --bg: #f5f2ec;
-        --surface: #fffdf9;
-        --border: #d8d0c4;
-        --text: #1f2933;
-        --muted: #5b6570;
-        --heading: #18212a;
-      }
-
-      * {
-        box-sizing: border-box;
-      }
-
-      body {
-        margin: 0;
-        background: var(--bg);
-        color: var(--text);
-        font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
-        line-height: 1.45;
-      }
-
-      .page {
-        max-width: 1180px;
-        margin: 0 auto;
-        padding: 32px 20px 48px;
-      }
-
-      h1 {
-        margin: 0 0 24px;
-        font-size: 32px;
-        line-height: 1.1;
-        color: var(--heading);
-      }
-
-      .stack {
-        display: grid;
-        gap: 20px;
-      }
-
-      .section {
-        background: var(--surface);
-        border: 1px solid var(--border);
-      }
-
-      .section-title {
-        padding: 14px 18px;
-        border-bottom: 1px solid var(--border);
-        font-size: 18px;
-        font-weight: 700;
-        color: var(--heading);
-      }
-
-      table {
-        width: 100%;
-        border-collapse: collapse;
-      }
-
-      .facts td,
-      .notes-table td,
-      .notes-table th,
-      .product-table td,
-      .product-table th {
-        padding: 10px 18px;
-        border-bottom: 1px solid var(--border);
-        vertical-align: top;
-      }
-
-      .facts td:first-child,
-      .notes-table th,
-      .product-table th {
-        color: var(--heading);
-        font-weight: 600;
-      }
-
-      .facts td:first-child {
-        width: 44%;
-      }
-
-      .facts tr.spacer td {
-        padding: 8px 18px;
-        background: rgba(216, 208, 196, 0.12);
-      }
-
-      .list-row td {
-        padding-top: 6px;
-        padding-bottom: 6px;
-      }
-
-      .two-col {
-        display: grid;
-        gap: 20px;
-        grid-template-columns: 1fr;
-      }
-
-      .product-table th {
-        text-align: left;
-        font-size: 13px;
-        letter-spacing: 0.01em;
-      }
-
-      .product-table .meta-row td {
-        padding-top: 6px;
-        padding-bottom: 6px;
-        color: var(--muted);
-        font-size: 14px;
-      }
-
-      .history {
-        padding: 0 18px 14px;
-        border-bottom: 1px solid var(--border);
-      }
-
-      .history-label {
-        margin: 10px 0 8px;
-        font-weight: 600;
-        color: var(--heading);
-      }
-
-      .history ul {
-        margin: 0;
-        padding-left: 18px;
-      }
-
-      .history li + li {
-        margin-top: 6px;
-      }
-
-      .notes-table th {
-        text-align: left;
-      }
-
-      .comparison-block {
-        padding: 14px 18px;
-        border-bottom: 1px solid var(--border);
-      }
-
-      .comparison-block:last-child {
-        border-bottom: 0;
-      }
-
-      .comparison-label {
-        font-weight: 600;
-        color: var(--heading);
-        margin-bottom: 6px;
-      }
-
-      .muted {
-        color: var(--muted);
-      }
-
-      @media (min-width: 900px) {
-        .two-col {
-          grid-template-columns: 1fr 1fr;
-        }
-      }
-    </style>
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <main class="page">
@@ -183,26 +27,19 @@
           <table class="facts">
             <tr><td>Products in this event</td><td>5</td></tr>
             <tr><td>Products this point should recall</td><td>3</td></tr>
-            <tr class="spacer"><td colspan="2"></td></tr>
             <tr><td>Products confirmed as recalled</td><td>2 of 3</td></tr>
-            <tr class="list-row"><td>Chicken Wrap 250g</td><td></td></tr>
-            <tr class="list-row"><td>Salad Mix 1lb</td><td></td></tr>
-            <tr class="spacer"><td colspan="2"></td></tr>
+            <tr class="list-row"><td>&nbsp;&nbsp;&nbsp;Chicken Wrap 250g</td><td></td></tr>
+            <tr class="list-row"><td>&nbsp;&nbsp;&nbsp;Salad Mix 1lb</td><td></td></tr>
             <tr><td>Products not confirmed as recalled</td><td>1 of 3</td></tr>
-            <tr class="list-row"><td>Fruit Pack Large</td><td></td></tr>
-            <tr class="spacer"><td colspan="2"></td></tr>
-            <tr><td>First confirmation submitted</td><td>Jun 29, 10:15</td></tr>
-            <tr><td>Most recent confirmation submitted</td><td>Jun 30, 11:40</td></tr>
-            <tr class="spacer"><td colspan="2"></td></tr>
+            <tr class="list-row"><td>&nbsp;&nbsp;&nbsp;Fruit Pack Large</td><td></td></tr>
             <tr><td>Contacts who entered response data</td><td>3 of 6</td></tr>
-            <tr class="list-row"><td>Anna Brown</td><td>email: anna@...</td></tr>
-            <tr class="list-row"><td>Mark Chen</td><td>sms: +1 ...</td></tr>
-            <tr class="list-row"><td>Lisa Green</td><td>phone: +1 ...</td></tr>
-            <tr class="spacer"><td colspan="2"></td></tr>
+            <tr class="list-row"><td>&nbsp;&nbsp;&nbsp;Anna Brown</td><td>email: anna@...</td></tr>
+            <tr class="list-row"><td>&nbsp;&nbsp;&nbsp;Mark Chen</td><td>sms: +1 ...</td></tr>
+            <tr class="list-row"><td>&nbsp;&nbsp;&nbsp;Lisa Green</td><td>phone: +1 ...</td></tr>
             <tr><td>Contacts who did not enter response data</td><td>3 of 6</td></tr>
-            <tr class="list-row"><td>David Cole</td><td>email: david@...</td></tr>
-            <tr class="list-row"><td>Priya Shah</td><td>email: priya@...</td></tr>
-            <tr class="list-row"><td>Maria Lopez</td><td>phone: +1 ...</td></tr>
+            <tr class="list-row"><td>&nbsp;&nbsp;&nbsp;David Cole</td><td>email: david@...</td></tr>
+            <tr class="list-row"><td>&nbsp;&nbsp;&nbsp;Priya Shah</td><td>email: priya@...</td></tr>
+            <tr class="list-row"><td>&nbsp;&nbsp;&nbsp;Maria Lopez</td><td>phone: +1 ...</td></tr>
           </table>
         </section>
 
@@ -213,22 +50,19 @@
             <tr><td>Contacts at this point</td><td>6</td></tr>
             <tr><td>Time to first notification delivered</td><td>1h 05m</td></tr>
             <tr><td>Time to last notification delivered</td><td>6h 12m</td></tr>
-            <tr class="spacer"><td colspan="2"></td></tr>
             <tr><td>Contacts successfully notified</td><td>4 of 6</td></tr>
-            <tr class="list-row"><td>Anna Brown</td><td>email: anna@...</td></tr>
-            <tr class="list-row"><td>Mark Chen</td><td>sms: +1 ...</td></tr>
-            <tr class="list-row"><td>Lisa Green</td><td>phone: +1 ...</td></tr>
-            <tr class="list-row"><td>David Cole</td><td>email: david@...</td></tr>
-            <tr class="spacer"><td colspan="2"></td></tr>
+            <tr class="list-row"><td>&nbsp;&nbsp;&nbsp;Anna Brown</td><td>email: anna@...</td></tr>
+            <tr class="list-row"><td>&nbsp;&nbsp;&nbsp;Mark Chen</td><td>sms: +1 ...</td></tr>
+            <tr class="list-row"><td>&nbsp;&nbsp;&nbsp;Lisa Green</td><td>phone: +1 ...</td></tr>
+            <tr class="list-row"><td>&nbsp;&nbsp;&nbsp;David Cole</td><td>email: david@...</td></tr>
             <tr><td>Contacts not successfully notified</td><td>2 of 6</td></tr>
-            <tr class="list-row"><td>Priya Shah</td><td>email: priya@... | email bounced</td></tr>
-            <tr class="list-row"><td>Maria Lopez</td><td>phone: +1 ... | invalid number</td></tr>
-            <tr class="spacer"><td colspan="2"></td></tr>
+            <tr class="list-row"><td>&nbsp;&nbsp;&nbsp;Priya Shah</td><td>email: priya@... | email bounced</td></tr>
+            <tr class="list-row"><td>&nbsp;&nbsp;&nbsp;Maria Lopez</td><td>phone: +1 ... | invalid number</td></tr>
             <tr><td>Delivery by channel</td><td class="muted">Attempts and deliveries</td></tr>
-            <tr class="list-row"><td>Email</td><td>Notification attempts 4 | Delivered 2</td></tr>
-            <tr class="list-row"><td>SMS</td><td>Notification attempts 2 | Delivered 1</td></tr>
-            <tr class="list-row"><td>Phone</td><td>Notification attempts 1 | Delivered 1</td></tr>
-            <tr class="list-row"><td>Fax</td><td>Notification attempts 1 | Delivered 0</td></tr>
+            <tr class="list-row"><td>&nbsp;&nbsp;&nbsp;Email</td><td>Notification attempts 4 | Delivered 2</td></tr>
+            <tr class="list-row"><td>&nbsp;&nbsp;&nbsp;SMS</td><td>Notification attempts 2 | Delivered 1</td></tr>
+            <tr class="list-row"><td>&nbsp;&nbsp;&nbsp;Phone</td><td>Notification attempts 1 | Delivered 1</td></tr>
+            <tr class="list-row"><td>&nbsp;&nbsp;&nbsp;Fax</td><td>Notification attempts 1 | Delivered 0</td></tr>
           </table>
         </section>
 
@@ -308,13 +142,6 @@
         <section class="section">
           <div class="section-title">Notes summary</div>
           <table class="notes-table">
-            <thead>
-              <tr>
-                <th>Date</th>
-                <th>Name</th>
-                <th>Content of note</th>
-              </tr>
-            </thead>
             <tbody>
               <tr>
                 <td>Jul 01, 09:30</td>
