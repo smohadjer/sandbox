@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Distribution Point Overview Wireframe</title>
+    <style>
+      :root {
+        --bg: #f5f2ec;
+        --surface: #fffdf9;
+        --border: #d8d0c4;
+        --text: #1f2933;
+        --muted: #5b6570;
+        --heading: #18212a;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: "IBM Plex Sans", "Segoe UI", sans-serif;
+        line-height: 1.45;
+      }
+
+      .page {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 32px 20px 48px;
+      }
+
+      h1 {
+        margin: 0 0 24px;
+        font-size: 32px;
+        line-height: 1.1;
+        color: var(--heading);
+      }
+
+      .stack {
+        display: grid;
+        gap: 20px;
+      }
+
+      .section {
+        background: var(--surface);
+        border: 1px solid var(--border);
+      }
+
+      .section-title {
+        padding: 14px 18px;
+        border-bottom: 1px solid var(--border);
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--heading);
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      .facts td,
+      .notes-table td,
+      .notes-table th,
+      .product-table td,
+      .product-table th {
+        padding: 10px 18px;
+        border-bottom: 1px solid var(--border);
+        vertical-align: top;
+      }
+
+      .facts td:first-child,
+      .notes-table th,
+      .product-table th {
+        color: var(--heading);
+        font-weight: 600;
+      }
+
+      .facts td:first-child {
+        width: 44%;
+      }
+
+      .facts tr.spacer td {
+        padding: 8px 18px;
+        background: rgba(216, 208, 196, 0.12);
+      }
+
+      .list-row td {
+        padding-top: 6px;
+        padding-bottom: 6px;
+      }
+
+      .two-col {
+        display: grid;
+        gap: 20px;
+        grid-template-columns: 1fr;
+      }
+
+      .product-table th {
+        text-align: left;
+        font-size: 13px;
+        letter-spacing: 0.01em;
+      }
+
+      .product-table .meta-row td {
+        padding-top: 6px;
+        padding-bottom: 6px;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .history {
+        padding: 0 18px 14px;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .history-label {
+        margin: 10px 0 8px;
+        font-weight: 600;
+        color: var(--heading);
+      }
+
+      .history ul {
+        margin: 0;
+        padding-left: 18px;
+      }
+
+      .history li + li {
+        margin-top: 6px;
+      }
+
+      .notes-table th {
+        text-align: left;
+      }
+
+      .comparison-block {
+        padding: 14px 18px;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .comparison-block:last-child {
+        border-bottom: 0;
+      }
+
+      .comparison-label {
+        font-weight: 600;
+        color: var(--heading);
+        margin-bottom: 6px;
+      }
+
+      .muted {
+        color: var(--muted);
+      }
+
+      @media (min-width: 900px) {
+        .two-col {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <h1>Distribution Point Overview Wireframe</h1>
+
+      <div class="stack">
+        <section class="section">
+          <div class="section-title">Distribution point summary</div>
+          <table class="facts">
+            <tr><td>Distribution point</td><td>North Valley Foods</td></tr>
+            <tr><td>Account ID</td><td>DP-20481</td></tr>
+            <tr><td>Region</td><td>West</td></tr>
+            <tr><td>Distribution level</td><td>Retailer</td></tr>
+            <tr><td>Contacts at this point</td><td>6</td></tr>
+          </table>
+        </section>
+
+        <section class="section">
+          <div class="section-title">Recall response summary</div>
+          <table class="facts">
+            <tr><td>Products in this event</td><td>5</td></tr>
+            <tr><td>Products this point should recall</td><td>3</td></tr>
+            <tr class="spacer"><td colspan="2"></td></tr>
+            <tr><td>Products confirmed as recalled</td><td>2 of 3</td></tr>
+            <tr class="list-row"><td>Chicken Wrap 250g</td><td></td></tr>
+            <tr class="list-row"><td>Salad Mix 1lb</td><td></td></tr>
+            <tr class="spacer"><td colspan="2"></td></tr>
+            <tr><td>Products not confirmed as recalled</td><td>1 of 3</td></tr>
+            <tr class="list-row"><td>Fruit Pack Large</td><td></td></tr>
+            <tr class="spacer"><td colspan="2"></td></tr>
+            <tr><td>First confirmation submitted</td><td>Jun 29, 10:15</td></tr>
+            <tr><td>Most recent confirmation submitted</td><td>Jun 30, 11:40</td></tr>
+            <tr class="spacer"><td colspan="2"></td></tr>
+            <tr><td>Contacts who entered response data</td><td>3 of 6</td></tr>
+            <tr class="list-row"><td>Anna Brown</td><td>email: anna@...</td></tr>
+            <tr class="list-row"><td>Mark Chen</td><td>sms: +1 ...</td></tr>
+            <tr class="list-row"><td>Lisa Green</td><td>phone: +1 ...</td></tr>
+            <tr class="spacer"><td colspan="2"></td></tr>
+            <tr><td>Contacts who did not enter response data</td><td>3 of 6</td></tr>
+            <tr class="list-row"><td>David Cole</td><td>email: david@...</td></tr>
+            <tr class="list-row"><td>Priya Shah</td><td>email: priya@...</td></tr>
+            <tr class="list-row"><td>Maria Lopez</td><td>phone: +1 ...</td></tr>
+          </table>
+        </section>
+
+        <section class="section">
+          <div class="section-title">Notification summary</div>
+          <table class="facts">
+            <tr><td>Notification attempts sent</td><td>8</td></tr>
+            <tr><td>Contacts at this point</td><td>6</td></tr>
+            <tr><td>Time to first notification delivered</td><td>1h 05m</td></tr>
+            <tr><td>Time to last notification delivered</td><td>6h 12m</td></tr>
+            <tr class="spacer"><td colspan="2"></td></tr>
+            <tr><td>Contacts successfully notified</td><td>4 of 6</td></tr>
+            <tr class="list-row"><td>Anna Brown</td><td>email: anna@...</td></tr>
+            <tr class="list-row"><td>Mark Chen</td><td>sms: +1 ...</td></tr>
+            <tr class="list-row"><td>Lisa Green</td><td>phone: +1 ...</td></tr>
+            <tr class="list-row"><td>David Cole</td><td>email: david@...</td></tr>
+            <tr class="spacer"><td colspan="2"></td></tr>
+            <tr><td>Contacts not successfully notified</td><td>2 of 6</td></tr>
+            <tr class="list-row"><td>Priya Shah</td><td>email: priya@... | email bounced</td></tr>
+            <tr class="list-row"><td>Maria Lopez</td><td>phone: +1 ... | invalid number</td></tr>
+            <tr class="spacer"><td colspan="2"></td></tr>
+            <tr><td>Delivery by channel</td><td class="muted">Attempts and deliveries</td></tr>
+            <tr class="list-row"><td>Email</td><td>Notification attempts 4 | Delivered 2</td></tr>
+            <tr class="list-row"><td>SMS</td><td>Notification attempts 2 | Delivered 1</td></tr>
+            <tr class="list-row"><td>Phone</td><td>Notification attempts 1 | Delivered 1</td></tr>
+            <tr class="list-row"><td>Fax</td><td>Notification attempts 1 | Delivered 0</td></tr>
+          </table>
+        </section>
+
+        <section class="section">
+          <div class="section-title">Product recall summary</div>
+          <table class="product-table">
+            <thead>
+              <tr>
+                <th>Product</th>
+                <th>Identifier</th>
+                <th>Packaging unit</th>
+                <th>Quantity supplied</th>
+                <th>Quantity removed</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Chicken Wrap 250g</td>
+                <td>GTIN...4821</td>
+                <td>Each</td>
+                <td>12</td>
+                <td>12</td>
+              </tr>
+              <tr>
+                <td colspan="5">
+                  <div class="history">
+                    <div class="history-label">Removal history:</div>
+                    <ul>
+                      <li>Jul 01, 10:15 | confirmed as complete | Anna Brown</li>
+                      <li>Jun 29, 10:15 | removed 8 | Anna Brown</li>
+                      <li>Jun 29, 09:40 | removed 4 | Anna Brown</li>
+                    </ul>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>Salad Mix 1lb</td>
+                <td>LOT...A19</td>
+                <td>Each</td>
+                <td>-</td>
+                <td>3</td>
+              </tr>
+              <tr>
+                <td colspan="5">
+                  <div class="history">
+                    <div class="history-label">Removal history:</div>
+                    <ul>
+                      <li>Jun 30, 13:05 | removed 3 | Mark Chen</li>
+                      <li>Jun 30, 11:40 | confirmed as complete | Anna Brown</li>
+                      <li>Jun 30, 11:40 | removed 5 | Anna Brown</li>
+                      <li>Jun 29, 10:15 | removed 0 | Anna Brown</li>
+                    </ul>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>Fruit Pack Large</td>
+                <td>BATCH...L2</td>
+                <td>Each</td>
+                <td>5</td>
+                <td>0</td>
+              </tr>
+              <tr>
+                <td colspan="5">
+                  <div class="history">
+                    <div class="history-label">Removal history:</div>
+                    <ul>
+                      <li>Jun 29, 16:20 | removed 0 | Lisa Green</li>
+                    </ul>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section class="section">
+          <div class="section-title">Notes summary</div>
+          <table class="notes-table">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Name</th>
+                <th>Content of note</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Jul 01, 09:30</td>
+                <td>Anna Brown</td>
+                <td>Confirmed removal entry was updated after stock recount</td>
+              </tr>
+              <tr>
+                <td>Jun 30, 14:20</td>
+                <td>Jane Smith</td>
+                <td>Response entered on behalf of this point</td>
+              </tr>
+              <tr>
+                <td>Jun 30, 10:05</td>
+                <td>Mark Chen</td>
+                <td>Store check completed; one item still pending recount</td>
+              </tr>
+              <tr>
+                <td>Jun 29, 12:05</td>
+                <td>Jane Smith</td>
+                <td>Follow-up requested after quantity remained unconfirmed for Salad Mix 1lb</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section class="section">
+          <div class="section-title">Comparison summary</div>
+          <div class="comparison-block">
+            <div class="comparison-label">Compared with other distribution points in this recall event</div>
+            <div class="muted">[Metrics still to be defined]</div>
+          </div>
+          <div class="comparison-block">
+            <div class="comparison-label">Compared with previous recall responses by this distribution point</div>
+            <div class="muted">[Metrics still to be defined]</div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>
